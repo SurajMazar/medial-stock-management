@@ -1,0 +1,28 @@
+.ant-menu-item-selected a, .ant-menu-item-selected a:hover {
+  color: $primary-color;
+}
+
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+  background-color: rgba($primary-color,0.1);
+}
+
+.ant-menu-vertical .ant-menu-item::after, .ant-menu-vertical-left .ant-menu-item::after, .ant-menu-vertical-right .ant-menu-item::after, .ant-menu-inline .ant-menu-item::after {
+  border-right: 3px solid $primary-color;
+}
+
+.menu-header{
+  color:grey !important;
+  pointer-events: none !important;
+  margin-top: 1.5em !important;
+  padding-left:18px !important;
+  margin-bottom: 0 !important;
+  height: 25px !important;
+  line-height: 25px !important;         
+}
+
+
+.ant-menu{
+  .selected{
+    color:$primary-color;
+  }
+}

@@ -1,0 +1,29 @@
+.dashboard-overview-card{
+  padding:1em;
+  margin-bottom:1em;
+  background:$primary-color;
+  box-shadow:0 0 5px rgba(0,0,0,0.3);
+  border-radius:font('15px');
+  cursor:pointer;
+  position:relative;
+  &:hover{
+    .icon{
+      transform:scale(1.1);
+    }
+    p{
+      font-size:font('26px');
+    }
+  }
+  p{
+    transition:all 0.3s ease;
+  }
+  .icon{
+    position:absolute;
+    transition:all 0.3s ease;
+    right:5%;
+    bottom:10%;
+    color:$white;
+    font-size:font('50px');
+    opacity:0.2;
+  }
+}

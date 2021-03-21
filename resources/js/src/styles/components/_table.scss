@@ -1,0 +1,12 @@
+.table{
+  margin-bottom:0px;
+  th{
+    color:$white;
+    background: $primary-color;
+    border:unset !important;
+  }
+  td{
+   font-size: font('14px');
+   vertical-align: middle; 
+  }
+}

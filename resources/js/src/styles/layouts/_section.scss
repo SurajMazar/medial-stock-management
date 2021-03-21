@@ -1,0 +1,26 @@
+@for $i from 1 to 6{
+  .page-section-#{$i}{
+    padding:1em*$i;
+    @include maxWidth(992px){
+      padding:0.3em*$i;
+    }
+  }
+
+  .section-break-#{$i}{
+    padding:1em*$i 0;
+    @include maxWidth(992px){
+      padding:0.3em*$i 0;
+    }
+  }
+}
+
+
+
+@for $i from 0 to 6{
+  @for $j from 0 to 6{
+    .section-break-#{$i}-#{$j}{
+      padding-top:$i*1em;
+      padding-bottom:$j*1em;
+    }
+  }
+}

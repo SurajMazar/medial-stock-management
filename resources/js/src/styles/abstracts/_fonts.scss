@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family:Poppins&display:swap');
+
+$font-family:'poppins';
+
+$font-sizes:(
+  '9px' : 0.6429rem,
+  '10px' : 0.7143rem,
+  '11px' : 0.7857rem,
+  '12px' : 0.8571rem,
+  '13px' : 0.9286rem,
+  '14px' : 1rem ,
+  '15px' : 1.071rem,
+  '16px' : 1.143rem,
+  '18px' : 1.286rem,
+  '20px' : 1.429rem,
+  '22px' : 1.571rem,
+  '24px' : 1.714rem,
+  '26px' : 1.857rem,
+  '28px' : 2rem,
+  '30px' : 2.143rem,
+  '32px' : 2.286rem,
+  '34px' : 2.429rem,
+  '36px' : 2.571rem,
+  '38px' : 2.714rem,
+  '40px' : 2.857rem,
+  '50px' : 3.571rem,
+  '60px' : 4.286rem
+);
+
+$font-colors:(
+  'primary':$primary-color,
+  'secondary':$secondary-color,
+  'black':$black,
+  'white':$white,
+);
+
+@each $i, $size in $font-sizes{
+  .text-#{$i}{ // text with different font sizes
+    font-size: $size;
+    margin-bottom:0.2 * $size;
+  }
+
+  
+  @each $j, $color in $font-colors{ // text with font size and colors
+    .text-#{$i}-#{$j}{
+      font-size: $size;
+      margin-bottom:0.2 * $size;
+      color:$color;
+    }
+  }
+}
+
+
+@each $i, $color in $font-colors{ // text font colors
+  .text-#{$i}{
+    color:$color;
+  }
+}
+
+.bold{
+  font-weight: 600;
+}
