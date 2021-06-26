@@ -10,26 +10,36 @@
         "production": "mix --production"
     },
     "devDependencies": {
-        "@babel/preset-react": "^7.12.13",
+        "@babel/preset-react": "^7.14.5",
+        "@types/history": "^4.7.8",
+        "@types/lodash": "^4.14.170",
+        "@types/react-router-dom": "^5.1.7",
         "axios": "^0.21",
         "bootstrap": "^4.0.0",
         "jquery": "^3.2",
         "laravel-mix": "^6.0.6",
-        "lodash": "^4.17.19",
+        "lodash": "^4.17.21",
         "popper.js": "^1.12",
         "postcss": "^8.1.14",
-        "react": "^16.2.0",
-        "react-dom": "^16.2.0",
+        "react": "^16.14.0",
+        "react-dom": "^16.14.0",
         "resolve-url-loader": "^2.3.1",
         "sass": "^1.15.2",
         "sass-loader": "^8.0.0"
     },
     "dependencies": {
         "@ant-design/icons": "^4.6.2",
+        "@reduxjs/toolkit": "^1.6.0",
+        "@types/react": "^17.0.11",
+        "@types/react-dom": "^17.0.8",
         "antd": "^4.14.0",
+        "connected-react-router": "^6.9.1",
         "history": "^4.10.1",
         "react-icons": "^4.2.0",
+        "react-redux": "^7.2.4",
         "react-router": "^5.2.0",
-        "react-router-dom": "^5.2.0"
+        "react-router-dom": "^5.2.0",
+        "ts-loader": "^9.2.3",
+        "typescript": "^4.3.4"
     }
 }

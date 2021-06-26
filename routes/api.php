@@ -21,16 +21,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 
-Route::prefix('/vendors')->group(function(){
-
-  Route::get('/',[VendorController::class,'index']);
-  Route::get('/show/{id}',[VendorController::class,'show']);
-  Route::post('/create',[VendorController::class,'store']);
-  Route::get('/update/{id}',[VendorController::class,'update']);
-  Route::get('/search',[VendorController::class,'search']);
-  Route::get('/trash/{id}',[VendorController::class,'trash']);
-  Route::get('/trashed',[VendorController::class,'trashed']);
-  Route::get('/restore/{id}',[VendorController::class,'restore']);
-  Route::get('/delete/{id}',[VendorController::class,'delete']);
-
-});
+Route::resource('/vendors',VendorController::class);

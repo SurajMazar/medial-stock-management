@@ -1,0 +1,27 @@
+interface Vendor{
+  id: number,
+  name: string,
+  email: string,
+  phone: string,
+  mobile: string,
+  pan_vat: string,
+  contact_person: string,
+  contact_person_number: string,
+  country: string,
+  province_state: string,
+  city: string,
+  address: string,
+  postal_zip: string,
+  bank_name: string,
+  account_name: string,
+  website:string,
+  facebook: string,
+  instagram: string,
+  linkedin: string,
+  twitter: string,
+  youtube: string,
+  description: string,
+  created_at:Date,
+}
+
+export default Vendor;

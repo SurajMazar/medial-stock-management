@@ -12,7 +12,11 @@ class Vendor extends Model
 
     protected $guarded = [];
 
-    public function scopeSearch($query,$request){
-      return $query->where('name', 'like', '%' .$request->search. '%');
+    public function scopeSearch($query,$keyword){
+      return $query->where('name', 'like', '%' .$keyword. '%')
+      ->orWhere('email','like','%'.$keyword.'%')
+      ->orWhere('pan_vat','like','%'.$keyword.'%')
+      ->orWhere('contact_person','like','%'.$keyword.'%')
+      ->orWhere('website','like','%'.$keyword.'%');
     }
 }
