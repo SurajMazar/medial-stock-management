@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import {Button} from 'antd';
+import {Button, Popover} from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { StoreInterface } from '../../store/store';
 import { fetchVendors } from '../../services/vendor.service';
 import Preloader from '../../components/Preloader';
 import DatTableWrapper from '../../components/DataTable';
+import CreateModal from './create';
+import { returnLimitedWords } from '../../utils/helper.utils';
 
 const Vendor:React.FC = () => {
 
@@ -31,7 +33,15 @@ const Vendor:React.FC = () => {
   },[dispatch]) //eslint-disable-line
 
 
-
+  //modal related
+  const [showModal,setShowModal] = useState<boolean>(false);
+  const openModal = ()=>{
+    setShowModal(true);
+  }
+  const closeModal = ()=>{
+    setShowModal(false);
+  }
+  //end modal
 
 
   return(
@@ -39,13 +49,16 @@ const Vendor:React.FC = () => {
 
       <div className="section-break-2 d-flex ac">
         <h3 className="text-24px-black">Vendors</h3>
-        <Button type="primary" shape="round" size={'large'} className="ml-auto">
+        <Button type="primary"
+         shape="round" size={'large'} 
+         onClick={openModal}
+         className="ml-auto">
           Add Vendor
         </Button>
       </div>
 
       <div className="section-break-1">
-        <DatTableWrapper fetchData={loadVendors}>
+        <DatTableWrapper fetchData={loadVendors} meta={meta}>
           <div className="p-1 table-responsive">
             <table className='table'>
               <thead>
@@ -54,7 +67,8 @@ const Vendor:React.FC = () => {
                   <th>Name</th>
                   <th>Email</th>
                   <th>Contact</th>
-                  <th>Address</th>
+                  <th title="Contact person">C.person</th>
+                  <th>Pan/Vat</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -66,10 +80,19 @@ const Vendor:React.FC = () => {
                   vendors.map((vendor,index)=>(
                     <tr key={vendor.id}>
                       <td>{index+1}</td>
-                      <td>{vendor.name}</td>
-                      <td>{vendor.email}</td>
-                      <td>{vendor.phone}</td>
-                      <td>{vendor.address}</td>
+                      <td>
+                        <Popover content={vendor.name} title={false}>
+                          {returnLimitedWords(vendor.name,20)}
+                        </Popover>
+                      </td>
+                      <td>
+                        <Popover content={vendor.email} title={false}>
+                          {returnLimitedWords(vendor.email,20)}
+                        </Popover>
+                      </td>
+                      <td>{vendor.phone || 'N/A'}</td>
+                      <td>{vendor.contact_person || 'N/A'}</td>
+                      <td>{vendor.pan_vat || 'N/A'}</td>
                       <td></td>
                     </tr>
                   ))
@@ -85,6 +108,7 @@ const Vendor:React.FC = () => {
           </div>
         </DatTableWrapper>
       </div>
+      <CreateModal closeModal={closeModal} showModal={showModal}/>
     </section>
   );
 }

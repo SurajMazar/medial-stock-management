@@ -6,7 +6,7 @@ import instance from "../utils/axios";
 import { setUrl } from "../utils/helper.utils";
 
 
-export const fetchVendors = (params:any)=>{
+export const fetchVendors = (params:any = {page:1})=>{
   return async (dispatch:Dispatch) =>{
     dispatch(fetchVendorRequest());
     try{
@@ -25,4 +25,18 @@ export const fetchVendors = (params:any)=>{
     }
   }
   
+}
+
+
+export const createVendor = (formData:FormData)=>{
+  return async(dispatch:Dispatch)=>{
+    dispatch(fetchVendorRequest());
+    try{
+      await instance.post('/api/vendors',formData);
+      message.success("Vendor created successfully");
+      
+    }catch(e){
+      message.error("Something went wrong")
+    }
+  }
 }

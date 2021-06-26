@@ -12,22 +12,16 @@ export const setUrl = (params:any,url:string) =>{
   return '';
 }
 
-/**
- * 
- * @param func 
- * @param wait 
- * @returns 
-*  @this debounce
- */
-export function debounce(func:any, wait:number) {
-  let timeout:any;
-  return function(this:any) {
-    const context:any = this;
-    const args = arguments;
-    clearTimeout(timeout);
-    const later = function() {
-      func.apply(context, args);
-    };
-    timeout = setTimeout(later, wait);
-  };
-};
+export const setFormdata = (data:any) =>{
+  const formData = new FormData();
+  Object.keys(data).forEach(key=>{
+    formData.append(key,data[key]);
+  })
+  return formData;         
+}
+
+
+export const returnLimitedWords = (string:string, num:number) => {
+  if (string.length > num) { string = string.substring(0, num-3) + '...' };
+  return string;
+}

@@ -16,7 +16,11 @@
   }
   tr{
     border-bottom:1px solid #bcbcbc;
+    &:nth-child(even){
+      background-color: $bg-dark;
+    }
   }
+
   td{
    font-size: font('14px');
    vertical-align: middle; 

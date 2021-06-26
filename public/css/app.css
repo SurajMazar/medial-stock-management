@@ -40623,6 +40623,12 @@ body {
   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
 }
 
+.ant-modal-close-x {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .table {
   margin-bottom: 0px;
 }
@@ -40646,6 +40652,10 @@ body {
   border-bottom: 1px solid #bcbcbc;
 }
 
+.table tr:nth-child(even) {
+  background-color: #f0f2f5;
+}
+
 .table td {
   font-size: 1rem;
   vertical-align: middle;
@@ -40655,6 +40665,7 @@ body {
 
 .fm-rounded {
   border-radius: 20px;
+  border-color: #bcbcbc;
 }
 
 
