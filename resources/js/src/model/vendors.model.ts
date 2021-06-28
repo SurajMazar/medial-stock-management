@@ -14,6 +14,7 @@ interface Vendor{
   postal_zip: string,
   bank_name: string,
   account_name: string,
+  account_number:number,
   website:string,
   facebook: string,
   instagram: string,

@@ -35,3 +35,19 @@ color:$primary-color;
   }
 }
 
+.msm-sidebar{
+  @include minWidth(992px){
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    height: 100vh;
+    overflow-y: auto !important;
+    position: fixed !important;
+    left: 0;
+  }
+}
+
+.msm-main{
+  @include minWidth(992px){
+    margin-left: 200px;
+  }
+}

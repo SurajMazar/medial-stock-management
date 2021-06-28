@@ -29,6 +29,7 @@ class CreateVendorsTable extends Migration
       $table->string('postal_zip')->nullable();
       $table->string('bank_name')->nullable();
       $table->string('account_name')->nullable();
+      $table->string('account_number')->nullable();
       $table->string('website')->nullable();
       $table->string('facebook')->nullable();
       $table->string('instagram')->nullable();

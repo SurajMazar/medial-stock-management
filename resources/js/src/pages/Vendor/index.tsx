@@ -7,6 +7,7 @@ import Preloader from '../../components/Preloader';
 import DatTableWrapper from '../../components/DataTable';
 import CreateModal from './create';
 import { returnLimitedWords } from '../../utils/helper.utils';
+import { Link } from 'react-router-dom';
 
 const Vendor:React.FC = () => {
 
@@ -31,6 +32,7 @@ const Vendor:React.FC = () => {
   useEffect(()=>{
     loadVendors();
   },[dispatch]) //eslint-disable-line
+
 
 
   //modal related
@@ -63,12 +65,10 @@ const Vendor:React.FC = () => {
             <table className='table'>
               <thead>
                 <tr>
-                  <th>SN</th>
+                  <th>Pan/Vat</th>
                   <th>Name</th>
                   <th>Email</th>
-                  <th>Contact</th>
-                  <th title="Contact person">C.person</th>
-                  <th>Pan/Vat</th>
+                  <th>Phone</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -77,23 +77,36 @@ const Vendor:React.FC = () => {
               vendors && vendors?.length?
               <tbody>
                 {
-                  vendors.map((vendor,index)=>(
+                  vendors.map((vendor)=>(
                     <tr key={vendor.id}>
-                      <td>{index+1}</td>
+                      <td>{vendor.pan_vat || 'N/A'}</td>
                       <td>
-                        <Popover content={vendor.name} title={false}>
-                          {returnLimitedWords(vendor.name,20)}
+                        <Popover content={
+                          <div className="p-1">
+                            <p><strong className="mr-1">Contact person:</strong>{vendor.contact_person || 'N/A'}</p>
+                            <p><strong className="mr-1">Contact:</strong>{vendor.contact_person_number || 'N/A'}</p>
+                            <h3 className="text-14px-primary mt-2">Banking Details <hr /></h3>
+                            <p><strong className="mr-1">Bank name:</strong>{vendor.bank_name || 'N/A'}</p>
+                            <p><strong className="mr-1">Account name:</strong>{vendor.account_name || 'N/A'}</p>
+                            <p><strong className="mr-1">Account no:</strong>{vendor.account_number || 'N/A'}</p>
+                          </div>
+                        } title={vendor.name}>
+                          {returnLimitedWords(vendor.name,30)}
                         </Popover>
                       </td>
                       <td>
                         <Popover content={vendor.email} title={false}>
-                          {returnLimitedWords(vendor.email,20)}
+                          {returnLimitedWords(vendor.email,30)}
                         </Popover>
                       </td>
                       <td>{vendor.phone || 'N/A'}</td>
-                      <td>{vendor.contact_person || 'N/A'}</td>
-                      <td>{vendor.pan_vat || 'N/A'}</td>
-                      <td></td>
+                      <td>
+                        <Link to={"/vendors/"+vendor.id+'/details'}>
+                          <Button shape="round" className="btn-secondary mr-1">
+                            View
+                          </Button>
+                        </Link>
+                      </td>
                     </tr>
                   ))
                 }

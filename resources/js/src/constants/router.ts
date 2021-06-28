@@ -1,6 +1,9 @@
 import React from 'react';
 import Dashboard from '../pages/Dashboard';
+import Products from '../pages/Products';
+import ProductCategory from '../pages/Products/Category';
 import Vendor from '../pages/Vendor';
+import EditVendor from '../pages/Vendor/edit';
 
 
 interface routeInterface{
@@ -15,16 +18,34 @@ const routes:Array<routeInterface> = [
     component:Dashboard,
     title:'Dashboard'
   },
-  {
-    path:null,
-    component:null,
-    title:'Management'
-  },
+ 
   {
     path:'/vendors',
     component:Vendor,
     title:'Vendors'
   },
+
+  {
+    path:'/vendors/:id/:tab',
+    component:EditVendor,
+    title:'Vendors'
+  },
+
+  {
+    path:'/products',
+    component:Products,
+    title:'Product'
+  },
+
+  {
+    path:'/products/category',
+    component:ProductCategory,
+    title:'Product category'
+  },
+
+
+
+
   {
     path:'/customers',
     component:Vendor,
@@ -32,11 +53,7 @@ const routes:Array<routeInterface> = [
   },
 
  
-  {
-    path:null,
-    component:null,
-    title:'Purchases'
-  },
+  
 
   {
     path:'/purchase-invoices',
@@ -50,11 +67,7 @@ const routes:Array<routeInterface> = [
   },
 
 
-  {
-    path:null,
-    component:null,
-    title:'Sales'
-  },
+ 
 
   {
     path:'/sales-invoices',
@@ -68,11 +81,7 @@ const routes:Array<routeInterface> = [
   },
 
 
-  {
-    path:null,
-    component:null,
-    title:'Inventory'
-  },
+
 
   {
     path:'/stocks',

@@ -34,12 +34,11 @@ class VendorController extends Controller
    * Create vendor
    */
   public function store(VendorRequest $request){
-    try{
-      $response = $this->vendorRepository->store($request);
+    $response = $this->vendorRepository->store($request);
+    if($response instanceof Vendor){
       return success('Vendor created successfully',$response);
-    }catch(Exception $e){
-      return failure($e->getMessage());
     }
+    return failure($response->getMessage());
   }
 
 
@@ -47,12 +46,11 @@ class VendorController extends Controller
    * Update vendor
   */
   public function update($id,VendorRequest $request){
-    try{
-      $response = $this->vendorRepository->update($id,$request);
-        return success('Vendor updated successfully',$response);
-    }catch(Exception $e){
-      return failure($e->getMessage());
+    $response = $this->vendorRepository->update($id,$request);
+    if($response instanceof Vendor){
+      return success('Vendor updated successfully',$response);
     }
+    return failure($response->getMessage());
   }
 
 

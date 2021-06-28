@@ -2,3 +2,10 @@
   border-radius: 20px;
   border-color:#bcbcbc;
 }
+
+
+input,textarea{
+  &:focus{
+    box-shadow: none !important;
+  }
+}

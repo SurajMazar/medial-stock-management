@@ -37,8 +37,8 @@ class VendorsRepository implements VendorsRepositoryInterface{
     public function update($id,$request){
       DB::beginTransaction();
       try{
-        $vendor = Vendor::finOrFail($id);
-        $inputs = $request->input();
+        $vendor = Vendor::findOrFail($id);
+        $inputs = $request->all();
         $vendor->update($inputs);
         DB::commit();
         return $vendor;

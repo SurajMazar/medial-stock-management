@@ -7,14 +7,22 @@ export interface VendorStoreInterface {
   vendors:Array<Vendor>|undefined,
   loading:boolean,
   meta:PageMeta|undefined,
-  errors:any
+  errors:any,
+
+  vendor:Vendor|undefined,
+  fetchingVendor:boolean,
+  errorVendor:any,
 }
 
 const initialState:VendorStoreInterface = {
   errors:undefined,
   loading:false,
   meta:undefined,
-  vendors:undefined
+  vendors:undefined,
+
+  vendor:undefined,
+  fetchingVendor:false,
+  errorVendor:undefined,
 }
 
 const VendorSlice = createSlice({
@@ -35,7 +43,26 @@ const VendorSlice = createSlice({
     fetchVendorFail(state,actions){
       state.loading = false;
       state.errors = actions.payload;
-    }
+    },
+
+
+    fetchSingleVendorRequest(state){
+      state.fetchingVendor = true;
+    },
+
+    fetchSingleVendorSuccess(state,actions){
+      state.fetchingVendor = false;
+      state.vendor = actions.payload;
+    },
+
+    updateVendorSuccess(state){
+      state.fetchingVendor = false;
+    },
+
+    fetchSingleVendorFail(state,actions){
+      state.fetchingVendor = false;
+      state.errorVendor = actions.payload;
+    },
 
   }
 });
@@ -44,7 +71,14 @@ const VendorSlice = createSlice({
 export const {
   fetchVendorFail,
   fetchVendorRequest,
-  fetchVendorSuccess
+  fetchVendorSuccess,
+
+  fetchSingleVendorFail,
+  fetchSingleVendorRequest,
+  fetchSingleVendorSuccess,
+
+  updateVendorSuccess
+  
 } = VendorSlice.actions;
 
 

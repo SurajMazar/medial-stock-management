@@ -7,8 +7,17 @@
   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
 }
 
-.ant-modal-close-x{
+.ant-modal-close-x,.ant-layout-sider-zero-width-trigger {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.ant-layout-sider-zero-width-trigger{
+  background-color: $primary-color;
+}
+
+.btn-secondary{
+  border-color: $primary-color !important;
+  background:transparent !important;
+  color: $primary-color !important;
 }

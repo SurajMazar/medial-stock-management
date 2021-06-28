@@ -25,3 +25,29 @@ export const returnLimitedWords = (string:string, num:number) => {
   if (string.length > num) { string = string.substring(0, num-3) + '...' };
   return string;
 }
+
+
+
+// remove null item from objects
+
+export const removeNullItems = (object:any)=>{
+  if(object){
+    Object.keys(object).forEach((key)=>{
+      if(object[key] === null || object[key] === "null"){
+        delete object[key]
+      }
+    })
+    return object;
+  }
+  return {};
+}
+
+
+export const updateItemById = (array:any,item:any)=>{
+  let oldItem = array.find((i:any)=>i.id === item.id);
+  if(oldItem){
+    let oldItemIndex = array.indexOf(oldItem);
+    if(oldItemIndex  !== -1) array[oldItemIndex] = item;
+  }
+  return array;
+}

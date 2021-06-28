@@ -14,7 +14,7 @@ const AppLayout:React.FC = props => {
     {/* <Header/> */}
     <Layout>
       <Sidebar/>
-      <Layout>
+      <Layout className="msm-main">
         <Content className="site-layout-background bg-white page-section-2">
           {children}
         </Content>

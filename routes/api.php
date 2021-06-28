@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\api\VendorController;
+use App\Http\Controllers\api\ProductCategoryController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,3 +24,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::resource('/vendors',VendorController::class);
+Route::resource('/product_category',ProductCategoryController::class);
