@@ -3,6 +3,7 @@ import React from 'react';
 
 
 const Products:React.FC = () =>{
+ 
   return(
     <section className="page-section-2">
       <div className="section-break-1-2 d-flex ac">
@@ -23,6 +24,14 @@ const Products:React.FC = () =>{
             <th>Actions</th>
           </tr>
         </thead>
+        <tbody>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
       </table>
     </section>
   );

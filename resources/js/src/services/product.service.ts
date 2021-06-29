@@ -6,7 +6,11 @@ import {
   createPCrequest,
   createPCsuccess,
 
-  updatePCsuccess
+  updatePCsuccess,
+
+  fetchProductsFail,
+  fetchProductsRequest,
+  fetchProductsSuccess
 
 } from '../store/action-reducer/products.actionreducer';
 
@@ -14,6 +18,7 @@ import instance from "../utils/axios";
 import { setUrl } from "../utils/helper.utils";
 import { Dispatch } from "redux";
 import { message } from 'antd';
+import { fetchSingleVendorRequest } from '../store/action-reducer/vendor.actionreducer';
 
 
 export const fetchProductCategory = (params:any = {page:1}) => {
@@ -66,6 +71,27 @@ export const updateProductCategory = (id:number,formdata:FormData,callback:any =
     }catch(e:any){
       if(e.response && e.response.data){
         dispatch(fetchCatFail(e.response.data));
+      }
+      message.error("Something went wrong");
+    }
+  }
+}
+
+
+export const fetchProducts = (params:any = {page:1}) => {
+  return async (dispatch:Dispatch) =>{
+    dispatch(fetchSingleVendorRequest());
+    try{
+      let url = setUrl(params,`api/products`)
+      const response = await instance.get(url);
+      let data = {
+        products:response.data.data,
+        meta:response.data.meta
+      }
+      dispatch(fetchProductsSuccess(data));
+    }catch(e:any){
+      if(e.response && e.response.data){
+        dispatch(fetchProductsFail(e.response.data));
       }
       message.error("Something went wrong");
     }

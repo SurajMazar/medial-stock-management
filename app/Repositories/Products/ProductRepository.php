@@ -12,7 +12,7 @@ class ProductRepository implements ProductInterface{
     public function index($request){
       $items_per_page = $request->items_per_page?:10;
       $keyword = $request->keyword;
-      $products = Product::latest();
+      $products = Product::latest()->with('category');
       if($keyword){
         $products->Search($keyword);
       }

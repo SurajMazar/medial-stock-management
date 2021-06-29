@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import PageMeta from "../../model/page_meta.model";
-import { ProductCategory } from "../../model/product.model";
+import Product, { ProductCategory } from "../../model/product.model";
 import { updateItemById } from "../../utils/helper.utils";
 
 
@@ -9,7 +9,12 @@ export interface ProductStateInterface{
   categories:Array<ProductCategory>|undefined,
   loading:boolean,
   meta:PageMeta|undefined,
-  errors:any
+  errors:any,
+
+  products:Product|undefined,
+  loadingProduct:boolean,
+  errorProduct:any,
+  metaProduct:PageMeta|undefined,
 }
 
 const initialState:ProductStateInterface = {
@@ -17,6 +22,12 @@ const initialState:ProductStateInterface = {
   errors:undefined,
   meta:undefined,
   categories:undefined,
+
+  products:undefined,
+  loadingProduct:false,
+  errorProduct:undefined,
+  metaProduct:undefined
+  
 }
 
 
@@ -28,6 +39,8 @@ const PCSlice = createSlice({
     fetchCatRequest(state){
       state.loading = true;
     },
+
+
     fetchCatSuccess(state,actions){
       state.loading = false;
       state.categories = actions.payload.categories,
@@ -50,7 +63,24 @@ const PCSlice = createSlice({
     updatePCsuccess(state,actions){
       state.loading = false;
       state.categories = updateItemById(state.categories,actions.payload);
-    }
+    },
+
+    fetchProductsRequest(state){
+      state.loadingProduct = true;
+    },
+
+    fetchProductsSuccess(state,actions){
+      state.loadingProduct = false;
+      state.products = actions.payload.products;
+      state.metaProduct = actions.payload.meta
+    },
+
+    fetchProductsFail(state,actions){
+      state.loadingProduct = false;
+      state.errorProduct = actions.payload;
+    },
+
+
   }
 });
 
@@ -63,7 +93,12 @@ export const {
   createPCrequest,
   createPCsuccess,
   
-  updatePCsuccess
+  updatePCsuccess,
+
+
+  fetchProductsFail,
+  fetchProductsRequest,
+  fetchProductsSuccess
 
 } = PCSlice.actions;
 
