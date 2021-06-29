@@ -22,7 +22,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
+Route::group(['before' => 'force.ssl'], function()
+{
+    Route::resource('/vendors',VendorController::class);
+    Route::resource('/product_category',ProductCategoryController::class);
+    Route::resource('/products',ProductController::class);
+});
 
-Route::resource('/vendors',VendorController::class);
-Route::resource('/product_category',ProductCategoryController::class);
-Route::resource('/products',ProductController::class);
