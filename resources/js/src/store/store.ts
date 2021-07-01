@@ -4,10 +4,12 @@ import history from '../utils/history.util';
 import reducers from './reducer';
 import {VendorStoreInterface} from './action-reducer/vendor.actionreducer';
 import { ProductStateInterface } from './action-reducer/products.actionreducer';
+import { CurrencyStateInterface } from './action-reducer/currency.actionreducer';
 
 export interface StoreInterface{
   vendor:VendorStoreInterface,
-  product:ProductStateInterface
+  product:ProductStateInterface,
+  currency:CurrencyStateInterface
 }
 
 const store = configureStore({

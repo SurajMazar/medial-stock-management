@@ -13,7 +13,7 @@ class CurrencyRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,10 @@ class CurrencyRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name'=>'required',
+            'local_value'=>'required',
+            'symbol'=>'required',
+            'country'=>'required'
         ];
     }
 }

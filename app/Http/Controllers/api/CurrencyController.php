@@ -12,11 +12,11 @@ use Illuminate\Http\Request;
 
 class CurrencyController extends Controller
 {
-  private CurrencyInterface $currencyInterface;
+  private CurrencyInterface $currencyRepository;
 
-  public function __construct(CurrencyInterface $currencyInterface)
+  public function __construct(CurrencyInterface $currencyRepository)
   {
-    $this->currencyInterface = $currencyInterface;
+    $this->currencyRepository = $currencyRepository;
   }
 
   /**
@@ -25,8 +25,8 @@ class CurrencyController extends Controller
   public function index(Request $request)
   {
     try {
-      $vendors = $this->currencyInterface->index($request);
-      return new CurrencyCollection($vendors);
+      $currencies = $this->currencyRepository->index($request);
+      return new CurrencyCollection($currencies);
     } catch (Exception $e) {
       return failure($e->getMessage());
     }
@@ -37,9 +37,9 @@ class CurrencyController extends Controller
    */
   public function store(CurrencyRequest $request)
   {
-    $response = $this->currencyInterface->store($request);
+    $response = $this->currencyRepository->store($request);
     if ($response instanceof Currency) {
-      return success('Product category created successfully', $response);
+      return success('Currency created successfully', $response);
     }
     return failure($response->getMessage());
   }
@@ -50,9 +50,9 @@ class CurrencyController extends Controller
    */
   public function update($id, CurrencyRequest $request)
   {
-    $response = $this->currencyInterface->update($id, $request);
+    $response = $this->currencyRepository->update($id, $request);
     if ($response instanceof Currency) {
-      return success('Product category updated successfully', $response);
+      return success('Currency updated successfully', $response);
     }
     return failure($response->getMessage());
   }
@@ -63,10 +63,10 @@ class CurrencyController extends Controller
    */
   public function show($id)
   {
-    $pc = Currency::findOrFail($id);
-    if ($pc instanceof Currency) {
-      return success('', $pc);
+    $currency = Currency::findOrFail($id);
+    if ($currency instanceof Currency) {
+      return success('', $currency);
     }
-    return failure($pc->getMessage());
+    return failure($currency->getMessage());
   }
 }

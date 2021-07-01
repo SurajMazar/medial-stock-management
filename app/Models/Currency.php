@@ -13,6 +13,9 @@ class Currency extends Model
 
 
     public function scopeSearch($query,$keyword){
-        return $query->where('name', 'like', '%' .$keyword. '%');
+        return $query->where('name', 'like', '%' .$keyword. '%')
+        ->orWhere('country', 'like', '%' .$keyword. '%')
+        ->orWhere('symbol', 'like', '%' .$keyword. '%')
+        ->orWhere('local_value', 'like', '%' .$keyword. '%');
       }
 }
