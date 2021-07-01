@@ -3,6 +3,7 @@
 use App\Http\Controllers\api\VendorController;
 use App\Http\Controllers\api\ProductCategoryController;
 use App\Http\Controllers\api\ProductController;
+use App\Http\Resources\CurrencyCollection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,10 +23,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::group(['before' => 'force.ssl'], function()
-{
+// Route::group(['before' => 'force.ssl'], function()
+// {
     Route::resource('/vendors',VendorController::class);
     Route::resource('/product_category',ProductCategoryController::class);
     Route::resource('/products',ProductController::class);
-});
+    Route::resource('/currency',CurrencyCollection::class);
+
+// });
 

@@ -1,6 +1,4 @@
-import React from 'react';
-
-
+import { BarChartOutlined, CoffeeOutlined, DollarOutlined, HomeOutlined, MedicineBoxOutlined, ShopOutlined, SketchOutlined, SolutionOutlined, SwapLeftOutlined } from "@ant-design/icons";
 
 interface routeInterface{
   path:string|null,
@@ -12,19 +10,27 @@ interface routeInterface{
 const sidebars:Array<routeInterface> = [
   {
     path:'/',
-    title:'Dashboard'
+    title:'Dashboard',
+    icon:HomeOutlined
   },
   {
     path:null,
-    title:'Management'
+    title:'Management',
+  },
+  {
+    path:'/currency',
+    title:'Currency',
+    icon:DollarOutlined
   },
   {
     path:'/vendors',
-    title:'Vendors'
+    title:'Vendors',
+    icon:CoffeeOutlined
   },
   {
     path:'/customers',
-    title:'Customers'
+    title:'Customers',
+    icon:SketchOutlined
   },
 
   {
@@ -36,10 +42,11 @@ const sidebars:Array<routeInterface> = [
         title:'Products'
       },
       {
-        path:'/products/category',
+        path:'/product/category',
         title:'Category'
       }
-    ]
+    ],
+    icon:MedicineBoxOutlined
   },
 
  
@@ -50,11 +57,13 @@ const sidebars:Array<routeInterface> = [
 
   {
     path:'/purchase-invoices',
-    title:'Puchase invoice'
+    title:'Puchase invoice',
+    icon:SolutionOutlined
   },
   {
     path:'/purchase-returns',
-    title:'Purchase returns'
+    title:'Purchase returns',
+    icon:SwapLeftOutlined
   },
 
 
@@ -65,11 +74,13 @@ const sidebars:Array<routeInterface> = [
 
   {
     path:'/sales-invoices',
-    title:'Sales invoice'
+    title:'Sales invoice',
+    icon:SolutionOutlined
   },
   {
     path:'/sales-returns',
-    title:'Sales returns'
+    title:'Sales returns',
+    icon:SwapLeftOutlined
   },
 
 
@@ -80,13 +91,15 @@ const sidebars:Array<routeInterface> = [
 
   {
     path:'/stocks',
-    title:'Stocks'
+    title:'Stocks',
+    icon:ShopOutlined
   },
 
 
   {
     path:'/reports',
-    title:'Reports'
+    title:'Reports',
+    icon:BarChartOutlined
   },
 
 

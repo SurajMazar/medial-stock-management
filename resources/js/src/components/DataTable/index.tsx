@@ -38,7 +38,11 @@ const DatTableWrapper:React.FC<DTinterface> = props =>{
     }
   }
   // end page change
+  
 
+  useEffect(()=>{
+    fetchData({page:1})
+  },[])//eslint-disable-line
 
   return(
     <div>

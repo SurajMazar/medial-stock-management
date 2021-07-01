@@ -23,11 +23,6 @@ const ProductCategory:React.FC = () =>{
     dispatch(fetchProductCategory(params));
   }
 
-  useEffect(()=>{
-    loadcats();
-  },[dispatch]);
-
-
 
   // create edit modal section
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -74,7 +69,7 @@ const ProductCategory:React.FC = () =>{
                 <tr key={item.id}>
                   <td>{item.name}</td>
                   <td>
-                  <Button shape='round' size="small" className="btn-secondary"
+                  <Button shape='round' size="middle" className="btn-secondary"
                     onClick={()=>editModal(item)}
                   >Edit</Button>
                   </td>

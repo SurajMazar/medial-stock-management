@@ -40028,6 +40028,12 @@ body {
   }
 }
 
+.ant-menu-submenu-title,
+.ant-menu-item {
+  display: flex;
+  align-items: center;
+}
+
 .d-flex {
   display: flex;
 }
@@ -40657,6 +40663,16 @@ body {
   color: #136acd !important;
 }
 
+.btn-outline-primary {
+  color: #136acd;
+  border-color: #136acd;
+}
+
+.btn-outline-primary:hover {
+  background-color: #136acd;
+  color: #fff;
+}
+
 .table {
   margin-bottom: 0px;
 }
@@ -40696,8 +40712,15 @@ body {
   border-color: #bcbcbc;
 }
 
+input,
+textarea,
+.ant-select-selector {
+  border-radius: 4px;
+}
+
 input:focus,
-textarea:focus {
+textarea:focus,
+.ant-select-selector:focus {
   box-shadow: none !important;
 }
 

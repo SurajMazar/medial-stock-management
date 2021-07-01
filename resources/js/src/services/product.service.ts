@@ -10,7 +10,9 @@ import {
 
   fetchProductsFail,
   fetchProductsRequest,
-  fetchProductsSuccess
+  fetchProductsSuccess,
+
+  createProductSuccess
 
 } from '../store/action-reducer/products.actionreducer';
 
@@ -18,7 +20,7 @@ import instance from "../utils/axios";
 import { setUrl } from "../utils/helper.utils";
 import { Dispatch } from "redux";
 import { message } from 'antd';
-import { fetchSingleVendorRequest } from '../store/action-reducer/vendor.actionreducer';
+import { push } from 'connected-react-router';
 
 
 export const fetchProductCategory = (params:any = {page:1}) => {
@@ -80,7 +82,7 @@ export const updateProductCategory = (id:number,formdata:FormData,callback:any =
 
 export const fetchProducts = (params:any = {page:1}) => {
   return async (dispatch:Dispatch) =>{
-    dispatch(fetchSingleVendorRequest());
+    dispatch(fetchProductsRequest());
     try{
       let url = setUrl(params,`api/products`)
       const response = await instance.get(url);
@@ -94,6 +96,57 @@ export const fetchProducts = (params:any = {page:1}) => {
         dispatch(fetchProductsFail(e.response.data));
       }
       message.error("Something went wrong");
+    }
+  }
+}
+
+
+export const createProduct = (formdata:FormData,callback:any = undefined) => {
+  return async (dispatch:Dispatch) =>{
+    dispatch(fetchProductsRequest());
+    try{
+      const response = await instance.post(`api/products`,formdata);
+      dispatch(createProductSuccess(response.data.data));
+      message.success("Product created!")
+      dispatch(push('/products/view/'+response.data.data.id))
+      if(callback) callback();
+    }catch(e:any){
+      if(e.response && e.response.data){
+        dispatch(fetchProductsFail(e.response.data));
+      }
+      message.error("Something went wrong");
+    }
+  }
+}
+
+export const fetchProductByID = async(id:string)=>{
+  try{
+    const response = await instance.get(`api/products/${id}`);
+    return response.data.data;
+  }catch(e:any){
+    if(e.response && e.response.data){
+      message.error(e.response.data.message);
+      return undefined;
+    }else{
+      message.error("Something went wrong");
+      return undefined;
+    }
+  }
+}
+
+
+export const updateProduct = async(id:string,formData:FormData)=>{
+  try{
+    await instance.post(`api/products/${id}`,formData);
+    message.success("Product updated successfully!");
+    return;
+  }catch(e:any){
+    if(e.response && e.response.data){
+      message.error(e.response.data.message);
+      return undefined;
+    }else{
+      message.error("Something went wrong");
+      return undefined;
     }
   }
 }

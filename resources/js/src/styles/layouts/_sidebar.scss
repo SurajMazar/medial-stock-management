@@ -51,3 +51,8 @@ color:$primary-color;
     margin-left: 200px;
   }
 }
+
+.ant-menu-submenu-title,.ant-menu-item{
+  display: flex;
+  align-items: center;
+}

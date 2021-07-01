@@ -44,7 +44,7 @@ export const createVendor = (formData:FormData,callback:any|null = null)=>{
       const response = await instance.post('/api/vendors',formData);
       if(callback) callback();
       message.success("Vendor created successfully");
-      dispatch(push('/vendors/'+response.data.data.id));
+      dispatch(push('/vendors/'+response.data.data.id+'/details'));
     }catch(e){
       message.error("Something went wrong")
     }

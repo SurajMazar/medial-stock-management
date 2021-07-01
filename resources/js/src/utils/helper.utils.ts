@@ -51,3 +51,20 @@ export const updateItemById = (array:any,item:any)=>{
   }
   return array;
 }
+
+export const getSn = (current_page:string|number,number:number) =>{
+  return (Number(current_page)-1)*10 + (number+1)
+}
+
+
+export const concatArray = (array:Array<any>,object:any) =>{
+  if(object){
+    let temp = [...array];
+    if(temp.indexOf(object) === -1){
+      temp.concat([object]);
+    }
+    return temp;
+  } 
+  return object;
+}
+

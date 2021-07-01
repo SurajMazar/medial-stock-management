@@ -11,7 +11,7 @@ export interface ProductStateInterface{
   meta:PageMeta|undefined,
   errors:any,
 
-  products:Product|undefined,
+  products:Array<Product>|undefined,
   loadingProduct:boolean,
   errorProduct:any,
   metaProduct:PageMeta|undefined,
@@ -26,7 +26,7 @@ const initialState:ProductStateInterface = {
   products:undefined,
   loadingProduct:false,
   errorProduct:undefined,
-  metaProduct:undefined
+  metaProduct:undefined,
   
 }
 
@@ -65,6 +65,8 @@ const PCSlice = createSlice({
       state.categories = updateItemById(state.categories,actions.payload);
     },
 
+
+    // product related
     fetchProductsRequest(state){
       state.loadingProduct = true;
     },
@@ -79,6 +81,12 @@ const PCSlice = createSlice({
       state.loadingProduct = false;
       state.errorProduct = actions.payload;
     },
+
+
+    createProductSuccess(state,actions){
+      state.loadingProduct = false;
+      state.products = [actions.payload].concat(state.products);
+    }
 
 
   }
@@ -98,7 +106,11 @@ export const {
 
   fetchProductsFail,
   fetchProductsRequest,
-  fetchProductsSuccess
+  fetchProductsSuccess,
+
+  createProductSuccess,
+
+
 
 } = PCSlice.actions;
 

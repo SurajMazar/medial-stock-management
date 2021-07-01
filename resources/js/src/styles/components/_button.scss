@@ -20,4 +20,15 @@
   border-color: $primary-color !important;
   background:transparent !important;
   color: $primary-color !important;
+ 
 }
+
+.btn-outline-primary{
+  color:$primary-color;
+  border-color: $primary-color;
+  &:hover{
+    background-color: $primary-color;
+    color: $white;
+  }
+}
+

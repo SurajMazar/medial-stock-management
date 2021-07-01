@@ -1,7 +1,9 @@
 import React from 'react';
+import Currency from '../pages/Currency';
 import Dashboard from '../pages/Dashboard';
 import Products from '../pages/Products';
 import ProductCategory from '../pages/Products/Category';
+import ProductView from '../pages/Products/View';
 import Vendor from '../pages/Vendor';
 import EditVendor from '../pages/Vendor/edit';
 
@@ -18,7 +20,11 @@ const routes:Array<routeInterface> = [
     component:Dashboard,
     title:'Dashboard'
   },
- 
+  {
+    path:'/currency',
+    component:Currency,
+    title:"Currency"
+  },
   {
     path:'/vendors',
     component:Vendor,
@@ -38,7 +44,13 @@ const routes:Array<routeInterface> = [
   },
 
   {
-    path:'/products/category',
+    path:'/products/view/:id',
+    component:ProductView,
+    title:'Product Details'
+  },
+
+  {
+    path:'/product/category',
     component:ProductCategory,
     title:'Product category'
   },

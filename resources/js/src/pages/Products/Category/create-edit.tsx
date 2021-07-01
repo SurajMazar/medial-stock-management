@@ -1,9 +1,11 @@
 import {Button, Input, Modal} from 'antd';
 import {Form} from 'antd'
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import Preloader from '../../../components/Preloader';
 import { ProductCategory } from '../../../model/product.model';
 import { createProductCategory, updateProductCategory } from '../../../services/product.service';
+import { StoreInterface } from '../../../store/store';
 import { setFormdata } from '../../../utils/helper.utils';
 
 interface Props{
@@ -15,6 +17,14 @@ interface Props{
 const CreateEditCategory:React.FC<Props> = (props)=>{
 
   const {showModal,closeModal,editData} = props;
+
+  //store
+  const state = useSelector((state:StoreInterface)=>{
+    const {product} = state;
+    return product;
+  });
+  const {loading} = state;
+  //store
 
   const [form] = Form.useForm();
   const dispatch = useDispatch()
@@ -50,13 +60,16 @@ const CreateEditCategory:React.FC<Props> = (props)=>{
       title={editData?"Update product category":"Create product category"}
       onCancel={handleClose}
       footer={[
-        <Button shape="round" key={1} size="middle" type="primary"
+        <Button shape="round" 
+        key={1} size="middle" type="primary"
+        disabled={loading}
           form="ce-product-category-form" htmlType="submit"> 
           {editData?"Update":"Create"}
         </Button>
       ]}
     >
       <div>
+        
         <Form 
           id="ce-product-category-form"
           form={form}
@@ -73,6 +86,10 @@ const CreateEditCategory:React.FC<Props> = (props)=>{
             <Input placeholder="Name" className="form-control"/>
           </Form.Item>
         </Form>
+        {
+          loading?
+          <Preloader/>:''
+        }
       </div>
     </Modal>
   );

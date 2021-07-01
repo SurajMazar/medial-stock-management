@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {Button, Popover} from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { StoreInterface } from '../../store/store';
@@ -21,17 +21,12 @@ const Vendor:React.FC = () => {
     return vendor;
   });
 
-  const {loading,meta,vendors}  =  state;
+  const {loading,meta,vendors,}  =  state;
   /** End store */
 
   const loadVendors = (params:any = {page:1}) =>{
     dispatch(fetchVendors(params));
   }
-
-
-  useEffect(()=>{
-    loadVendors();
-  },[dispatch]) //eslint-disable-line
 
 
 

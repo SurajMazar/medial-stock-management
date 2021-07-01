@@ -11,7 +11,7 @@ interface Product{
   subunits_per_quantity: number,
   sub_unit_name: string,
   description: string,
-  product_category_id: number,
+  product_category_id?: number,
   created_at: Date,
   category:ProductCategory
 }

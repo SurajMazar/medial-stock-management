@@ -22,9 +22,11 @@ const Sidebar = () => {
       >
         {
           sidebars.map((route,index)=>{
+            const{icon:Icon} = route;
             if(route.children && route.children.length){
+              
               return(
-                <SubMenu key={route.title} title={route.title}>
+                <SubMenu key={route.title} title={route.title} icon={Icon ? <Icon/> : null}>
                   {route.children.map((r,i)=>(
                     <Menu.Item key={'sub-menu-'+i}>
                       <NavLink exact  activeClassName="active" to={r.path||''}>
@@ -37,7 +39,7 @@ const Sidebar = () => {
             }
             else if(route.path){
               return (
-              <Menu.Item key={index+1}>
+              <Menu.Item key={index+1} icon={Icon ? <Icon/> : null}>
                 <NavLink exact activeClassName="active" to={route.path||''}>
                   {route.title}
                 </NavLink>

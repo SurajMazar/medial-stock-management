@@ -45,7 +45,7 @@ class ProductController extends Controller
   /**
    * Update vendor
   */
-  public function update($id,Product $request){
+  public function update($id,ProductRequest $request){
     $response = $this->productInterface->update($id,$request);
     if($response instanceof Product){
       return success('Product updated successfully',$response);
@@ -58,7 +58,7 @@ class ProductController extends Controller
    * Show vendor
   */
   public function show($id){
-    $pc = Product::findOrFail($id);
+    $pc = Product::with('category')->findOrFail($id);
     if($pc instanceof Product){
       return success('',$pc);
     }

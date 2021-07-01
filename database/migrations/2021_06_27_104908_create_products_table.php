@@ -16,7 +16,7 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->boolean('has_sub_units');
+            $table->boolean('has_sub_units')->default(false);
             $table->float('subunits_per_quantity')->nullable();
             $table->string('sub_unit_name')->nullable();
             $table->text('description')->nullable();
