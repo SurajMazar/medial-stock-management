@@ -16,13 +16,14 @@ class CreatePurchaseInvoicesTable extends Migration
     Schema::create('purchase_invoices', function (Blueprint $table) {
       $table->id();
       $table->string('invoice_number');
-      $table->date('transaction_date');
-      $table->date('invoice_issue_date');
-      $table->longText('alterations');
-      $table->float('total');
-      $table->float('total_in_words');
+      $table->date('transaction_date')->nullable();
+      $table->date('invoice_issue_date')->nullable();
+      $table->longText('alterations')->nullable();
+      $table->float('total')->nullable();
+      $table->float('total_in_words')->nullable();
       $table->foreignId('vendor_id')->references('id')->on('vendors')->nullable(false);
       $table->foreignId('currency_id')->references('id')->on('currencies')->nullable();
+      $table->text('note');
       $table->softDeletes();
       $table->timestamps();
     });

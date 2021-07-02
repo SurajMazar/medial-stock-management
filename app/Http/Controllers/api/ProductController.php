@@ -31,7 +31,7 @@ class ProductController extends Controller
   }
 
   /**
-   * Create vendor
+   * Create product
    */
   public function store(ProductRequest $request){
     $response = $this->productInterface->store($request);
@@ -43,7 +43,7 @@ class ProductController extends Controller
 
 
   /**
-   * Update vendor
+   * Update product
   */
   public function update($id,ProductRequest $request){
     $response = $this->productInterface->update($id,$request);
@@ -55,7 +55,7 @@ class ProductController extends Controller
 
 
   /**
-   * Show vendor
+   * Show product
   */
   public function show($id){
     $pc = Product::with('category')->findOrFail($id);

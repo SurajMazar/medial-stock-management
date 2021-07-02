@@ -4,6 +4,7 @@ import Dashboard from '../pages/Dashboard';
 import Products from '../pages/Products';
 import ProductCategory from '../pages/Products/Category';
 import ProductView from '../pages/Products/View';
+import PurchaseInvoice from '../pages/Purchase/Purchase-invoice';
 import Vendor from '../pages/Vendor';
 import EditVendor from '../pages/Vendor/edit';
 
@@ -69,7 +70,7 @@ const routes:Array<routeInterface> = [
 
   {
     path:'/purchase-invoices',
-    component:Vendor,
+    component:PurchaseInvoice,
     title:'Puchase invoice'
   },
   {

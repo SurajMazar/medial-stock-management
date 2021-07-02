@@ -14,6 +14,7 @@ interface Props{
   required:boolean
   defaultOption?:any
   dropDownRenderer?:any
+  displayValue?:string|Array<string>
 }
 
 const {Option} = Select;
@@ -31,16 +32,32 @@ const CustomSelect:React.FC<Props> = (props)=>{
     search,
     defaultOption,
     dropDownRenderer,
+    displayValue,
   } = props;
 
+
+  const displayName = (item:any,array:Array<any>) =>{
+    let name = '';
+    array.forEach((key:any,i)=>{
+      if(i<array.length-1){
+        name += item[key] + '-'
+      }else{
+        name += item[key]
+      }
+    })
+    return name;
+  }
 
   const getSelectOptions = (List:Array<any>,errorMessage="Sorry no data found") => {
     if(List && List.length){
       return(
         <>
-        {List.map(item =>(
+        {List.map((item:any) =>(
           <Option value={item.id} key={item.id}>
-            {item.name || item.title}
+            {displayValue? Array.isArray(displayValue) ? 
+              displayName(item,displayValue)
+            :item[displayValue]  
+            : item.name || item.title  }
           </Option>
         ))}
         </>
@@ -56,7 +73,10 @@ const CustomSelect:React.FC<Props> = (props)=>{
   }
   
   const handleSearch = debounce((value) =>{
-    search(value)
+    search({
+      keyword:value,
+      page:1
+    })
   },500);
 
 
