@@ -21,6 +21,11 @@ class PurchaseInvoice extends Model
     }
 
 
+    public function purchases(){
+        return $this->hasMany(Purchase::class)->with('product');
+    }
+
+
     public function scopeSearch($query,$keyword){
         return $query->where('invoice_number', 'like', '%' .$keyword. '%');
     }

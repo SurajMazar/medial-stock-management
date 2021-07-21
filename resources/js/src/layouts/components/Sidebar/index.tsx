@@ -2,14 +2,22 @@ import React, { useEffect, useState } from 'react';
 import { Layout, Menu } from 'antd';
 import {NavLink, useLocation} from 'react-router-dom';
 import sidebars from '../../../constants/sidebar'
+import { useDispatch } from 'react-redux';
+import { Logout } from '../../../services/auth.service';
+import { LogoutOutlined } from '@ant-design/icons';
 
 const { Sider } = Layout;
 const {SubMenu} = Menu;
 
 const Sidebar = () => {
 
-  const location = useLocation();
+  const dispatch = useDispatch();
 
+
+
+  const handleLogout = () =>{
+    dispatch(Logout());
+  }
   return(
     <Sider 
     breakpoint="lg"
@@ -52,6 +60,10 @@ const Sidebar = () => {
             }
           })
         }
+
+        <Menu.Item key={'logout'} icon={<LogoutOutlined />} onClick={handleLogout}>
+          Logout                      
+        </Menu.Item>
       </Menu>
     </Sider>
   );

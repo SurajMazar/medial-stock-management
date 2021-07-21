@@ -16,7 +16,7 @@ const OverviewCard:React.FC<ovPropsInterface> = props =>{
 
   return(
     <div className="dashboard-overview-card">
-      <h1 className="text-18px-white bold mb-2">
+      <h1 className="text-18px-white mb-2">
         {title}
       </h1>
       <p className='text-26px-white '>{counts}</p>

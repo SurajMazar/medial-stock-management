@@ -1,10 +1,15 @@
 import React from 'react';
+import AppLayout from '../layouts/App';
+import Public from '../layouts/Public';
 import Currency from '../pages/Currency';
 import Dashboard from '../pages/Dashboard';
+import Home from '../pages/Home';
+import Login from '../pages/Login';
 import Products from '../pages/Products';
 import ProductCategory from '../pages/Products/Category';
 import ProductView from '../pages/Products/View';
 import PurchaseInvoice from '../pages/Purchase/Purchase-invoice';
+import ViewPurchaseInvoice from '../pages/Purchase/Purchase-invoice/view';
 import Vendor from '../pages/Vendor';
 import EditVendor from '../pages/Vendor/edit';
 
@@ -12,48 +17,72 @@ import EditVendor from '../pages/Vendor/edit';
 interface routeInterface{
   path:string|null,
   component:React.FC|null,
-  title:string
+  title:string,
+  layout:React.FC
 }
 
 const routes:Array<routeInterface> = [
+
+  {
+    path:'/login',
+    component:Login,
+    title:'Login',
+    layout:Public
+  },
+
+  // {
+  //   path:'/',
+  //   component:Home,
+  //   title:'Home',
+  //   layout:Public
+  // },
+
   {
     path:'/',
     component:Dashboard,
-    title:'Dashboard'
+    title:'Dashboard',
+    layout:AppLayout
   },
+
   {
     path:'/currency',
     component:Currency,
-    title:"Currency"
+    title:"Currency",
+    layout:AppLayout
   },
   {
     path:'/vendors',
     component:Vendor,
-    title:'Vendors'
+    title:'Vendors',
+    layout:AppLayout
   },
 
   {
     path:'/vendors/:id/:tab',
     component:EditVendor,
-    title:'Vendors'
+    title:'Vendors',
+    layout:AppLayout
   },
 
   {
     path:'/products',
     component:Products,
-    title:'Product'
+    title:'Product',
+    layout:AppLayout
   },
 
   {
     path:'/products/view/:id',
     component:ProductView,
-    title:'Product Details'
+    title:'Product Details',
+    layout:AppLayout
   },
 
   {
     path:'/product/category',
     component:ProductCategory,
-    title:'Product category'
+    title:'Product category',
+    layout:AppLayout
   },
 
 
@@ -62,7 +91,8 @@ const routes:Array<routeInterface> = [
   {
     path:'/customers',
     component:Vendor,
-    title:'Customers'
+    title:'Customers',
+    layout:AppLayout
   },
 
  
@@ -71,12 +101,23 @@ const routes:Array<routeInterface> = [
   {
     path:'/purchase-invoices',
     component:PurchaseInvoice,
-    title:'Puchase invoice'
+    title:'Purchase invoice',
+    layout:AppLayout
   },
+
+
+  {
+    path:'/purchase-invoices/view/:id',
+    component:ViewPurchaseInvoice,
+    title:'Purchase Invoice View',
+    layout:AppLayout
+  },
+
   {
     path:'/purchase-returns',
     component:Vendor,
-    title:'Purchase returns'
+    title:'Purchase returns',
+    layout:AppLayout
   },
 
 
@@ -85,12 +126,14 @@ const routes:Array<routeInterface> = [
   {
     path:'/sales-invoices',
     component:Vendor,
-    title:'Sales invoice'
+    title:'Sales invoice',
+    layout:AppLayout
   },
   {
     path:'/sales-returns',
     component:Vendor,
-    title:'Sales returns'
+    title:'Sales returns',
+    layout:AppLayout
   },
 
 
@@ -99,14 +142,16 @@ const routes:Array<routeInterface> = [
   {
     path:'/stocks',
     component:Vendor,
-    title:'Stocks'
+    title:'Stocks',
+    layout:AppLayout
   },
 
 
   {
     path:'/reports',
     component:Vendor,
-    title:'Reports'
+    title:'Reports',
+    layout:AppLayout
   },
 
 

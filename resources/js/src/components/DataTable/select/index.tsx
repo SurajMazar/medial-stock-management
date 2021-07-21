@@ -65,7 +65,7 @@ const CustomSelect:React.FC<Props> = (props)=>{
       
     }else{
       return(
-        <Option disabled value={""} key={0}>
+        <Option disabled value={"test"} key={0}>
           {errorMessage}
         </Option>
       )
@@ -108,7 +108,7 @@ const CustomSelect:React.FC<Props> = (props)=>{
       >
         {!loading?
           getSelectOptions(defaultOption?concatArray(options,defaultOption):options):
-          <Option value="" key={'null'} disabled>Loading</Option>
+          <Option value="null" key={'null'} disabled>Loading</Option>
         }
       </Select>
     </Form.Item>

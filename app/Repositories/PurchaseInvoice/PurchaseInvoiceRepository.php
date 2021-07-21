@@ -12,7 +12,7 @@ class PurchaseInvoiceRepository implements PurchaseInvoiceInterface{
     public function index($request){
       $items_per_page = $request->items_per_page?:10;
       $keyword = $request->keyword;
-      $purchaseInvoices = PurchaseInvoice::latest()->with('vendor','currency');
+      $purchaseInvoices = PurchaseInvoice::latest()->with('vendor','currency','purchases');
       if($keyword){
         $purchaseInvoices->Search($keyword);
       }

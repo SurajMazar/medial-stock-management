@@ -16,16 +16,16 @@ class CreatePurchasesTable extends Migration
     Schema::create('purchases', function (Blueprint $table) {
       $table->id();
       $table->string('code');
-      $table->float('pack');
+      $table->string('pack');
       $table->float('quantity');
       $table->float('marked_price');
       $table->string('batch');
       $table->date('expiry_date');
-      $table->float('rate');
+      $table->float('rate')->nullable();
       $table->float('amount');
       $table->boolean('free');
-      $table->enum('free_rate_type',['percent','amount']);
-      $table->float('free_rate');
+      $table->enum('free_rate_type',['percent','amount'])->nullable();
+      $table->float('free_rate')->nullable();;
       $table->foreignId('product_id')->references('id')->on('products')->nullable(false);
       $table->foreignId('purchase_invoice_id')->references('id')->on('purchase_invoices')->nullable(false);
       $table->softDeletes();

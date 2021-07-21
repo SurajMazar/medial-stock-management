@@ -2,7 +2,6 @@ import React from 'react';
 import {Switch, withRouter} from 'react-router-dom';
 import routes from './constants/router';
 import PublicRouter from './router/Public';
-import AppLayout from './layouts/App';
 
 
 const App = () =>{
@@ -15,7 +14,7 @@ const App = () =>{
             exact 
             path={route.path} 
             component={route.component} 
-            layout={AppLayout}/>
+            layout={route.layout}/>
           }
       })
       }

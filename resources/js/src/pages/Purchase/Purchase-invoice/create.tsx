@@ -3,8 +3,10 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import CustomSelect from '../../../components/DataTable/select';
 import { fetchCurrencies } from '../../../services/currency.service';
+import { createPurchaseInvoice } from '../../../services/purchase.service';
 import { fetchVendors } from '../../../services/vendor.service';
 import { StoreInterface } from '../../../store/store';
+import { removeNullItems, setFormdata } from '../../../utils/helper.utils';
 
 interface Props{
   visible:boolean,
@@ -35,6 +37,13 @@ const CreatePurchaseInvoice:React.FC<Props> = (props)=>{
   }
   //redux store
 
+  const [creating,setCreating] = useState<boolean>(false)
+  const createPI = async(values:any) =>{
+    setCreating(true);
+    const form = setFormdata(removeNullItems(values));
+    await dispatch(createPurchaseInvoice(form));
+    setCreating(false);
+  }
 
   const [foreignCurrency,setForeignCurrency] = useState<boolean>(false)
 
@@ -57,7 +66,7 @@ const CreatePurchaseInvoice:React.FC<Props> = (props)=>{
         id="create-purchase-invoice-id-form"
         form={form}
         layout="vertical"
-        onFinish={value=>console.log(value)}
+        onFinish={createPI}
         >
         <div className="row">
 
@@ -130,7 +139,7 @@ const CreatePurchaseInvoice:React.FC<Props> = (props)=>{
           <div className="col-md-6">
             <Form.Item
             label="Invoice date"
-            name="invoice_date"
+            name="invoice_issue_date"
             rules={
               [{required:true,message:'Invoice date is required!'}]
             }

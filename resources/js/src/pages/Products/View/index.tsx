@@ -10,7 +10,7 @@ const ProductView:React.FC = () =>{
     <section className="page-section-2">
       <div className="section-padding-1-2 d-flex ac">
         <h3 className="text-22px">Product Details</h3>
-        <div className="ml-auto">
+        <div className="ml-auto d-flex">
           <Link to='/products'>
             <Button className="btn-outline-primary mr-1" 
             shape="round"  size="middle">Product lists</Button>

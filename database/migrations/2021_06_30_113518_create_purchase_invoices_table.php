@@ -22,8 +22,8 @@ class CreatePurchaseInvoicesTable extends Migration
       $table->float('total')->nullable();
       $table->float('total_in_words')->nullable();
       $table->foreignId('vendor_id')->references('id')->on('vendors')->nullable(false);
-      $table->foreignId('currency_id')->references('id')->on('currencies')->nullable();
-      $table->text('note');
+      $table->foreignId('currency_id')->nullable()->references('id')->on('currencies')->onDelete('cascade');
+      $table->text('note')->nullable();
       $table->softDeletes();
       $table->timestamps();
     });

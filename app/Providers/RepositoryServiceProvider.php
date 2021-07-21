@@ -36,6 +36,10 @@ class RepositoryServiceProvider extends ServiceProvider
     $this->app->bind(
       "App\\Repositories\\PurchaseInvoice\\PurchaseInvoiceInterface",
       "App\\Repositories\\PurchaseInvoice\\PurchaseInvoiceRepository",);
+
+    $this->app->bind(
+      "App\\Repositories\\Purchase\\PurchaseInterface",
+      "App\\Repositories\\Purchase\\PurchaseRepository",);
   }
 
   /**

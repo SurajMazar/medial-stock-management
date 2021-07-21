@@ -5,11 +5,15 @@ import reducers from './reducer';
 import {VendorStoreInterface} from './action-reducer/vendor.actionreducer';
 import { ProductStateInterface } from './action-reducer/products.actionreducer';
 import { CurrencyStateInterface } from './action-reducer/currency.actionreducer';
+import { PurchaseStoreInterface } from './action-reducer/purchase.actionreducer';
+import { AuthStore } from './action-reducer/auth.actionreducer';
 
 export interface StoreInterface{
+  auth:AuthStore,
   vendor:VendorStoreInterface,
   product:ProductStateInterface,
-  currency:CurrencyStateInterface
+  currency:CurrencyStateInterface,
+  purchase:PurchaseStoreInterface
 }
 
 const store = configureStore({

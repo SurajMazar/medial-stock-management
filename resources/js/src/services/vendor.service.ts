@@ -20,7 +20,7 @@ export const fetchVendors = (params:any = {page:1})=>{
     dispatch(fetchVendorRequest());
     try{
       let url = setUrl(params,`api/vendors`)
-      const response = await instance.get(url);
+      const response = await instance().get(url);
       let data = {
         vendors:response.data.data,
         meta:response.data.meta
@@ -41,7 +41,7 @@ export const createVendor = (formData:FormData,callback:any|null = null)=>{
   return async(dispatch:Dispatch)=>{
     dispatch(fetchVendorRequest());
     try{
-      const response = await instance.post('/api/vendors',formData);
+      const response = await instance().post('/api/vendors',formData);
       if(callback) callback();
       message.success("Vendor created successfully");
       dispatch(push('/vendors/'+response.data.data.id+'/details'));
@@ -56,7 +56,7 @@ export const fetchVendor = (id:string) =>{
   return async (dispatch:Dispatch)=>{
     dispatch(fetchSingleVendorRequest());
     try{
-      const response = await instance.get('/api/vendors/'+id);
+      const response = await instance().get('/api/vendors/'+id);
       dispatch(fetchSingleVendorSuccess(response.data.data));
     }catch(e:any){
       if(e.response && e.response.data){
@@ -72,7 +72,7 @@ export const updateVendor = (id:string,formData:FormData) =>{
   return async (dispatch:Dispatch)=>{
     dispatch(fetchSingleVendorRequest());
     try{
-      const response = await instance.post('/api/vendors/'+id,formData);
+      const response = await instance().post('/api/vendors/'+id,formData);
       dispatch(fetchSingleVendorSuccess(response.data.data));
       message.success("Vendor updated successfully");
     }catch(e:any){

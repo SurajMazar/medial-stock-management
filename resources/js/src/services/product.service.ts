@@ -28,7 +28,7 @@ export const fetchProductCategory = (params:any = {page:1}) => {
     dispatch(fetchCatRequest());
     try{
       let url = setUrl(params,`api/product_category`)
-      const response = await instance.get(url);
+      const response = await instance().get(url);
       let data = {
         categories:response.data.data,
         meta:response.data.meta
@@ -48,7 +48,7 @@ export const createProductCategory = (formdata:FormData,callback:any = undefined
   return async (dispatch:Dispatch) =>{
     dispatch(createPCrequest());
     try{
-      const response = await instance.post(`api/product_category`,formdata);
+      const response = await instance().post(`api/product_category`,formdata);
       dispatch(createPCsuccess(response.data.data));
       message.success("Product category created!")
       if(callback) callback();
@@ -66,7 +66,7 @@ export const updateProductCategory = (id:number,formdata:FormData,callback:any =
   return async (dispatch:Dispatch) =>{
     dispatch(createPCrequest());
     try{
-      const response = await instance.post(`api/product_category/${id}`,formdata);
+      const response = await instance().post(`api/product_category/${id}`,formdata);
       dispatch(updatePCsuccess(response.data.data));
       message.success("Product category updated!")
       if(callback) callback();
@@ -85,7 +85,7 @@ export const fetchProducts = (params:any = {page:1}) => {
     dispatch(fetchProductsRequest());
     try{
       let url = setUrl(params,`api/products`)
-      const response = await instance.get(url);
+      const response = await instance().get(url);
       let data = {
         products:response.data.data,
         meta:response.data.meta
@@ -105,7 +105,7 @@ export const createProduct = (formdata:FormData,callback:any = undefined) => {
   return async (dispatch:Dispatch) =>{
     dispatch(fetchProductsRequest());
     try{
-      const response = await instance.post(`api/products`,formdata);
+      const response = await instance().post(`api/products`,formdata);
       dispatch(createProductSuccess(response.data.data));
       message.success("Product created!")
       dispatch(push('/products/view/'+response.data.data.id))
@@ -121,7 +121,7 @@ export const createProduct = (formdata:FormData,callback:any = undefined) => {
 
 export const fetchProductByID = async(id:string)=>{
   try{
-    const response = await instance.get(`api/products/${id}`);
+    const response = await instance().get(`api/products/${id}`);
     return response.data.data;
   }catch(e:any){
     if(e.response && e.response.data){
@@ -137,7 +137,7 @@ export const fetchProductByID = async(id:string)=>{
 
 export const updateProduct = async(id:string,formData:FormData)=>{
   try{
-    await instance.post(`api/products/${id}`,formData);
+    await instance().post(`api/products/${id}`,formData);
     message.success("Product updated successfully!");
     return;
   }catch(e:any){

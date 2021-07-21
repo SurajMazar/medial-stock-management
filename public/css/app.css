@@ -1,5 +1,4 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);
-@import url(https://fonts.googleapis.com/css2?family:Poppins&display:swap);
 /*!
  * 
  * antd v4.14.0
@@ -39275,6 +39274,68 @@ a.text-dark:focus {
   }
 }
 
+@font-face {
+  font-family: "Quicksand";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/Q-SB-1.woff2?9c6e70ae4aec7b165c6f29899cef1b0a) format("woff2");
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+}
+
+/* latin-ext */
+
+@font-face {
+  font-family: "Quicksand";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/Q-SB-2.woff2?f4f345dd9bc768ec869832bb38613637) format("woff2");
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* latin */
+
+@font-face {
+  font-family: "Quicksand";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/Q-SB-3.woff2?07a3480d288293229838d1237f3a1b92) format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Quicksand Medium";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/Quicksand-medium-1.woff2?0b78293dfa800fce4cd2fce105bebb2c) format("woff2");
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+}
+
+/* latin-ext */
+
+@font-face {
+  font-family: "Quicksand Medium";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/Quicksand-medium-2.woff2?2892e5a51c71c922665112c2bdc27207) format("woff2");
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* latin */
+
+@font-face {
+  font-family: "Quicksand Medium";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/Quicksand-medium-3.woff2?4ff6e5b9ccdb25199651619cf54cfd26) format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 .text-9px {
   font-size: 0.6429rem;
   margin-bottom: 0.12858rem;
@@ -39933,6 +39994,16 @@ a.text-dark:focus {
   font-weight: 600;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 500;
+  font-family: "Quicksand";
+}
+
 #root {
   height: 100%;
 }
@@ -39950,7 +40021,7 @@ html,
 body {
   font-size: 14px;
   background-color: white;
-  font-family: "poppins";
+  font-family: "Quicksand Medium";
 }
 
 html {
@@ -40020,6 +40091,10 @@ body {
     position: fixed !important;
     left: 0;
   }
+}
+
+.msm-sidebar a {
+  font-family: "Quicksand";
 }
 
 @media (min-width: 992px) {
@@ -40646,6 +40721,15 @@ body {
   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
 }
 
+.ant-popover-buttons {
+  display: flex;
+}
+
+.ant-btn {
+  display: flex;
+  align-items: center;
+}
+
 .ant-modal-close-x,
 .ant-layout-sider-zero-width-trigger {
   display: flex;
@@ -40681,7 +40765,7 @@ body {
   color: rgba(0, 0, 0, 0.85);
   background: transparent;
   border: unset !important;
-  font-weight: 500;
+  font-family: "Quicksand";
   font-size: 1rem;
   padding: 12px 15px;
   line-height: 1.4;
@@ -40724,6 +40808,10 @@ textarea:focus,
   box-shadow: none !important;
 }
 
+.ant-picker-cell .ant-picker-cell-inner {
+  text-align: center;
+}
+
 .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
   color: #136acd;
   font-weight: 500;
@@ -40731,6 +40819,26 @@ textarea:focus,
 
 .ant-tabs-ink-bar {
   background: #136acd;
+}
+
+.section-home {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.auth-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.auth-wrapper .auth-card {
+  padding: 1em;
 }
 
 

@@ -60,11 +60,16 @@ class PurchaseInvoiceController extends Controller
    * Show pinvoice
   */
   public function show($id){
-    $pc = PurchaseInvoice::with('vendor','currency')->findOrFail($id);
+    $pc = PurchaseInvoice::with('vendor','currency','purchases')->findOrFail($id);
     if($pc instanceof PurchaseInvoice){
       return success('',$pc);
     }
     return failure($pc->getMessage());
+  }
+
+
+  public function trash($id){
+    return $this->purchaseInvoiceRepository->trash($id);
   }
 
 }
