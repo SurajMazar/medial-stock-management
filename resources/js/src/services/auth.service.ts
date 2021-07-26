@@ -15,7 +15,7 @@ export const login = (form:FormData) =>{
   return async(dispatch:Dispatch)=>{
     dispatch(loginRequest());
     try{
-      const response = await instance().post('/api/login',form);
+      const response = await instance(true).post('/api/login',form);
       let data = {
         token:response.data.data.token,
         user:response.data.data.user
@@ -37,11 +37,11 @@ export const login = (form:FormData) =>{
   }
 }
 
-export const Logout = () =>{
+export const Logout = (mess:boolean = true) =>{
   return (dispatch:Dispatch)=>{
     dispatch(logout());
     dispatch(push('/login'));
     localStorage.clear();
-    message.success('Logged out successfully!!')
+    if(mess)  message.success('Logged out successfully!!')
   }
 }

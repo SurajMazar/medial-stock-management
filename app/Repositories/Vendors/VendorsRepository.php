@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Vendors;
 
+use App\Models\PurchaseInvoice;
 use App\Models\Vendor;
 use App\Repositories\Vendors\VendorsRepositoryInterface;
 use Exception;
@@ -66,6 +67,27 @@ class VendorsRepository implements VendorsRepositoryInterface{
       $vendor->findOrFail($id);
       return $vendor->forceDelete();
     }
+
+
+    public function show($id)
+    {
+      $vendor = Vendor::findOrFail($id);
+      $vendor->total_purchases = $this->getTotalPurchases($id);
+      return $vendor;
+    }
+
+
+    public function getTotalPurchases($vendor_id){
+      $purchases = PurchaseInvoice::where('vendor_id',$vendor_id)->get();
+      $total = 0;
+      foreach($purchases as $purchase){
+        $total = $total + $purchase->total;
+      };
+      return $total;
+    }
+
+
+
 
   }
 

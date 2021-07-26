@@ -40,4 +40,9 @@ class PurchaseController extends Controller
     }
     return failure($response->getMessage());
   }
+
+  public function trash($id){
+    return $this->purchaseRepository->trash($id);
+  }
 }
+

@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->boolean('has_sub_units')->default(false);
             $table->float('subunits_per_quantity')->nullable();
             $table->string('sub_unit_name')->nullable();
-            $table->text('description')->nullable();
+            $table->longText('description')->nullable();
             $table->foreignId('product_category_id')->references('id')->on('product_categories')->nullable(false);
             $table->timestamps();
             $table->softDeletes();

@@ -16,8 +16,8 @@ class CreatePurchasesTable extends Migration
     Schema::create('purchases', function (Blueprint $table) {
       $table->id();
       $table->string('code');
-      $table->string('pack');
-      $table->float('quantity');
+      $table->string('pack')->nullable();
+      $table->bigInteger('quantity');
       $table->float('marked_price');
       $table->string('batch');
       $table->date('expiry_date');

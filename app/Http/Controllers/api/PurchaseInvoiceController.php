@@ -34,7 +34,7 @@ class PurchaseInvoiceController extends Controller
 
   /**
    * Create pinvoice
-   */
+  */
   public function store(PurchaseInvoiceRequest $request){
     $response = $this->purchaseInvoiceRepository->store($request);
     if($response instanceof PurchaseInvoice){
@@ -68,8 +68,6 @@ class PurchaseInvoiceController extends Controller
   }
 
 
-  public function trash($id){
-    return $this->purchaseInvoiceRepository->trash($id);
-  }
+  
 
 }

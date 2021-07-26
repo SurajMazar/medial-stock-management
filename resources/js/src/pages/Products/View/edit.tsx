@@ -9,6 +9,7 @@ import { fetchProductByID, fetchProductCategory, updateProduct } from '../../../
 import { StoreInterface } from '../../../store/store';
 import Preloader from '../../../components/Preloader';
 import { removeNullItems, setFormdata } from '../../../utils/helper.utils';
+import TextEditor from '../../../components/TextEditor';
 
 
 interface routeParams{
@@ -74,7 +75,7 @@ const ProductEdit:React.FC = () =>{
     }
     const form = setFormdata({
       ...value,
-      has_sub_units:hasSubUnit,
+      has_sub_units:hasSubUnit?1:0,
       _method:'put'
     })
     await updateProduct(id,form);
@@ -163,7 +164,7 @@ const ProductEdit:React.FC = () =>{
             <Form.Item
               name="description"
               label="Description">
-                <TextArea rows={5} className="form-control"/>
+                <TextEditor/>
             </Form.Item>
           </div>
 

@@ -27,7 +27,8 @@ class PurchaseInvoice extends Model
 
 
     public function scopeSearch($query,$keyword){
-        return $query->where('invoice_number', 'like', '%' .$keyword. '%');
+        return $query->where('invoice_number', 'like', '%' .$keyword. '%')->orWhereHas('vendor',function($query) use($keyword){
+            return $query->where('name','like', '%' .$keyword. '%');});
     }
     
 }   

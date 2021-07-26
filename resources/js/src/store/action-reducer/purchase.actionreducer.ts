@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import PageMeta from "../../model/page_meta.model";
 import { purchase, purchase_invoice } from "../../model/purchase.model";
-import { updateItemById } from "../../utils/helper.utils";
+import { removeItemById, updateItemById } from "../../utils/helper.utils";
 
 
 export interface PurchaseStoreInterface{
@@ -47,6 +47,11 @@ const PISlice = createSlice({
       state.errorPurchaseInvoice = actions.payload;
     },
 
+
+    updatePurchaseInvoiceSuccess(state,actions){
+      state.loadingPurchaseInvoice = false;
+      state.purchaseInvoice = actions.payload;
+    },
     // view related
 
     fetchSinglePurchaseInvoiceRequest(state){
@@ -62,13 +67,18 @@ const PISlice = createSlice({
     
     addPurchase(state,actions){
       state.loadingPurchaseInvoice = false;
-      state.purchases = state.purchases ? [actions.payload].concat(state.purchases) : [actions.payload];
+      state.purchases = state.purchases ? state.purchases.concat([actions.payload]) : [actions.payload];
     },
 
     updatePurchase(state,actions){
       state.loadingPurchaseInvoice = false;
       state.purchases = updateItemById(state.purchases,actions.payload);
     },
+
+    deletePurchase(state,actions){
+      state.loadingPurchaseInvoice = false;
+      state.purchases = removeItemById(state.purchases,actions.payload);
+    }
 
 
   }
@@ -79,9 +89,11 @@ export const {
   fetchPurchasInvoicesRequest,
   fetchPurchaseInvoiceFail,
   fetchPurchaseInvoiceSuccess,
+  updatePurchaseInvoiceSuccess,
 
   addPurchase,
   updatePurchase,
+  deletePurchase,
   fetchSinglePurchaseInvoiceRequest,
   fetchSinglePurchaseInvoiceSuccess
 

@@ -7,6 +7,7 @@
     font-family: $font-family-medium;
     font-size: font('14px');
     padding: 12px 15px;line-height: 1.4;
+    white-space: nowrap;
   }
   thead{
     tr{
@@ -25,6 +26,6 @@
    font-size: font('14px');
    vertical-align: middle; 
    padding: 16px 15px;
-   line-height: 1.4;
+   line-height: 1.4;white-space: nowrap;
   }
 }

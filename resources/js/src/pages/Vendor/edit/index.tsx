@@ -3,11 +3,14 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
+import OverviewCard from '../../../components/Dashboard/overview-card';
 import Preloader from '../../../components/Preloader';
 import { fetchVendor } from '../../../services/vendor.service';
 import { StoreInterface } from '../../../store/store';
+import PurchaseInvoice from '../../Purchase/Purchase-invoice';
 import EditForm from './edit';
-
+import {IoReceipt} from 'react-icons/io5';
+import { NepaliNS } from '../../../utils/helper.utils';
 
 interface paramsInterface{
   id:string,
@@ -63,7 +66,20 @@ const EditVendor:React.FC = () =>{
             <EditForm vendor={vendor}/>
           </TabPane>
           <TabPane key={'purchase-history'} tab="Purchase history">
-
+            {vendor?
+            <div className="p-1 mt-3">
+              <div className="row">
+                <div className="col-md-3">
+                  <OverviewCard 
+                    title="Total Purchases"
+                    icon={IoReceipt}
+                    counts={NepaliNS(vendor?.total_purchases,"Rs ")}
+                  />
+                </div>
+              </div>
+            </div>
+            :''}
+            <PurchaseInvoice vendor_id={id}/>
           </TabPane>
           <TabPane key={'payments'} tab="Payments">
 

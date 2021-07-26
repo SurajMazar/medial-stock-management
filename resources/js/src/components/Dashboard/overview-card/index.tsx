@@ -3,7 +3,7 @@ import React from 'react';
 interface ovPropsInterface{
   title:string,
   icon:any,
-  counts:number
+  counts:number|string
 }
 
 

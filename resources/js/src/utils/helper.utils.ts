@@ -4,7 +4,7 @@ export const setUrl = (params:any,url:string) =>{
       if(i == 0){
         url += `/?${item}=${params[item]}`
       }else{
-        url += `&&${item}=${params[item]}`
+        url += `&${item}=${params[item]}`
       }
     })
     return url;
@@ -20,6 +20,16 @@ export const setFormdata = (data:any) =>{
   return formData;         
 }
 
+export const NepaliNS = (number:string|number,symbol:string = '') => {
+  const string = number?.toString()
+  if (string?.length > 3) {
+    let hundredPlace = string.substring(string.length - 3)
+    let remaining = string.slice(0, -3)
+    remaining = remaining.replace(/\B(?=(\d{2})+(?!\d))/g, ",")
+    return symbol +' '+ remaining + ',' + hundredPlace
+  }
+  return symbol +' '+number
+}
 
 export const returnLimitedWords = (string:string, num:number) => {
   if (string.length > num) { string = string.substring(0, num-3) + '...' };
@@ -50,6 +60,11 @@ export const updateItemById = (array:any,item:any)=>{
     if(oldItemIndex  !== -1) array[oldItemIndex] = item;
   }
   return array;
+}
+
+
+export const removeItemById = (array:any,id:any)=>{
+  return array.filter((item:any)=>item.id !== id);
 }
 
 export const getSn = (current_page:string|number,number:number) =>{

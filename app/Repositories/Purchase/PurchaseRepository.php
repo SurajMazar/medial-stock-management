@@ -11,7 +11,10 @@ class PurchaseRepository implements PurchaseInterface{
   public function store($request){
     DB::beginTransaction();
     try{
-      $input = $request->input();
+      $request->merge([
+        'expiry_date' => date('Y-m-d H:i:s',strtotime($request->expiry_date)),
+      ]);
+      $input = $request->all();
       $purchase = Purchase::create($input);
       DB::commit();
       $purchase = Purchase::with('product')->findOrFail($purchase->id);
@@ -26,6 +29,9 @@ class PurchaseRepository implements PurchaseInterface{
     DB::beginTransaction();
     try{
       $purchase = Purchase::with('product')->findOrFail($id);
+      $request->merge([
+        'expiry_date' => date('Y-m-d H:i:s',strtotime($request->expiry_date)),
+      ]);
       $inputs = $request->all();
       $purchase->update($inputs);
       DB::commit();

@@ -17,14 +17,14 @@ export interface purchase_invoice{
 }
 
 export interface purchase{
-  id?:number,
+  id:number,
   purchase_invoice?:purchase_invoice,
   code:string,
   product_id:number|undefined,
   product?:Product,
-  free?:string,
+  free:string,
   free_rate?:number,
-  pack:number,
+  pack:string,
   expiry_date:Date,
   batch:string,
   rate?:number,

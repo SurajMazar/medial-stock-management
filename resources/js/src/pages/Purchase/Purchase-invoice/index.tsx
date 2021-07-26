@@ -10,8 +10,11 @@ import { StoreInterface } from '../../../store/store';
 import { getSn } from '../../../utils/helper.utils';
 import CreatePurchaseInvoice from './create';
 
+interface PIprops{
+  vendor_id?:string
+}
 
-const PurchaseInvoice:React.FC = () =>{
+const PurchaseInvoice:React.FC<PIprops> = ({vendor_id}) =>{
 
 
   const [showModal,setShowModal] = useState<boolean>(false);
@@ -28,6 +31,12 @@ const PurchaseInvoice:React.FC = () =>{
     loadingPurchaseInvoice} = state;
 
     const loadPurchaseInvoice = (params:any) =>{
+      if(vendor_id){
+        params = {
+          ...params,
+          vendor:vendor_id
+        }
+      }
       dispatch(fetchPurchaseInvoice(params));
     }
   //store
@@ -35,13 +44,13 @@ const PurchaseInvoice:React.FC = () =>{
   return(
     <section>
       <div className="section-break-1-2 d-flex ac">
-        <h3 className="text-22px">Purchase Invoice</h3>
+        {vendor_id?"":<h3 className="text-22px">Purchase Invoice</h3>}
         <div className="ml-auto">
           <Button shape="round" size="middle" type="primary"
           onClick={()=>setShowModal(true)}>Create invoice</Button>
         </div>
       </div>
-      <DatTableWrapper fetchData={loadPurchaseInvoice} meta={metaPurchaseInvoice}>
+      <DatTableWrapper dateRange={true} fetchData={loadPurchaseInvoice} meta={metaPurchaseInvoice}>
         <div className="section-break-2">
           {loadingPurchaseInvoice?<Preloader/>:
           <table className="table">
@@ -49,7 +58,7 @@ const PurchaseInvoice:React.FC = () =>{
               <tr>
                 <th>SN</th>
                 <th>Invoice no</th>
-                <th>Vendor</th>
+                {vendor_id?null:<th>Vendor</th>}
                 <th>Currency</th>
                 <th>Transaction date</th>
                 <th>Total</th>
@@ -63,7 +72,8 @@ const PurchaseInvoice:React.FC = () =>{
                   <tr key={pi.id}>
                     <td>{getSn(metaPurchaseInvoice.current_page,i)}</td>
                     <td>{pi.invoice_number}</td>
-                    <td>{ pi.vendor.name || 'N/A'}</td>
+                    {vendor_id?null:<td>
+                      <Link to={`/vendors/${pi.vendor.id}/purchase-history`}>{ pi.vendor.name || 'N/A'}</Link></td>}
                     <td>{ pi.currency? `${pi.currency.country}(${pi.currency.symbol})`:'Nep(Rs)'}</td>
                     <td>{moment(pi.transaction_date).format("YYYY-MM-DD")}</td>
                     <td>Rs.{pi.total || 0}</td>
@@ -87,8 +97,7 @@ const PurchaseInvoice:React.FC = () =>{
           }
         </div>
       </DatTableWrapper>
-      
-      <CreatePurchaseInvoice closeModal={()=>setShowModal(false)} visible={showModal}/>
+      <CreatePurchaseInvoice closeModal={()=>setShowModal(false)} visible={showModal} vendor_id={vendor_id}/>
     </section>
   );
 }

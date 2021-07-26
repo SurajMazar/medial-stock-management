@@ -19,4 +19,5 @@ class Vendor extends Model
       ->orWhere('contact_person','like','%'.$keyword.'%')
       ->orWhere('website','like','%'.$keyword.'%');
     }
+
 }

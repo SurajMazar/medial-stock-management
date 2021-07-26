@@ -1,4 +1,5 @@
 import { Button, Checkbox, Form, Input, Modal, DatePicker } from 'antd';
+import moment from 'moment';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import CustomSelect from '../../../components/DataTable/select';
@@ -11,11 +12,12 @@ import { removeNullItems, setFormdata } from '../../../utils/helper.utils';
 interface Props{
   visible:boolean,
   closeModal:()=>void,
+  vendor_id?:string
 }
 
 const CreatePurchaseInvoice:React.FC<Props> = (props)=>{
 
-  const {closeModal,visible} = props;
+  const {closeModal,visible,vendor_id} = props;
 
   const [form] = Form.useForm();
   const dispatch = useDispatch();
@@ -40,6 +42,9 @@ const CreatePurchaseInvoice:React.FC<Props> = (props)=>{
   const [creating,setCreating] = useState<boolean>(false)
   const createPI = async(values:any) =>{
     setCreating(true);
+    if(vendor_id){
+      values.vendor_id = vendor_id;
+    }
     const form = setFormdata(removeNullItems(values));
     await dispatch(createPurchaseInvoice(form));
     setCreating(false);
@@ -56,7 +61,7 @@ const CreatePurchaseInvoice:React.FC<Props> = (props)=>{
         [
           <Button shape="round" size="middle" key={2}
             form="create-purchase-invoice-id-form" htmlType="submit"
-            type="primary">
+            type="primary" loading={creating}>
             Create
           </Button>
         ]
@@ -81,18 +86,20 @@ const CreatePurchaseInvoice:React.FC<Props> = (props)=>{
               <Input className="form-control" placeholder="Invoice no."/>
             </Form.Item>
           </div>
-
-          <div className="col-md-12">
-            <CustomSelect
-              label="Vendor"
-              name="vendor_id"
-              loading={vendor.loading}
-              options={vendor.vendors||[]}
-              placeholder="Select vendor"
-              required={true}
-              search={loadVendors} 
-            />
-          </div>
+          {
+            vendor_id?"":
+            <div className="col-md-12">
+              <CustomSelect
+                label="Vendor"
+                name="vendor_id"
+                loading={vendor.loading}
+                options={vendor.vendors||[]}
+                placeholder="Select vendor"
+                required={true}
+                search={loadVendors} 
+              />
+            </div>
+          }
 
           <div className="col-md-12 mb-4">
             <Checkbox checked={foreignCurrency} onChange={
@@ -132,7 +139,7 @@ const CreatePurchaseInvoice:React.FC<Props> = (props)=>{
               [{required:true,message:'Transaction date is required!'}]
             }
             >
-              <DatePicker  placeholder="Transaction date"/>
+              <DatePicker  placeholder="Transaction date" className="form-control"/>
             </Form.Item>
           </div>
 
@@ -144,7 +151,7 @@ const CreatePurchaseInvoice:React.FC<Props> = (props)=>{
               [{required:true,message:'Invoice date is required!'}]
             }
             >
-              <DatePicker placeholder="Invoice date "/>
+              <DatePicker placeholder="Invoice date " className="form-control"/>
             </Form.Item>
           </div>
         </div>

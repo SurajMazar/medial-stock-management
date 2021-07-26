@@ -1,6 +1,7 @@
 import { FilePdfOutlined, PrinterOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import EditPurchaseInvoice from './edit';
 
 
@@ -12,9 +13,12 @@ const ViewPurchaseInvoice:React.FC = ()=>{
         <h3 className="text-22px">Edit Purchase Invoice</h3>
         <div className="ml-auto">
           <div className="d-flex">
-            <Button shape='round' size="middle" className="btn-outline-primary mr-2">
-              Back
-            </Button>
+            <Link to="/purchase-invoices">
+              <Button shape='round' size="middle" className="btn-outline-primary mr-2">
+                List
+              </Button>
+            </Link>
+            
             
             <Button shape='round'
             icon={<FilePdfOutlined />}

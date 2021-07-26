@@ -57,8 +57,12 @@ class VendorController extends Controller
   /**
    * Show vendor
   */
-  public function show(Vendor $vendor){
-    return success("",$vendor);
+  public function show($id){
+    $response = $this->vendorRepository->show($id);
+    if($response instanceof Vendor){
+      return success('',$response);
+    }
+    return failure($response->getMessage());
   }
 
 }

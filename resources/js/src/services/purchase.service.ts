@@ -4,11 +4,14 @@ import {
   fetchPurchaseInvoiceSuccess,
   fetchPurchaseInvoiceFail,
 
+  updatePurchaseInvoiceSuccess,
+
   fetchSinglePurchaseInvoiceRequest,
   fetchSinglePurchaseInvoiceSuccess,
 
   addPurchase,
-  updatePurchase
+  updatePurchase,
+  deletePurchase
 
 } from '../store/action-reducer/purchase.actionreducer';
 import { Dispatch } from 'redux';
@@ -48,6 +51,24 @@ export const createPurchaseInvoice = (formData:FormData,callBack:any = undefined
       return;
     }catch(e:any){
       if(e.response && e.response.data){
+        dispatch(fetchPurchaseInvoiceFail(e.response.data));
+      }else{
+        dispatch(fetchPurchaseInvoiceFail("Something went wrong"))
+      }
+    }
+  }
+}
+
+export const updatePurchaseInvoice = (id:string,formData:FormData)=>{
+  return async(dispatch:Dispatch)=>{
+    dispatch(fetchPurchasInvoicesRequest());
+    try{
+      const response = await instance().post(`api/purchase_invoice/${id}`,formData);
+      message.success("Purchase invoice updated!");
+      dispatch(updatePurchaseInvoiceSuccess(response.data.data));
+      return;
+    }catch(e:any){
+      if(e.response && e.response.data){
         message.error(e.response.data.message);
         return undefined;
       }else{
@@ -57,7 +78,6 @@ export const createPurchaseInvoice = (formData:FormData,callBack:any = undefined
     }
   }
 }
-
 
 export const fetchSinglePurchaseInvoice = (id:string)=>{
   return async(dispatch:Dispatch) =>{
@@ -93,7 +113,7 @@ export const createPurchase = (formData:FormData,callback:any = undefined)=>{
 }
 
 
-export const updatePurchaseItem = (id:string,formData:FormData,callback:any = undefined)=>{
+export const updatePurchaseItem = (id:number,formData:FormData,callback:any = undefined)=>{
   return async (dispatch:Dispatch)=>{
     dispatch(fetchSinglePurchaseInvoiceRequest());
     try{
@@ -112,12 +132,18 @@ export const updatePurchaseItem = (id:string,formData:FormData,callback:any = un
 
 
 
-export const deletePurchaseItem = async(id:string)=>{
- try{
-    await httpBase().delete(`api/purchases/delete/${id}`);
-    return true;
-  }catch(e:any){
-    console.log(e)
-    return false;
+export const deletePurchaseItem = (id:string)=>{
+  return async (dispatch:Dispatch)=>{
+    dispatch(fetchSinglePurchaseInvoiceRequest());
+    try{
+      await httpBase().delete(`api/purchases/delete/${id}`);
+      dispatch(deletePurchase(id));
+      message.success("Item deleted successfully!");
+    }catch(e:any){
+      if(e.response && e.response.data){
+        dispatch(fetchPurchaseInvoiceFail(e.response.data));
+      }
+      message.error("Something went wrong");
+    }
   }
 }
