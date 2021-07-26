@@ -9,10 +9,10 @@ import EditPurchaseInvoice from './edit';
 const ViewPurchaseInvoice:React.FC = ()=>{
   return(
     <section>
-      <div className="section-break-2 d-flex ac">
+      <div className="section-break-2 d-flex flex-wrap ac">
         <h3 className="text-22px">Edit Purchase Invoice</h3>
         <div className="ml-auto">
-          <div className="d-flex">
+          <div className="d-flex flex-wrap">
             <Link to="/purchase-invoices">
               <Button shape='round' size="middle" className="btn-outline-primary mr-2">
                 List

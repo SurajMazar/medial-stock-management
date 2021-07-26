@@ -43,9 +43,9 @@ const PurchaseInvoice:React.FC<PIprops> = ({vendor_id}) =>{
 
   return(
     <section>
-      <div className="section-break-1-2 d-flex ac">
+      <div className="section-break-1-2 d-flex flex-wrap ac">
         {vendor_id?"":<h3 className="text-22px">Purchase Invoice</h3>}
-        <div className="ml-auto">
+        <div className="ml-auto ">
           <Button shape="round" size="middle" type="primary"
           onClick={()=>setShowModal(true)}>Create invoice</Button>
         </div>

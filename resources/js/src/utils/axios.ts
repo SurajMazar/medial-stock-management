@@ -32,9 +32,11 @@ if(!login){
 
 instance.interceptors.response.use((response)=>response,
   (error)=>{
-    if(error &&  error.response && error.response.status === 401 && state.auth.authenticated){
-      store.dispatch(Logout(false));
-      message.error('Login expired!')
+    if(error &&  error.response && error.response.status === 401){
+      if(state.auth.authenticated){
+        store.dispatch(Logout(false));
+        message.error('Login expired!');
+      }
     }else{
       return Promise.reject(error);
     }

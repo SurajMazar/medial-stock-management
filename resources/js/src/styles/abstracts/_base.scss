@@ -29,3 +29,11 @@ body{
 .ql-container{
   font-family: $font-family !important;
 }
+
+.d-flex{
+  button{
+    @include maxWidth(992px){
+      margin-bottom: 10px;
+    }
+  }
+}

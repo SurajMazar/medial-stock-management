@@ -88,7 +88,7 @@ const EditPurchaseInvoice:React.FC = () =>{
     if(purchaseInvoice?.currency){
       return purchaseInvoice.currency?.symbol + " ";
     }
-    return "Rs ";
+    return "Rs";
   }
 
   // bill total
@@ -141,7 +141,6 @@ const EditPurchaseInvoice:React.FC = () =>{
     oldObj = oldObj.filter((item,index)=>index !== i);
     setAlt(oldObj);
   }
-
 
 
 
@@ -300,7 +299,7 @@ const EditPurchaseInvoice:React.FC = () =>{
         </div>
 
         <div className="table-responsive p-05">
-          <table className="table fix-width text-center">
+          <table className="table fix-width">
             <thead>
               <tr>
                 <th>Sn</th>
@@ -314,7 +313,7 @@ const EditPurchaseInvoice:React.FC = () =>{
                 <th>Rate ({getCurrency()})</th>
                 <th>Amount ({getCurrency()})</th>
                 <th>M.R.P ({getCurrency()})</th>
-                <th></th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>

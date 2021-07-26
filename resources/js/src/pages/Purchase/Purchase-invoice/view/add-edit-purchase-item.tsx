@@ -47,13 +47,15 @@ const CreateEditPurchase:React.FC<Props> = (props) =>{
 
 
   //close modal
+  const [free,setFree] = useState<boolean>(false);
+
   const handleClose = ()=>{
     closeModal();
     form.resetFields();
+    setFree(false);
   }
 
   // free
-  const [free,setFree] = useState<boolean>(false);
   const calculateTotal = (value:any) =>{
     const {free_rate_type,rate,free_rate,quantity} = value;
     if(free){
@@ -192,7 +194,7 @@ const CreateEditPurchase:React.FC<Props> = (props) =>{
                   purchases.map(item=>{
                     if(!item.free){
                       return(
-                        <Select.Option value={item.id}>
+                        <Select.Option value={item.id} key={item.id}>
                           {item.product?.name}
                         </Select.Option>
                       )

@@ -40984,6 +40984,12 @@ body {
   font-family: "Quicksand Medium" !important;
 }
 
+@media (max-width: 992px) {
+  .d-flex button {
+    margin-bottom: 10px;
+  }
+}
+
 .ant-layout-header {
   background: #fff !important;
   background-color: #fff !important;
@@ -41723,9 +41729,9 @@ body {
   border: unset !important;
   font-family: "Quicksand";
   font-size: 1rem;
-  padding: 12px 15px;
+  padding: 15px;
   line-height: 1.4;
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .table thead tr {
@@ -41744,9 +41750,9 @@ body {
 .table td {
   font-size: 1rem;
   vertical-align: middle;
-  padding: 16px 15px;
+  padding: 15px;
   line-height: 1.4;
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .fm-rounded {
