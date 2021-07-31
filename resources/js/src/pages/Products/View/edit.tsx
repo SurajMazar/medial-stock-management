@@ -1,6 +1,6 @@
 import { Button, Form, Input } from 'antd';
 import Checkbox from 'antd/lib/checkbox/Checkbox';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import CustomSelect from '../../../components/DataTable/select';
@@ -16,9 +16,14 @@ interface routeParams{
   id:string
 }
 
-const {TextArea} =  Input;
+interface Props{
+  product:Product|undefined,
+  loading:boolean
+}
 
-const ProductEdit:React.FC = () =>{
+const ProductEdit:React.FC<Props> = (props) =>{
+
+  const {loading,product} = props
 
   const [form] = Form.useForm();
   const {id} = useParams<routeParams>();
@@ -36,21 +41,7 @@ const ProductEdit:React.FC = () =>{
 
   const [hasSubUnit,setHasSubUnit] = React.useState<boolean>(false);
 
-
-  const [product,setProduct] = React.useState<Product|undefined>(undefined)
-  const [loading,setLoading] = React.useState<boolean>(false);
-
-  const loadProduct = async() =>{
-    setLoading(true);
-    const product = await fetchProductByID(id);
-    setProduct(product);
-    setLoading(false);
-  }
-
-  useEffect(()=>{
-    loadProduct();
-  },[]) //eslint-disable-line
-
+  const [updating,setUpdating] = useState<boolean>(false);
 
   //editing
   useEffect(()=>{
@@ -67,7 +58,7 @@ const ProductEdit:React.FC = () =>{
 
   // update function
   const onSubmit = async(value:any) =>{
-    setLoading(true);
+    setUpdating(true);
     value = removeNullItems(value);
     if(!hasSubUnit){
       value.sub_unit_name = "";
@@ -79,12 +70,12 @@ const ProductEdit:React.FC = () =>{
       _method:'put'
     })
     await updateProduct(id,form);
-    setLoading(false);
+    setUpdating(false);
   }
 
   return(
     <div className="section-break-2">
-      {loading?<Preloader/>:
+      {loading || updating?<Preloader/>:
       <Form
         form={form}
         layout="vertical"

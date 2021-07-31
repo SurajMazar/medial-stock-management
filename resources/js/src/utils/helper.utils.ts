@@ -43,7 +43,7 @@ export const returnLimitedWords = (string:string, num:number) => {
 export const removeNullItems = (object:any)=>{
   if(object){
     Object.keys(object).forEach((key)=>{
-      if(object[key] === null || object[key] === "null"){
+      if(object[key] === null || object[key] === "null" || object[key] === undefined){
         delete object[key]
       }
     })
@@ -83,3 +83,9 @@ export const concatArray = (array:Array<any>,object:any) =>{
   return object;
 }
 
+export const getCurrency = (purchaseInvoice:any) =>{
+  if(purchaseInvoice?.currency){
+    return purchaseInvoice.currency?.symbol + " ";
+  }
+  return "Rs ";
+}

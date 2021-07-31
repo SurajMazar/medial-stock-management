@@ -13,7 +13,9 @@ interface Product{
   description: string,
   product_category_id?: number,
   created_at: Date,
-  category:ProductCategory
+  category:ProductCategory,
+  total_purchases:string|number,
+  total_stocks:string|number
 }
 
 export default Product;

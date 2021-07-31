@@ -4,8 +4,10 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PurchaseRequest;
+use App\Http\Resources\PurchaseCollection;
 use App\Models\Purchase;
 use App\Repositories\Purchase\PurchaseInterface;
+use Exception;
 use Illuminate\Http\Request;
 
 class PurchaseController extends Controller
@@ -17,6 +19,18 @@ class PurchaseController extends Controller
 		$this->purchaseRepository = $purchaseRepository;
 	}
 
+  /**
+   * get purchases
+   */
+  public function index(Request $request){
+    try{
+      $response = $this->purchaseRepository->index($request);
+      return new PurchaseCollection($response);
+    }catch(Exception $e){
+      return failure($e->getMessage());
+    }
+  }
+
 
 	 /**
    * Create pinvoice
@@ -24,7 +38,7 @@ class PurchaseController extends Controller
   public function store(PurchaseRequest $request){
     $response = $this->purchaseRepository->store($request);
     if($response instanceof Purchase){
-      return success('Purchase Invoice created successfully',$response);
+      return success('Purchase created successfully',$response);
     }
     return failure($response->getMessage());
   }
@@ -36,7 +50,7 @@ class PurchaseController extends Controller
   public function update($id,PurchaseRequest $request){
     $response = $this->purchaseRepository->update($id,$request);
     if($response instanceof Purchase){
-      return success('Purchase Invoice updated successfully',$response);
+      return success('Purchase  updated successfully',$response);
     }
     return failure($response->getMessage());
   }

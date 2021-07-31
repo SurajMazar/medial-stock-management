@@ -12,10 +12,10 @@ use Illuminate\Http\Request;
 
 class ProductCategoryController extends Controller
 {
-  private ProductCategoryInterface $productCategoryInterface;
+  private ProductCategoryInterface $productCategoryRepository;
 
-  public function __construct(ProductCategoryInterface $productCategoryInterface){
-    $this->productCategoryInterface = $productCategoryInterface;
+  public function __construct(ProductCategoryInterface $productCategoryRepository){
+    $this->productCategoryRepository = $productCategoryRepository;
   }
 
   /**
@@ -23,7 +23,7 @@ class ProductCategoryController extends Controller
    */
   public function index(Request $request){
     try{
-      $vendors = $this->productCategoryInterface->index($request);
+      $vendors = $this->productCategoryRepository->index($request);
       return new ProductCategoryCollection($vendors);
     }catch(Exception $e){
       return failure($e->getMessage());
@@ -34,7 +34,7 @@ class ProductCategoryController extends Controller
    * Create vendor
    */
   public function store(ProductCategoryRequest $request){
-    $response = $this->productCategoryInterface->store($request);
+    $response = $this->productCategoryRepository->store($request);
     if($response instanceof ProductCategory){
       return success('Product category created successfully',$response);
     }
@@ -46,7 +46,7 @@ class ProductCategoryController extends Controller
    * Update vendor
   */
   public function update($id,ProductCategoryRequest $request){
-    $response = $this->productCategoryInterface->update($id,$request);
+    $response = $this->productCategoryRepository->update($id,$request);
     if($response instanceof ProductCategory){
       return success('Product category updated successfully',$response);
     }

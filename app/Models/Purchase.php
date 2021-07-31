@@ -14,4 +14,20 @@ class Purchase extends Model
     public function product(){
         return $this->belongsTo(Product::class,'product_id');
     }
+
+
+    public function purchaseInvoice(){
+        return $this->belongsTo(PurchaseInvoice::class,'purchase_invoice_id')->with('vendor');
+    }
+
+    public function scopeSearch($query,$keyword){
+        return $query->where('batch', 'like', '%' .$keyword. '%')
+        ->orWhere('code', 'like', '%' .$keyword. '%')
+        ->orWhereHas('purchaseInvoice',function($pquery) use($keyword){
+            return $pquery->where('invoice_number','like','%'.$keyword.'%')->orwhereHas('vendor',function($q) use($keyword){
+                return $q->where('name','like','%'.$keyword.'%')
+                ->orWhere('email','like','%'.$keyword.'%');
+            });
+        });
+    }
 }

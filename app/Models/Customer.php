@@ -11,4 +11,9 @@ class Customer extends Model
     use HasFactory,SoftDeletes;
 
     protected $guarded = [];
+
+    public function scopeSearch($query,$keyword){
+        return $query->where('name', 'like', '%' .$keyword. '%')
+        ->orWhere('email','like','%'.$keyword.'%');
+      }
 }

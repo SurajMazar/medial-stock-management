@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\api\AuthController;
 use App\Http\Controllers\api\CurrencyController;
+use App\Http\Controllers\api\CustomerController;
 use App\Http\Controllers\api\VendorController;
 use App\Http\Controllers\api\ProductCategoryController;
 use App\Http\Controllers\api\ProductController;
@@ -31,6 +32,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::middleware(['auth:api'])->group(function () {
   Route::resource('/vendors', VendorController::class);
 
+  Route::resource('/customers', CustomerController::class);
 
   Route::resource('/product_category', ProductCategoryController::class);
 
@@ -39,7 +41,6 @@ Route::middleware(['auth:api'])->group(function () {
 
 
   Route::resource('/currency', CurrencyController::class);
-
   
   Route::resource('/purchase_invoice', PurchaseInvoiceController::class);
 

@@ -50,7 +50,7 @@ const PurchaseInvoice:React.FC<PIprops> = ({vendor_id}) =>{
           onClick={()=>setShowModal(true)}>Create invoice</Button>
         </div>
       </div>
-      <DatTableWrapper dateRange={true} fetchData={loadPurchaseInvoice} meta={metaPurchaseInvoice}>
+      <DatTableWrapper dateRange={true} dateRangeTitle={"transaction date"} fetchData={loadPurchaseInvoice} meta={metaPurchaseInvoice}>
         <div className="section-break-2">
           {loadingPurchaseInvoice?<Preloader/>:
           <table className="table">

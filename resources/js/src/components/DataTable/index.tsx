@@ -9,24 +9,31 @@ const {RangePicker} = DatePicker;
 interface DTinterface {
   fetchData:(params:any)=>void,
   meta:PageMeta|undefined,
-  dateRange?:boolean
+  dateRange?:boolean,
+  dateRangeTitle?:string
 }
 const DatTableWrapper:React.FC<DTinterface> = props =>{
 
-  const {children,fetchData,meta,dateRange} = props;
+  const {children,fetchData,meta,dateRange,dateRangeTitle} = props;
 
   const [keyword,setKeyword] = useState<string>('');
   const [dateR,setDateRange] = useState<{from:string,to:string}|undefined>(undefined)
 
   // search with keywords
   const search = debounce((value)=>{
-    setKeyword(value); 
-    fetchData({
+    setKeyword(value);
+    let values:any = {
       keyword:value,
       page:1,
-      from:dateR?.from,
-      to:dateR?.to
-    });
+    }
+    if(dateR){
+      values ={
+         ...values,
+        from:dateR?.from,
+        to:dateR?.to
+      } 
+    }
+    fetchData(values);
   },1000);
 
   const onKeywordChange = (e:React.FormEvent<HTMLInputElement>)=>{
@@ -38,12 +45,19 @@ const DatTableWrapper:React.FC<DTinterface> = props =>{
   //on page change
   const onPageChange = (value:number)=>{
     if(meta){
-      fetchData({
+      let values:any = {
         keyword:keyword,
         page:value,
-        from:dateR?.from,
-        to:dateR?.to
-      });
+      }
+
+      if(dateR){
+        values ={
+           ...values,
+          from:dateR?.from,
+          to:dateR?.to
+        } 
+      }
+      fetchData(values);
     }
   }
   // end page change
@@ -78,11 +92,13 @@ const DatTableWrapper:React.FC<DTinterface> = props =>{
         </Col>
         {
           dateRange?
-          <Col  xs={24} md={12} lg={8} className='d-flex justify-content-center align-items-center'> 
-            <RangePicker onChange={(value,val)=>onDateFilterChange(val)}/>
+          <Col  xs={24} md={12} lg={8} > 
+            <p className="ml-2">Filter by {dateRangeTitle||''}</p>
+            <RangePicker className="round-input" onChange={(value,val)=>onDateFilterChange(val)}/>
           </Col>:''
         }
         <Col  xs={24} md={12} lg={6}> 
+          <p className="ml-2">Search</p>
           <Input size="large" className="fm-rounded" onChange={onKeywordChange}  placeholder="Search" prefix={<SearchOutlined />} />
         </Col>
       </Row>

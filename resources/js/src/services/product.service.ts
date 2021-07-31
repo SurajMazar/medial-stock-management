@@ -12,7 +12,12 @@ import {
   fetchProductsRequest,
   fetchProductsSuccess,
 
-  createProductSuccess
+  createProductSuccess,
+
+
+  fetchStocksFail,
+  fetchStocksRequest,
+  fetchStocksSuccess
 
 } from '../store/action-reducer/products.actionreducer';
 
@@ -39,6 +44,7 @@ export const fetchProductCategory = (params:any = {page:1}) => {
         dispatch(fetchCatFail(e.response.data));
       }
       message.error("Something went wrong");
+      dispatch(fetchCatFail("Something went wrong"));
     }
   }
 }
@@ -57,6 +63,7 @@ export const createProductCategory = (formdata:FormData,callback:any = undefined
         dispatch(fetchCatFail(e.response.data));
       }
       message.error("Something went wrong");
+      dispatch(fetchCatFail("Something went wrong"));
     }
   }
 }
@@ -75,6 +82,7 @@ export const updateProductCategory = (id:number,formdata:FormData,callback:any =
         dispatch(fetchCatFail(e.response.data));
       }
       message.error("Something went wrong");
+      dispatch(fetchCatFail("Something went wrong"));
     }
   }
 }
@@ -96,6 +104,7 @@ export const fetchProducts = (params:any = {page:1}) => {
         dispatch(fetchProductsFail(e.response.data));
       }
       message.error("Something went wrong");
+      dispatch(fetchProductsFail("Something went wrong"));
     }
   }
 }
@@ -115,6 +124,7 @@ export const createProduct = (formdata:FormData,callback:any = undefined) => {
         dispatch(fetchProductsFail(e.response.data));
       }
       message.error("Something went wrong");
+      dispatch(fetchProductsFail("Something went wrong"));
     }
   }
 }
@@ -147,6 +157,31 @@ export const updateProduct = async(id:string,formData:FormData)=>{
     }else{
       message.error("Something went wrong");
       return undefined;
+    }
+  }
+}
+
+
+
+
+// fetch stocks
+export const fetchStocks = (params:any = {page:1}) => {
+  return async (dispatch:Dispatch) =>{
+    dispatch(fetchStocksRequest());
+    try{
+      let url = setUrl(params,`api/purchases`)
+      const response = await instance().get(url);
+      let data = {
+        stocks:response.data.data,
+        meta:response.data.meta
+      }
+      dispatch(fetchStocksSuccess(data));
+    }catch(e:any){
+      if(e.response && e.response.data){
+        dispatch(fetchStocksFail(e.response.data));
+      }
+      message.error("Something went wrong");
+      dispatch(fetchStocksFail("Something went wrong"));
     }
   }
 }

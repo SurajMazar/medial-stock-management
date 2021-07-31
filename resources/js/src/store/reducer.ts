@@ -7,6 +7,7 @@ import ProductReducer from './action-reducer/products.actionreducer';
 import CurrencyReducer from './action-reducer/currency.actionreducer';
 import PurchaseReducer from './action-reducer/purchase.actionreducer';
 import AuthReducer from './action-reducer/auth.actionreducer';
+import CustomerReducer from './action-reducer/customer.actionreducer';
 
 const reducer = {
   router:connectRouter(history) as  Reducer<RouterState<LocationState>>,
@@ -15,6 +16,7 @@ const reducer = {
   product:ProductReducer,
   currency:CurrencyReducer,
   purchase:PurchaseReducer,
+  customer:CustomerReducer
 }
 
 export default reducer;

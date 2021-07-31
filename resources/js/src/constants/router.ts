@@ -2,6 +2,8 @@ import React from 'react';
 import AppLayout from '../layouts/App';
 import Public from '../layouts/Public';
 import Currency from '../pages/Currency';
+import CustomerPage from '../pages/Customers';
+import CreateEditCustomer from '../pages/Customers/create-edit';
 import Dashboard from '../pages/Dashboard';
 import Home from '../pages/Home';
 import Login from '../pages/Login';
@@ -90,13 +92,26 @@ const routes:Array<routeInterface> = [
 
   {
     path:'/customers',
-    component:Vendor,
+    component:CustomerPage,
+    title:'Customers',
+    layout:AppLayout
+  },
+
+  {
+    path:'/customers/add',
+    component:CreateEditCustomer,
+    title:'Customers',
+    layout:AppLayout
+  },
+
+  {
+    path:'/customers/view/:id',
+    component:CreateEditCustomer,
     title:'Customers',
     layout:AppLayout
   },
 
  
-  
 
   {
     path:'/purchase-invoices',

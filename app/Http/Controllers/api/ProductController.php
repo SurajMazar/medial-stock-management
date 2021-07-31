@@ -12,10 +12,10 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-  private ProductInterface $productInterface;
+  private ProductInterface $productRepository;
 
-  public function __construct(ProductInterface $productInterface){
-    $this->productInterface = $productInterface;
+  public function __construct(ProductInterface $productRepository){
+    $this->productRepository = $productRepository;
   }
 
   /**
@@ -23,7 +23,7 @@ class ProductController extends Controller
    */
   public function index(Request $request){
     try{
-      $vendors = $this->productInterface->index($request);
+      $vendors = $this->productRepository->index($request);
       return new ProductCollection($vendors);
     }catch(Exception $e){
       return failure($e->getMessage());
@@ -34,7 +34,7 @@ class ProductController extends Controller
    * Create product
    */
   public function store(ProductRequest $request){
-    $response = $this->productInterface->store($request);
+    $response = $this->productRepository->store($request);
     if($response instanceof Product){
       return success('Product created successfully',$response);
     }
@@ -46,7 +46,7 @@ class ProductController extends Controller
    * Update product
   */
   public function update($id,ProductRequest $request){
-    $response = $this->productInterface->update($id,$request);
+    $response = $this->productRepository->update($id,$request);
     if($response instanceof Product){
       return success('Product updated successfully',$response);
     }
@@ -58,7 +58,19 @@ class ProductController extends Controller
    * Show product
   */
   public function show($id){
-    $pc = Product::with('category')->findOrFail($id);
+    $pc = Product::with('category','purchases')->findOrFail($id);
+    
+    $total_purchases = 0;
+    $total_stocks = 0;
+
+    foreach($pc->purchases as $purchase){
+      $total_purchases = $total_purchases + $purchase->amount;
+      $total_stocks = $total_stocks + $purchase->quantity;
+    }
+
+    $pc->total_purchases = $total_purchases;
+    $pc->total_stocks = $total_stocks;
+    
     if($pc instanceof Product){
       return success('',$pc);
     }

@@ -8,6 +8,26 @@ use Illuminate\Support\Facades\DB;
 
 class PurchaseRepository implements PurchaseInterface{
 
+
+  public function index($request){
+    $items_per_page = $request->items_per_page?:10;
+    $keyword = $request->keyword;
+    $purchases = Purchase::latest()->with('product','purchaseInvoice');
+
+    // search 
+    if($keyword){
+      $purchases->Search($keyword);
+    }
+
+    //filter by vendor
+    if($request->product_id){
+      $purchases->where('product_id',$request->product_id);
+    }
+
+    return $purchases->paginate($items_per_page);
+  }
+
+
   public function store($request){
     DB::beginTransaction();
     try{

@@ -63,6 +63,7 @@ class PurchaseInvoiceRepository implements PurchaseInvoiceInterface{
         $request->merge([
           'transaction_date' => date('Y-m-d H:i:s',strtotime($request->transaction_date)),
           'invoice_issue_date' => date('Y-m-d H:i:s',strtotime($request->invoice_issue_date)),
+          'currency_id'=>$request->currency_id?:null
         ]);
         $inputs = $request->all();
         $purchaseInvoice->update($inputs);

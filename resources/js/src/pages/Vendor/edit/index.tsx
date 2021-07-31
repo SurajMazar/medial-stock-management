@@ -10,7 +10,7 @@ import { StoreInterface } from '../../../store/store';
 import PurchaseInvoice from '../../Purchase/Purchase-invoice';
 import EditForm from './edit';
 import {IoReceipt} from 'react-icons/io5';
-import { NepaliNS } from '../../../utils/helper.utils';
+import { NepaliNS, returnLimitedWords } from '../../../utils/helper.utils';
 
 interface paramsInterface{
   id:string,
@@ -52,7 +52,9 @@ const EditVendor:React.FC = () =>{
       {fetchingVendor?<Preloader/>:
       <>
         <div className="d-flex ac">
-          <h1 className="text-22-black">Vendor Details</h1>
+          <h1 className="text-22-black"
+          title={vendor?vendor.name:''}
+          >{returnLimitedWords(vendor?vendor.name:'',25)}</h1>
           <div className="ml-auto">
             <Link to="/vendors">
               <Button shape="round" className="mr-2" type="default" htmlType="submit" size="middle">Back to vendors</Button>
@@ -73,7 +75,7 @@ const EditVendor:React.FC = () =>{
                   <OverviewCard 
                     title="Total Purchases"
                     icon={IoReceipt}
-                    counts={NepaliNS(vendor?.total_purchases,"Rs ")}
+                    counts={NepaliNS(vendor?.total_purchases||0,"Rs ")}
                   />
                 </div>
               </div>
