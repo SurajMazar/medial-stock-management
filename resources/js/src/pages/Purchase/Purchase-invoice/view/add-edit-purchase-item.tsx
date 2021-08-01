@@ -16,6 +16,7 @@ interface Props{
   closeModal:()=>void,
   editData?:purchase|undefined,
   purchases:Array<purchase>|undefined
+  callbackUpdate:()=>void
 }
 
 interface params{
@@ -29,6 +30,7 @@ const CreateEditPurchase:React.FC<Props> = (props) =>{
     editData,
     visible,
     purchases,
+    callbackUpdate
   } = props;
 
 
@@ -71,7 +73,7 @@ const CreateEditPurchase:React.FC<Props> = (props) =>{
   }
 
   //additem
-  const handleAdd = (value:any) =>{
+  const handleAdd = async(value:any) =>{
     value.free = free?1:0;
     value.purchase_invoice_id=id;
 
@@ -110,10 +112,11 @@ const CreateEditPurchase:React.FC<Props> = (props) =>{
       });
     }
     if(editData){
-      dispatch(updatePurchaseItem(editData?.id,formData,handleClose));
+     await dispatch(updatePurchaseItem(editData?.id,formData,handleClose));
     }else{
-      dispatch(createPurchase(formData,handleClose));
+      await dispatch(createPurchase(formData,handleClose));
     }
+    callbackUpdate();
   }
 
 

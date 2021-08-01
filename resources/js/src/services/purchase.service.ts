@@ -3,8 +3,9 @@ import {
   fetchPurchasInvoicesRequest,
   fetchPurchaseInvoiceSuccess,
   fetchPurchaseInvoiceFail,
-
+  updatePurchaseInvoiceRequest,
   updatePurchaseInvoiceSuccess,
+  deletePurchaseInvoiceSuccess,
 
   fetchSinglePurchaseInvoiceRequest,
   fetchSinglePurchaseInvoiceSuccess,
@@ -59,21 +60,20 @@ export const createPurchaseInvoice = (formData:FormData,callBack:any = undefined
   }
 }
 
-export const updatePurchaseInvoice = (id:string,formData:FormData)=>{
+export const updatePurchaseInvoice = (id:string,formData:FormData,showMesssage:boolean = false)=>{
   return async(dispatch:Dispatch)=>{
-    dispatch(fetchPurchasInvoicesRequest());
+    dispatch(updatePurchaseInvoiceRequest());
     try{
       const response = await instance().post(`api/purchase_invoice/${id}`,formData);
-      message.success("Purchase invoice updated!");
       dispatch(updatePurchaseInvoiceSuccess(response.data.data));
-      return;
+      if(showMesssage) message.success("Purchase invoice updated!");
     }catch(e:any){
       if(e.response && e.response.data){
         message.error(e.response.data.message);
-        return undefined;
+        dispatch(fetchPurchaseInvoiceFail(e.response.data));
       }else{
         message.error("Something went wrong");
-        return undefined;
+        dispatch(fetchPurchaseInvoiceFail('Something went wrong'));
       }
     }
   }
@@ -90,6 +90,25 @@ export const fetchSinglePurchaseInvoice = (id:string)=>{
         dispatch(fetchPurchaseInvoiceFail(e.response.data));
       }
       message.error("Something went wrong");
+    }
+  }
+}
+
+
+export const deletePurchaseInvoiceService = (id:string)=>{
+  return async(dispatch:Dispatch) =>{
+    dispatch(fetchSinglePurchaseInvoiceRequest());
+    try{
+       await instance().delete(`api/purchase_invoice/trash/`+id);
+      dispatch(deletePurchaseInvoiceSuccess(id));
+      dispatch(push('/purchase-invoices'))
+    }catch(e:any){
+      if(e.response && e.response.data){
+        dispatch(fetchPurchaseInvoiceFail(e.response.data));
+      }else{
+        dispatch(fetchPurchaseInvoiceFail("Something went wrong"));
+        message.error("Something went wrong");
+      }
     }
   }
 }

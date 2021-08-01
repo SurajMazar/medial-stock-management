@@ -1,4 +1,4 @@
-import { BarChartOutlined, CoffeeOutlined, DollarOutlined, HomeOutlined, MedicineBoxOutlined, ShopOutlined, SketchOutlined, SolutionOutlined, SwapLeftOutlined } from "@ant-design/icons";
+import { BarChartOutlined, CoffeeOutlined, DollarOutlined, FileProtectOutlined, FileSearchOutlined, HomeOutlined, MedicineBoxOutlined, ShopOutlined, SketchOutlined, SolutionOutlined, SwapLeftOutlined } from "@ant-design/icons";
 
 interface routeInterface{
   path:string|null,
@@ -102,6 +102,28 @@ const sidebars:Array<routeInterface> = [
     icon:BarChartOutlined
   },
 
+  {
+    path:null,
+    title:'Laboratory'
+  },
+
+  {
+    path:'/lab-tests',
+    title:'Lab Tests',
+    icon:FileSearchOutlined
+  },
+
+  {
+    path:'/lab invoices',
+    title:'Lab Invoices',
+    icon:SolutionOutlined
+  },
+
+  {
+    path:'/reports',
+    title:'Lab reports',
+    icon:FileProtectOutlined
+  },
 
 ]
 

@@ -1,13 +1,14 @@
 import { DeleteOutlined, EditOutlined, PlusCircleOutlined } from '@ant-design/icons';
-import { Button, Checkbox, DatePicker, Form, Input, Popconfirm, Select } from 'antd';
+import { Button, Checkbox, DatePicker, Form, Input, Popconfirm } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router';
+import { Prompt, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import CustomSelect from '../../../../components/DataTable/select';
 import Preloader from '../../../../components/Preloader';
+import MiniLoader from '../../../../components/UI/MiniLoader';
 import { purchase } from '../../../../model/purchase.model';
 import { fetchCurrencies } from '../../../../services/currency.service';
 import { deletePurchaseItem, fetchSinglePurchaseInvoice,updatePurchaseInvoice } from '../../../../services/purchase.service';
@@ -31,9 +32,12 @@ const EditPurchaseInvoice:React.FC = () =>{
   const [form] = Form.useForm();
   const {id} = useParams<params>();
   const dispatch = useDispatch();
+  const [pauseRoute,setPauseRoute] = useState<boolean>(false);
+
 
   const state = useSelector((state:StoreInterface)=>state);
   const {currency,vendor,purchase} = state;
+  const {purchaseInvoice,purchases} = purchase; // from store
 
 
   const loadCurrency = (params:any) =>{
@@ -44,6 +48,7 @@ const EditPurchaseInvoice:React.FC = () =>{
   }
 
   const [foreignCurrency,setForeignCurrency] = useState<boolean>(false);
+  const [alt,setAlt] = useState<Array<alterations>>([]);
 
   //editing
   const loadEditPurchaseInvoice = () =>{
@@ -55,7 +60,7 @@ const EditPurchaseInvoice:React.FC = () =>{
   },[]);
 
 
-  const {purchaseInvoice,purchases} = purchase; // from store
+
 
   useEffect(() => {
     if(purchaseInvoice){
@@ -75,12 +80,7 @@ const EditPurchaseInvoice:React.FC = () =>{
   //editing
 
 
-  //purchases
-  const [showProductItemModel,setSPIM] = useState<boolean>(false);
 
-  const deletePItem = (id:any)=>{
-    dispatch(deletePurchaseItem(id));
-  }
  
 
   //currency formatting
@@ -91,7 +91,7 @@ const EditPurchaseInvoice:React.FC = () =>{
     return "Rs";
   }
 
-  // bill total
+  // bill total with out alterations
   const [total,setTotal] = useState<number>(0);
   const calculateTotal = () =>{
     if(purchase.purchases && purchase.purchases.length){
@@ -109,10 +109,9 @@ const EditPurchaseInvoice:React.FC = () =>{
   useEffect(()=>{
     calculateTotal();
   },[purchase.purchases])//eslint-disable-line
-
+  // end total with out alterations
 
   // alterations
-  const [alt,setAlt] = useState<Array<alterations>>([]);
 
   const addAlt = () =>{
     const newAlt:alterations = {
@@ -141,20 +140,19 @@ const EditPurchaseInvoice:React.FC = () =>{
     oldObj = oldObj.filter((item,index)=>index !== i);
     setAlt(oldObj);
   }
-
+  // end alterations
 
 
   //grand total
   const [grandTotal,setGrandTotal] = useState<number>(0);
-
   const calculateGrandTotal = () =>{
     if(alt && alt.length){
       let gt = total;
       alt.forEach(item=>{
         if(item.operation === 'sub'){
-          gt = parseFloat(gt.toString()) - parseFloat(item.amount.toString());
+          gt = parseFloat(gt.toString()) - parseFloat(item.amount?item.amount.toString():"0");
         }else{
-          gt = parseFloat(gt.toString()) + parseFloat(item.amount.toString());
+          gt = parseFloat(gt.toString()) + parseFloat(item.amount?item.amount.toString():"0");
         }
       })
       setGrandTotal(gt);
@@ -163,14 +161,14 @@ const EditPurchaseInvoice:React.FC = () =>{
       setGrandTotal(total);
     }
   }
-
   useEffect(()=>{
     calculateGrandTotal();
   },[total,alt])//eslint-disable-line
+  // end grand total section
 
 
   //update purchase invoice
-  const updatePI = (values:any) =>{
+  const updatePI = (values:any,message:boolean) =>{
     values = removeNullItems(values);
     const formDate = setFormdata({
       ...values,
@@ -178,9 +176,42 @@ const EditPurchaseInvoice:React.FC = () =>{
       alterations:JSON.stringify(alt),
       total:grandTotal
     });
-    dispatch(updatePurchaseInvoice(id,formDate))
+    dispatch(updatePurchaseInvoice(id,formDate,message))
+    setPauseRoute(false)
   }
 
+  const callbackUpdate = ()=>{
+    updatePI(form.getFieldsValue(),false);
+  }
+  // useEffect(()=>{
+  //   return ()=>{
+  //     updatePI(form.getFieldsValue(),true)
+  //   }
+  // },[])
+
+  // this auto saves the invoice when grand total changes
+  // const updateWithDelay = debounce(()=>updatePI(form.getFieldsValue(),false),1000);
+  // useEffect(()=>{
+  //   if(purchaseInvoice){
+  //     if(Number(purchaseInvoice.total) !== grandTotal) updateWithDelay();
+  //   }
+  // },[grandTotal]) 
+  // end this auto saves the invoice when grand total changes
+
+
+  // end update purchase invoice
+
+
+  
+  /**
+   *  for individual purchased item
+   */
+
+  //purchases
+  const [showProductItemModel,setSPIM] = useState<boolean>(false);
+  const deletePItem = (id:any)=>{
+    dispatch(deletePurchaseItem(id));
+  }
 
   //update purchase item
   const [editPI,setEditPI] = useState<purchase|undefined>(undefined);
@@ -189,12 +220,31 @@ const EditPurchaseInvoice:React.FC = () =>{
     setSPIM(true);
   }
 
+
+  
+  useEffect(()=>{
+    if(purchaseInvoice){
+      if(Number(purchaseInvoice.total) !== grandTotal){
+        window.onbeforeunload = () => true;
+        setPauseRoute(true);
+      }else{
+        window.onbeforeunload = ()=>undefined
+        setPauseRoute(false)
+      }
+    }
+  },[grandTotal,purchaseInvoice])
+
   return(
     <>
+     <Prompt
+      when={pauseRoute}
+      message='There are some unsaved changes, Do you wanna continue?'
+    />
     <Form
       form={form}
       layout={"vertical"}
-      onFinish={updatePI}
+      onValuesChange={()=>setPauseRoute(true)}
+      onFinish={(value)=>updatePI(value,true)}
     > 
     {purchase.loadingPurchaseInvoice?<Preloader/>:
     <>
@@ -372,10 +422,25 @@ const EditPurchaseInvoice:React.FC = () =>{
         </div>
       </div>
 
-      {/* alterations */}
       <div className="row mt-3">
-        <div className="offset-md-6 col-md-6">
+        <div className="col-md-6 justify-content-center">
+          <div className="row justify-content-center">
+            <Button className="btn btn-success mr-2" shape="round"  loading={purchase.updatingPurchaseInvoice}
+            size="large" htmlType="submit">
+              Save
+            </Button>
+            
+            <Link to={`/vendors/${purchaseInvoice?.vendor?.id}/payments`}>
+              <Button type="primary" shape="round" 
+              size="large" htmlType="button">
+                Add payment 
+              </Button>
+            </Link>
+          </div>
+        </div>
 
+        {/* alterations */}
+        <div className="col-md-6">
           <div className="row">
             <div className="col-md-12">
               <Button onClick={addAlt} htmlType="button" shape="round" type="primary">Add alteration</Button>
@@ -449,24 +514,16 @@ const EditPurchaseInvoice:React.FC = () =>{
             </div>
           </div>
 
+          {/* <div className="col-md-12 mt-2 text-center text-15px-primary">
+            Please update the total amount before exiting
+          </div> */}
+
         </div>
       </div>
       {/** end alterations */}
       
-        
-      <div className="row mt-4 justify-content-center">
-        <Button className="btn btn-success mr-2" shape="round"  loading={purchase.loadingPurchaseInvoice}
-        size="large" htmlType="submit">
-          Save
-        </Button>
-        
-        <Link to={`/vendors/${purchaseInvoice?.vendor?.id}/payments`}>
-          <Button type="primary" shape="round" 
-          size="large" htmlType="button">
-            Add payment 
-          </Button>
-        </Link>
-      </div>
+      
+      
     </>
 
     }
@@ -476,6 +533,7 @@ const EditPurchaseInvoice:React.FC = () =>{
     visible={showProductItemModel} 
     purchases={purchases} 
     editData={editPI}
+    callbackUpdate={callbackUpdate}
     closeModal={()=>{
       setSPIM(false);
       setEditPI(undefined)

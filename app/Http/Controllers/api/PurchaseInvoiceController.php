@@ -67,7 +67,23 @@ class PurchaseInvoiceController extends Controller
     return failure($pc->getMessage());
   }
 
+  /**
+   * Trash 
+   */
 
+  public function trash($id){
+    return $this->purchaseInvoiceRepository->trash($id);
+  }
+
+
+  public function restore($id){
+    return $this->purchaseInvoiceRepository->restore($id);
+  }
+
+
+  public function destroy($id){
+    return $this->purchaseInvoiceRepository->delete($id);
+  }
   
 
 }

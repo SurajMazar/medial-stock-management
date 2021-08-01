@@ -34,7 +34,8 @@ const Sidebar = () => {
             if(route.children && route.children.length){
               
               return(
-                <SubMenu key={route.title} title={route.title} icon={Icon ? <Icon/> : null}>
+                <SubMenu key={route.title} title={route.title} 
+                icon={Icon ? <Icon/> : null}>
                   {route.children.map((r,i)=>(
                     <Menu.Item key={'sub-menu-'+i}>
                       <NavLink exact  activeClassName="active" to={r.path||''}>

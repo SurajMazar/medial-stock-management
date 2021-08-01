@@ -10,6 +10,8 @@ export interface PurchaseStoreInterface{
   errorPurchaseInvoice:any,
   metaPurchaseInvoice:PageMeta|undefined,
 
+  updatingPurchaseInvoice:boolean,
+
   purchaseInvoice:purchase_invoice|undefined,
   purchases:Array<purchase>|undefined
 }
@@ -20,6 +22,8 @@ const initialState:PurchaseStoreInterface = {
   errorPurchaseInvoice:undefined,
   loadingPurchaseInvoice:false,
   metaPurchaseInvoice:undefined,
+
+  updatingPurchaseInvoice:false,
 
   purchaseInvoice:undefined,
   purchases:undefined
@@ -44,12 +48,16 @@ const PISlice = createSlice({
 
     fetchPurchaseInvoiceFail(state,actions){
       state.loadingPurchaseInvoice = false;
+      state.updatingPurchaseInvoice = false;
       state.errorPurchaseInvoice = actions.payload;
     },
 
+    updatePurchaseInvoiceRequest(state){
+      state.updatingPurchaseInvoice = true;
+    },
 
     updatePurchaseInvoiceSuccess(state,actions){
-      state.loadingPurchaseInvoice = false;
+      state.updatingPurchaseInvoice = false;
       state.purchaseInvoice = actions.payload;
     },
     // view related
@@ -78,6 +86,13 @@ const PISlice = createSlice({
     deletePurchase(state,actions){
       state.loadingPurchaseInvoice = false;
       state.purchases = removeItemById(state.purchases,actions.payload);
+    },
+
+
+    // delete purchase invoice
+    deletePurchaseInvoiceSuccess(state,actions){
+      state.loadingPurchaseInvoice = false;
+      state.PurchaseInvoices = removeItemById(state.PurchaseInvoices,actions.payload)
     }
 
 
@@ -89,13 +104,18 @@ export const {
   fetchPurchasInvoicesRequest,
   fetchPurchaseInvoiceFail,
   fetchPurchaseInvoiceSuccess,
+  updatePurchaseInvoiceRequest,
   updatePurchaseInvoiceSuccess,
+  deletePurchaseInvoiceSuccess,
+
 
   addPurchase,
   updatePurchase,
   deletePurchase,
   fetchSinglePurchaseInvoiceRequest,
-  fetchSinglePurchaseInvoiceSuccess
+  fetchSinglePurchaseInvoiceSuccess,
+
+
 
 } = PISlice.actions;
 

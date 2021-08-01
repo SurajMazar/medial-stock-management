@@ -43,6 +43,8 @@ Route::middleware(['auth:api'])->group(function () {
   Route::resource('/currency', CurrencyController::class);
   
   Route::resource('/purchase_invoice', PurchaseInvoiceController::class);
+  Route::delete('/purchase_invoice/trash/{id}', [PurchaseInvoiceController::class,'trash']);
+  Route::get('/purchase_invoice/restore/{id}', [PurchaseInvoiceController::class,'restore']);
 
 
   Route::resource('/purchases', PurchaseController::class);

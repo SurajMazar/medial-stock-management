@@ -82,16 +82,12 @@ class PurchaseInvoiceRepository implements PurchaseInvoiceInterface{
 
 
     public function restore($id){
-      $purchaseInvoice  = PurchaseInvoice::onlyTrashed();
-      $purchaseInvoice->findOrFail($id);
-      return $purchaseInvoice->restore();
+      return PurchaseInvoice::withTrashed()->find($id)->restore();
     }
 
 
     public function delete($id){
-      $purchaseInvoice  = PurchaseInvoice::onlyTrashed();
-      $purchaseInvoice->findOrFail($id);
-      return $purchaseInvoice->forceDelete();
+      return PurchaseInvoice::withTrashed()->find($id)->forceDelete();
     }
 
 

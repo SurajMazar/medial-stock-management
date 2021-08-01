@@ -1,13 +1,14 @@
-import { Button } from 'antd';
+import { DeleteOutlined, EyeOutlined } from '@ant-design/icons';
+import { Button, Popconfirm, Popover } from 'antd';
 import moment from 'moment';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import DatTableWrapper from '../../../components/DataTable';
 import Preloader from '../../../components/Preloader';
-import { fetchPurchaseInvoice } from '../../../services/purchase.service';
+import { deletePurchaseInvoiceService, fetchPurchaseInvoice } from '../../../services/purchase.service';
 import { StoreInterface } from '../../../store/store';
-import { getSn } from '../../../utils/helper.utils';
+import { getSn, returnLimitedWords } from '../../../utils/helper.utils';
 import CreatePurchaseInvoice from './create';
 
 interface PIprops{
@@ -38,6 +39,11 @@ const PurchaseInvoice:React.FC<PIprops> = ({vendor_id}) =>{
         }
       }
       dispatch(fetchPurchaseInvoice(params));
+    }
+
+
+    const deletePI = (id:any)=>{
+      dispatch(deletePurchaseInvoiceService(id));
     }
   //store
 
@@ -73,16 +79,29 @@ const PurchaseInvoice:React.FC<PIprops> = ({vendor_id}) =>{
                     <td>{getSn(metaPurchaseInvoice.current_page,i)}</td>
                     <td>{pi.invoice_number}</td>
                     {vendor_id?null:<td>
-                      <Link to={`/vendors/${pi.vendor.id}/purchase-history`}>{ pi.vendor.name || 'N/A'}</Link></td>}
+                      <Link to={`/vendors/${pi.vendor.id}/purchase-history`}>{ returnLimitedWords(pi.vendor.name||"",25) || 'N/A'}</Link></td>}
                     <td>{ pi.currency? `${pi.currency.country}(${pi.currency.symbol})`:'Nep(Rs)'}</td>
                     <td>{moment(pi.transaction_date).format("YYYY-MM-DD")}</td>
                     <td>Rs.{pi.total || 0}</td>
                     <td>
-                      <Link to={`/purchase-invoices/view/${pi.id}`}>
-                        <Button shape="round" size="middle" className="btn-outline-primary">
-                          View
-                        </Button>
-                      </Link>
+                      <div className="d-flex">
+                        <Link to={`/purchase-invoices/view/${pi.id}`}>
+                          <Button icon={<EyeOutlined />}
+                          shape="round" title="view" size="middle" className="btn-outline-primary mr-1 mb-1">
+                          </Button>
+                        </Link>
+                        <Popconfirm
+                          title={"Are you sure?"}
+                          onConfirm={()=>deletePI(pi.id)}
+                          okText="delete"
+                          cancelText="cancle"
+                        >
+                          <Button shape="round" title="delete" size="middle" className="btn-outline-danger"
+                          icon={<DeleteOutlined />}
+                          >
+                          </Button>
+                        </Popconfirm>
+                      </div>
                     </td>
                   </tr>
                 ))
