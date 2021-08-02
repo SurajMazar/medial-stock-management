@@ -40,6 +40,10 @@ class RepositoryServiceProvider extends ServiceProvider
     $this->app->bind(
       "App\Repositories\Purchase\PurchaseInterface",
       "App\Repositories\Purchase\PurchaseRepository",);
+
+    $this->app->bind(
+      "App\Repositories\Payments\PaymentsInterface",
+      "App\Repositories\Payments\PaymentsRepository",);
   }
 
   /**

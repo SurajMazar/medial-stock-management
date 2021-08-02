@@ -21,6 +21,7 @@ export const setFormdata = (data:any) =>{
 }
 
 export const NepaliNS = (number:string|number,symbol:string = '') => {
+  number = Math.floor(Number(number));
   const string = number?.toString()
   if (string?.length > 3) {
     let hundredPlace = string.substring(string.length - 3)

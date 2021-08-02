@@ -3,6 +3,7 @@
 use App\Http\Controllers\api\AuthController;
 use App\Http\Controllers\api\CurrencyController;
 use App\Http\Controllers\api\CustomerController;
+use App\Http\Controllers\api\PaymentController;
 use App\Http\Controllers\api\VendorController;
 use App\Http\Controllers\api\ProductCategoryController;
 use App\Http\Controllers\api\ProductController;
@@ -49,5 +50,8 @@ Route::middleware(['auth:api'])->group(function () {
 
   Route::resource('/purchases', PurchaseController::class);
   Route::delete('/purchases/delete/{id}', [PurchaseController::class,'trash']);
+
+
+  Route::resource('/payments', PaymentController::class);
 
 });
