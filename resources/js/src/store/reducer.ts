@@ -16,7 +16,7 @@ const reducer = {
   product:ProductReducer,
   currency:CurrencyReducer,
   purchase:PurchaseReducer,
-  customer:CustomerReducer
+  customer:CustomerReducer,
 }
 
 export default reducer;

@@ -4,8 +4,9 @@
 }
 
 
-input,textarea,.ant-select-selector {
+input,textarea,.ant-select-selector,.ant-picker  {
   border-radius:4px;
+  box-shadow: none !important;
   &:focus{
     box-shadow: none !important;
   }

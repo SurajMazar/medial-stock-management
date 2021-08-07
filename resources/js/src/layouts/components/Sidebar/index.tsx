@@ -23,6 +23,9 @@ const Sidebar = () => {
     breakpoint="lg"
     collapsedWidth="0"
     className="site-layout-background msm-sidebar">
+      <div className="logo-text">
+        Aradhana Health Care Center
+      </div>
       <Menu
         mode="inline"
         className="sidebar-menu"

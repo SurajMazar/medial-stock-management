@@ -11,6 +11,7 @@ import PurchaseInvoice from '../../Purchase/Purchase-invoice';
 import EditForm from './edit';
 import {IoReceipt} from 'react-icons/io5';
 import { NepaliNS, returnLimitedWords } from '../../../utils/helper.utils';
+import Payments from './Payments';
 
 interface paramsInterface{
   id:string,
@@ -84,7 +85,7 @@ const EditVendor:React.FC = () =>{
             <PurchaseInvoice vendor_id={id}/>
           </TabPane>
           <TabPane key={'payments'} tab="Payments">
-
+              <Payments CVendor={vendor}/>
           </TabPane>
         </Tabs>
       </>

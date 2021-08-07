@@ -19,7 +19,7 @@ class CreatePaymentsTable extends Migration
             $table->string('payment_type');
             $table->float('paid_amount');
             $table->dateTime('payment_date');
-            $table->string('receving_person');
+            $table->string('receiving_person');
             $table->string('paid_by');
             $table->text('note')->nullable();
             $table->softDeletes();

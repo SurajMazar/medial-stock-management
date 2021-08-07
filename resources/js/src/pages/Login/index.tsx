@@ -1,4 +1,4 @@
-import { Button, Col, Input, Row } from 'antd';
+import { Button, Input } from 'antd';
 import {Form} from 'antd';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -23,6 +23,9 @@ const Login:React.FC = props =>{
     <section className="auth-wrapper">
       <div className="row w-100 justify-content-center">
         <div className="col-md-6 col-sm-12 col-lg-4">
+          <div className="auth-logo">
+            <img src='/logo.png' alt="" />
+          </div>
           <div className="auth-card">
             <Form
               id="msm-login-form"

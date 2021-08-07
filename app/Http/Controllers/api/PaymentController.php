@@ -25,7 +25,7 @@ class PaymentController extends Controller
       $payments = $this->paymentRepository->index($request);
       return new PaymentCollection($payments);
     }catch(Exception $e){
-      return $e->getMessage();
+      return failure($e->getMessage());
     }
   }
 
@@ -34,7 +34,7 @@ class PaymentController extends Controller
     if($response instanceof Payment){
       return success('Payment created!',$response);
     }
-    return $response->getMessage();
+    return failure($response->getMessage());
   }
 
   public function update($id,PaymentRequest $request){
@@ -42,6 +42,10 @@ class PaymentController extends Controller
     if($response instanceof Payment){
       return success('Payment updated!',$response);
     }
-    return $response->getMessage();
+    return failure($response->getMessage());
+  }
+
+  public function destroy($id){
+    return $this->paymentRepository->delete($id);
   }
 }

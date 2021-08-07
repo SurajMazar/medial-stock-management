@@ -23,7 +23,8 @@ interface Vendor{
   youtube: string,
   description: string,
   created_at:Date,
-  total_purchases:number
+  total_purchases:number,
+  total_payments:number
 }
 
 export default Vendor;

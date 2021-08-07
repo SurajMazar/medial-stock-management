@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Vendors;
 
+use App\Models\Payment;
 use App\Models\PurchaseInvoice;
 use App\Models\Vendor;
 use App\Repositories\Vendors\VendorsRepositoryInterface;
@@ -73,6 +74,7 @@ class VendorsRepository implements VendorsRepositoryInterface{
     {
       $vendor = Vendor::findOrFail($id);
       $vendor->total_purchases = $this->getTotalPurchases($id);
+      $vendor->total_payments = $this->getTotalPayments($id);
       return $vendor;
     }
 
@@ -82,6 +84,16 @@ class VendorsRepository implements VendorsRepositoryInterface{
       $total = 0;
       foreach($purchases as $purchase){
         $total = $total + $purchase->total;
+      };
+      return $total;
+    }
+
+
+    public function getTotalPayments($vendor_id){
+      $payments = Payment::where('vendor_id',$vendor_id)->get();
+      $total = 0;
+      foreach($payments as $payment){
+        $total = $total + $payment->paid_amount;
       };
       return $total;
     }

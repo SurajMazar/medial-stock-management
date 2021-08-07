@@ -8,7 +8,6 @@ import { Prompt, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import CustomSelect from '../../../../components/DataTable/select';
 import Preloader from '../../../../components/Preloader';
-import MiniLoader from '../../../../components/UI/MiniLoader';
 import { purchase } from '../../../../model/purchase.model';
 import { fetchCurrencies } from '../../../../services/currency.service';
 import { deletePurchaseItem, fetchSinglePurchaseInvoice,updatePurchaseInvoice } from '../../../../services/purchase.service';
@@ -426,13 +425,13 @@ const EditPurchaseInvoice:React.FC = () =>{
         <div className="col-md-6 justify-content-center">
           <div className="row justify-content-center">
             <Button className="btn btn-success mr-2" shape="round"  loading={purchase.updatingPurchaseInvoice}
-            size="large" htmlType="submit">
+            size="middle" htmlType="submit">
               Save
             </Button>
             
             <Link to={`/vendors/${purchaseInvoice?.vendor?.id}/payments`}>
               <Button type="primary" shape="round" 
-              size="large" htmlType="button">
+              size="middle" htmlType="button">
                 Add payment 
               </Button>
             </Link>

@@ -47,7 +47,7 @@ const Vendor:React.FC = () => {
       <div className="section-break-2 d-flex ac">
         <h3 className="text-24px-black">Vendors</h3>
         <Button type="primary"
-         shape="round" size={'large'} 
+         shape="round" size={'middle'} 
          onClick={openModal}
          className="ml-auto">
           Add Vendor

@@ -47,6 +47,16 @@ color:$primary-color;
   a{
     font-family: $font-family-medium;
   }
+
+  .logo-text{
+    padding:1em;
+    text-align: center;
+    color:$primary-color;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-bottom:2px double rgba($primary-color,0.6);
+  }
 }
 
 .msm-main{
