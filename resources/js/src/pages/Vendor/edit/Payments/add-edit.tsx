@@ -5,7 +5,7 @@ import Vendor from '../../../../model/vendors.model';
 import { removeNullItems, setFormdata } from '../../../../utils/helper.utils';
 import { useDispatch } from 'react-redux';
 import { addPaymentService, 
-  // fetchVendor,
+  fetchVendor,
    updatePaymentService } from '../../../../services/vendor.service';
 import { useParams } from 'react-router';
 import moment from 'moment';
@@ -84,7 +84,7 @@ const AddEditPayment: React.FC<Props> = (props) => {
       await dispatch(addPaymentService(values,handleModelClose));
     }
 
-    // dispatch(fetchVendor(vendorId));
+    dispatch(fetchVendor(vendorId));
   }
 
   return (

@@ -46,7 +46,31 @@ const EditVendor:React.FC = () =>{
     setActiveTab(tab);
   },[tab]);
   
-
+  const stats = (
+    <>
+    {
+      vendor?
+      <div className="p-1 mt-3">
+        <div className="row">
+          <div className="col-md-3">
+            <OverviewCard 
+              title="Total Purchases"
+              icon={IoReceipt}
+              counts={NepaliNS(vendor?.total_purchases||0,"Rs ")}
+            />
+          </div>
+          <div className="col-md-3">
+            <OverviewCard 
+              title="Total Payments"
+              icon={IoReceipt}
+              counts={NepaliNS(vendor?.total_payments||0,"Rs ")}
+            />
+          </div>
+        </div>
+      </div>:''
+    }
+    </>
+  )
 
   return(
     <div className="page-section-2">
@@ -69,23 +93,12 @@ const EditVendor:React.FC = () =>{
             <EditForm vendor={vendor}/>
           </TabPane>
           <TabPane key={'purchase-history'} tab="Purchase history">
-            {vendor?
-            <div className="p-1 mt-3">
-              <div className="row">
-                <div className="col-md-3">
-                  <OverviewCard 
-                    title="Total Purchases"
-                    icon={IoReceipt}
-                    counts={NepaliNS(vendor?.total_purchases||0,"Rs ")}
-                  />
-                </div>
-              </div>
-            </div>
-            :''}
+            {stats}
             <PurchaseInvoice vendor_id={id}/>
           </TabPane>
           <TabPane key={'payments'} tab="Payments">
-              <Payments CVendor={vendor}/>
+            {stats}
+            <Payments CVendor={vendor}/>
           </TabPane>
         </Tabs>
       </>

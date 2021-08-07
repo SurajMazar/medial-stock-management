@@ -20,7 +20,7 @@ class Payment extends Model
   public function scopeSearch($query, $keyword)
   {
     return $query->where('payment_type', 'like', '%' . $keyword . '%')
-    ->orWhere('receving_person', 'like', '%' . $keyword . '%')
+    ->orWhere('receiving_person', 'like', '%' . $keyword . '%')
     ->orWhere('paid_by', 'like', '%' . $keyword . '%')
       ->orWhereHas('vendor', function ($q) use ($keyword) {
         return $q->where('name', 'like', '%' . $keyword . '%')

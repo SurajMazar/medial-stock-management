@@ -11,7 +11,7 @@ class PaymentsRepository implements PaymentsInterface{
       $items_per_page = $request->items_per_page?:10;
       $keyword = $request->keyword;
       $vendor = $request->vendor_id;
-      $payments = Payment::orderBy('payment_date','asc')->with('vendor');
+      $payments = Payment::orderBy('payment_date','desc')->with('vendor');
 
       if($vendor){
         $payments = $payments->where('vendor_id',$vendor);
