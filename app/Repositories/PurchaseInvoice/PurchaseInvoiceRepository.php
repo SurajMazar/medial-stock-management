@@ -5,7 +5,7 @@
   use App\Models\PurchaseInvoice;
   use Exception;
   use Illuminate\Support\Facades\DB;
-
+  use PDF;
 class PurchaseInvoiceRepository implements PurchaseInvoiceInterface{
     
 
@@ -88,6 +88,15 @@ class PurchaseInvoiceRepository implements PurchaseInvoiceInterface{
 
     public function delete($id){
       return PurchaseInvoice::withTrashed()->find($id)->forceDelete();
+    }
+
+    public function downloadPdf($id){
+      $data = PurchaseInvoice::with('vendor','purchases');
+      $data = $data->findOrFail($id);
+      $data->alterations= str_replace("\\", "",$data->alterations);
+      $data->alterations= json_decode($data->alterations);
+      $pdf = PDF::loadView('pdf.purchase_invoice',compact('data'));
+      return $pdf->download('purchase-invoice.pdf');
     }
 
 

@@ -37,7 +37,6 @@ const CustomerPage: React.FC = () => {
           fetchData={loadCustomers}
           meta={customer.metaCustomers}
         >
-          <div className="p-1 table-responsive">
             <table className="table">
               <thead>
                 <tr>
@@ -85,7 +84,6 @@ const CustomerPage: React.FC = () => {
                 </tbody>
               )}
             </table>
-          </div>
         </DatTableWrapper>
       </div>
     </section>

@@ -33,6 +33,13 @@ const sidebars:Array<routeInterface> = [
     icon:SketchOutlined
   },
 
+  
+  {
+    path:null,
+    title:'Inventory'
+  },
+
+
   {
     path:null,
     title:'Products Mgmt',
@@ -49,6 +56,11 @@ const sidebars:Array<routeInterface> = [
     icon:MedicineBoxOutlined
   },
 
+  {
+    path:'/reports',
+    title:'Reports',
+    icon:BarChartOutlined
+  },
  
   {
     path:null,
@@ -84,23 +96,6 @@ const sidebars:Array<routeInterface> = [
   },
 
 
-  {
-    path:null,
-    title:'Inventory'
-  },
-
-  {
-    path:'/stocks',
-    title:'Stocks',
-    icon:ShopOutlined
-  },
-
-
-  {
-    path:'/reports',
-    title:'Reports',
-    icon:BarChartOutlined
-  },
 
   {
     path:null,

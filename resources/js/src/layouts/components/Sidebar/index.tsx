@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { Layout, Menu } from 'antd';
-import {NavLink, useLocation} from 'react-router-dom';
+import React, { useState } from 'react';
+import { Button, Layout, Menu, Modal } from 'antd';
+import {NavLink} from 'react-router-dom';
 import sidebars from '../../../constants/sidebar'
 import { useDispatch } from 'react-redux';
 import { Logout } from '../../../services/auth.service';
@@ -14,10 +14,34 @@ const Sidebar = () => {
   const dispatch = useDispatch();
 
 
-
+  /**
+   * Logout function
+   */
   const handleLogout = () =>{
     dispatch(Logout());
   }
+
+
+  /**
+   * logout confirm modal
+   */
+  const [showLogoutModal,setShowLogoutModal] = useState<boolean>(false);
+  const logoutConfirmModal = (
+    <Modal
+      visible={showLogoutModal}
+      title={'Are you sure you want to logout?'}
+      footer={false}
+      onCancel={()=>setShowLogoutModal(false)}
+    >
+      <div className="d-flex justify-content-end">
+        <Button className="mr-1" shape="round" size="middle" type="default"
+          onClick={()=>setShowLogoutModal(false)}
+         >Cancle</Button>
+        <Button shape="round" onClick={handleLogout} size="middle" type="primary">logout</Button>
+      </div>
+    </Modal>
+  );
+
   return(
     <Sider 
     breakpoint="lg"
@@ -40,8 +64,8 @@ const Sidebar = () => {
                 <SubMenu key={route.title} title={route.title} 
                 icon={Icon ? <Icon/> : null}>
                   {route.children.map((r,i)=>(
-                    <Menu.Item key={'sub-menu-'+i}>
-                      <NavLink exact  activeClassName="active" to={r.path||''}>
+                    <Menu.Item key={'sub-menu-'+i} onClick={(e:any)=>e.stopPropagation()}>
+                      <NavLink exact  activeClassName="active" to={r.path||''} >
                         {r.title}
                       </NavLink>
                     </Menu.Item>
@@ -65,10 +89,11 @@ const Sidebar = () => {
           })
         }
 
-        <Menu.Item key={'logout'} icon={<LogoutOutlined />} onClick={handleLogout}>
+        <Menu.Item key={'logout'} icon={<LogoutOutlined />} onClick={()=>setShowLogoutModal(true)}>
           Logout                      
         </Menu.Item>
       </Menu>
+      {logoutConfirmModal}
     </Sider>
   );
 }

@@ -38660,6 +38660,11 @@ h6 {
 
 a {
   text-decoration: none !important;
+  color: rgba(237, 27, 36, 0.7);
+}
+
+a:hover {
+  color: #ed1b24;
 }
 
 html,
@@ -39431,6 +39436,12 @@ body {
   border-radius: 32px !important;
 }
 
+.table-wrapper {
+  border: 1px solid #bcbcbc;
+  border-radius: 13px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
+
 .table {
   margin-bottom: 0px;
 }
@@ -39441,7 +39452,7 @@ body {
   border: unset !important;
   font-family: "Averta Medium";
   font-size: 1rem;
-  padding: 15px;
+  padding: 20px 15px;
   line-height: 1.4;
   white-space: normal;
 }
@@ -39456,7 +39467,7 @@ body {
 }
 
 .table tr:nth-child(even) {
-  background-color: #fffbfb;
+  background-color: white;
 }
 
 .table td {

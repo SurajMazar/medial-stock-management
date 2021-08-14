@@ -9,6 +9,10 @@
 
 a{
   text-decoration: none !important;
+  color:rgba($primary-color,0.7);
+  &:hover{
+    color:$primary-color;
+  }
 }
 
 html,body{

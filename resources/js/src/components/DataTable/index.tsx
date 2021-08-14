@@ -102,7 +102,9 @@ const DatTableWrapper:React.FC<DTinterface> = props =>{
           <Input size="large" className="fm-rounded" onChange={onKeywordChange}  placeholder="Search" prefix={<SearchOutlined />} />
         </Col>
       </Row>
-      {children}
+      <div className="table-wrapper table-responsive">
+        {children}
+      </div>
       <div className="section-break-2">
         {meta && meta.total > 10?
           <Pagination 

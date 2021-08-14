@@ -117,7 +117,7 @@ const ProductStock:React.FC<Props> = (props)=>{
                     </tr>
                   )):
                   <tr>
-                    <td colSpan={8} className="text-center">Sorry no purchases were made!!</td>
+                    <td colSpan={9} className="text-center">Sorry no purchases were made!!</td>
                   </tr>
                 }
                 

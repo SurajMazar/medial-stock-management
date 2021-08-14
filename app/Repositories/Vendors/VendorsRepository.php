@@ -8,8 +8,9 @@ use App\Models\Vendor;
 use App\Repositories\Vendors\VendorsRepositoryInterface;
 use Exception;
 use Illuminate\Support\Facades\DB;
-
+use PDF;
 class VendorsRepository implements VendorsRepositoryInterface{
+
 
     public function index($request){
       $items_per_page = $request->items_per_page?:10;
@@ -97,8 +98,6 @@ class VendorsRepository implements VendorsRepositoryInterface{
       };
       return $total;
     }
-
-
 
 
   }

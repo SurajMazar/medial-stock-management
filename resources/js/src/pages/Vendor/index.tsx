@@ -56,7 +56,6 @@ const Vendor:React.FC = () => {
 
       <div className="section-break-1">
         <DatTableWrapper fetchData={loadVendors} meta={meta}>
-          <div className="p-1 table-responsive">
             <table className='table'>
               <thead>
                 <tr>
@@ -113,7 +112,6 @@ const Vendor:React.FC = () => {
               </tbody>
               } 
             </table>
-          </div>
         </DatTableWrapper>
       </div>
       <CreateModal closeModal={closeModal} showModal={showModal}/>

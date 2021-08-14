@@ -67,6 +67,14 @@ class PurchaseInvoiceController extends Controller
     return failure($pc->getMessage());
   }
 
+  
+  /**
+   * download pdf
+   */
+  public function export_pdf($id){
+    return $this->purchaseInvoiceRepository->downloadPdf($id);
+  }
+
   /**
    * Trash 
    */

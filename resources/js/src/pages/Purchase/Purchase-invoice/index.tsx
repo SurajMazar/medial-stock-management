@@ -1,4 +1,4 @@
-import { DeleteOutlined, EyeOutlined } from '@ant-design/icons';
+import { DeleteOutlined, EyeOutlined, FilePdfOutlined, PrinterOutlined } from '@ant-design/icons';
 import { Button, Popconfirm, Popover } from 'antd';
 import moment from 'moment';
 import React, { useState } from 'react';
@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import DatTableWrapper from '../../../components/DataTable';
 import Preloader from '../../../components/Preloader';
+import { exportPDF } from '../../../services/export.service';
 import { deletePurchaseInvoiceService, fetchPurchaseInvoice } from '../../../services/purchase.service';
 import { StoreInterface } from '../../../store/store';
 import { getSn, returnLimitedWords } from '../../../utils/helper.utils';
@@ -47,6 +48,10 @@ const PurchaseInvoice:React.FC<PIprops> = ({vendor_id}) =>{
     }
   //store
 
+  const exportPdf = async(id:number,print:boolean = false)=>{
+    await exportPDF('purchase_invoice/export_pdf',`purchase-invoice-${id}`,id,print);
+  }
+
   return(
     <section>
       <div className="section-break-1-2 d-flex flex-wrap ac">
@@ -57,7 +62,6 @@ const PurchaseInvoice:React.FC<PIprops> = ({vendor_id}) =>{
         </div>
       </div>
       <DatTableWrapper dateRange={true} dateRangeTitle={"transaction date"} fetchData={loadPurchaseInvoice} meta={metaPurchaseInvoice}>
-        <div className="section-break-2">
           {loadingPurchaseInvoice?<Preloader/>:
           <table className="table">
             <thead>
@@ -87,16 +91,28 @@ const PurchaseInvoice:React.FC<PIprops> = ({vendor_id}) =>{
                       <div className="d-flex">
                         <Link to={`/purchase-invoices/view/${pi.id}`}>
                           <Button icon={<EyeOutlined />}
-                          shape="round" title="view" size="middle" className="btn-outline-primary mr-1 mb-1">
+                          shape="round" title="view" size="middle" className="mr-1 mb-1" type="primary">
                           </Button>
                         </Link>
+
+                        <Button shape='round'
+                        icon={<FilePdfOutlined />}
+                        onClick={()=>exportPdf(pi.id)}
+                        size="middle" className="mr-1 mb-1" title="Export pdf" type="primary">
+                        </Button>
+
+                        <Button shape='round' 
+                        onClick={()=>exportPdf(pi.id,true)}
+                        icon={<PrinterOutlined />} size="middle" title="print" className="mr-1 mb-1" type="default">
+                        </Button>
+
                         <Popconfirm
                           title={"Are you sure?"}
                           onConfirm={()=>deletePI(pi.id)}
                           okText="delete"
                           cancelText="cancle"
                         >
-                          <Button shape="round" title="delete" size="middle" className="btn-outline-danger"
+                          <Button shape="round" title="delete" size="middle" className="btn-outline-danger mr-1 mb-1"
                           icon={<DeleteOutlined />}
                           >
                           </Button>
@@ -114,7 +130,6 @@ const PurchaseInvoice:React.FC<PIprops> = ({vendor_id}) =>{
             </tbody>
           </table>
           }
-        </div>
       </DatTableWrapper>
       <CreatePurchaseInvoice closeModal={()=>setShowModal(false)} visible={showModal} vendor_id={vendor_id}/>
     </section>

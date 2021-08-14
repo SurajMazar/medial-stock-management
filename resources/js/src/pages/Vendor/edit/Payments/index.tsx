@@ -54,7 +54,7 @@ const Payments:React.FC<Props> = (props)=>{
   }
 
   return(
-    <div className="page-section-2">
+    <div className="section-break-2">
       <>
         <div className="d-flex ac">
           <h1 className="text-22-black">Payments</h1>

@@ -12,6 +12,15 @@ class Vendor extends Model
 
     protected $guarded = [];
 
+
+    public function purchaseInvoices(){
+      return $this->hasMany(PurchaseInvoice::class);
+    }
+
+    public function payments(){
+      return $this->hasMany(Payment::class);
+    }
+
     public function scopeSearch($query,$keyword){
       return $query->where('name', 'like', '%' .$keyword. '%')
       ->orWhere('email','like','%'.$keyword.'%')

@@ -1,0 +1,6 @@
+{
+  "workbench.statusBar.visible": false,
+  "workbench.tips.enabled": false,
+  "workbench.tree.indent": 4,
+  "diffEditor.codeLens": true
+}

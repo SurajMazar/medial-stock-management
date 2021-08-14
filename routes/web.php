@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\api\PurchaseInvoiceController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 })->name('app');
 
+Route::get('/purchase_invoice/export_pdf/{id}', [PurchaseInvoiceController::class,'export_pdf']);
 
 Route::get('{reactRoutes}', function () {
   return view('welcome'); // your start view

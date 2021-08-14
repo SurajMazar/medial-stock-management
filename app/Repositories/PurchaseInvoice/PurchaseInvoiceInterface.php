@@ -10,6 +10,7 @@
     public function trash($id);
     public function restore($id);
     public function delete($id);
+    public function downloadPdf($id);
   }
 
 ?>

@@ -1,3 +1,8 @@
+.table-wrapper{
+  border: 1px solid #bcbcbc;
+  border-radius: 13px;
+  box-shadow: 0 0 2px rgba(0,0,0,0.2);
+}
 .table{
   margin-bottom:0px;
   th{
@@ -6,7 +11,7 @@
     border:unset !important;
     font-family: $font-family-medium;
     font-size: font('14px');
-    padding: 15px;line-height: 1.4;
+    padding: 20px 15px;line-height: 1.4;
     white-space: normal;
   }
   thead{
@@ -18,7 +23,7 @@
   tr{
     border-bottom:1px solid #bcbcbc;
     &:nth-child(even){
-      background-color: $bg-dark;
+      background-color: white;
     }
   }
 

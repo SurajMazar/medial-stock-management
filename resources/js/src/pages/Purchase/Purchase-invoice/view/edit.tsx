@@ -373,7 +373,10 @@ const EditPurchaseInvoice:React.FC = () =>{
                   <tr key={item.id}>
                     <td>{i+1}</td>
                     <td>{item.code}</td>
-                    <td>{item.product?.name}</td>
+                    <td>
+                      <Link to={`/products/view/${item.product?.id}`}>
+                      {item.product?.name}
+                      </Link></td>
                     <td>{Number(item.free)?"Free":''}</td>
                     <td>{item.pack}</td>
                     <td>{item.batch}</td>
