@@ -6,6 +6,8 @@ import CustomerPage from '../pages/Customers';
 import CreateEditCustomer from '../pages/Customers/create-edit';
 import Dashboard from '../pages/Dashboard';
 import Home from '../pages/Home';
+import LabTestList from '../pages/Lab/LabTests';
+import AddEditLabTest from '../pages/Lab/LabTests/add-edit';
 import Login from '../pages/Login';
 import Products from '../pages/Products';
 import ProductCategory from '../pages/Products/Category';
@@ -168,6 +170,28 @@ const routes:Array<routeInterface> = [
     title:'Reports',
     layout:AppLayout
   },
+
+
+  {
+    path:'/lab-tests',
+    component:LabTestList,
+    layout:AppLayout,
+    title:"Lab tests"
+  },
+
+  {
+    path:'/lab-tests/add',
+    component:AddEditLabTest,
+    layout:AppLayout,
+    title:"Add Lab tests"
+  },
+
+  {
+    path:'/lab-tests/edit/:id',
+    component:AddEditLabTest,
+    layout:AppLayout,
+    title:"Edit Lab tests"
+  }
 
 
 ]

@@ -3,6 +3,7 @@
 use App\Http\Controllers\api\AuthController;
 use App\Http\Controllers\api\CurrencyController;
 use App\Http\Controllers\api\CustomerController;
+use App\Http\Controllers\api\LabTestController;
 use App\Http\Controllers\api\PaymentController;
 use App\Http\Controllers\api\VendorController;
 use App\Http\Controllers\api\ProductCategoryController;
@@ -55,5 +56,8 @@ Route::middleware(['auth:api'])->group(function () {
 
 
   Route::resource('/payments', PaymentController::class);
+
+
+  Route::resource('/lab-tests', LabTestController::class);
 
 });

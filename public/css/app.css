@@ -39438,7 +39438,7 @@ body {
 
 .table-wrapper {
   border: 1px solid #bcbcbc;
-  border-radius: 13px;
+  border-radius: 6px;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
 }
 
@@ -39476,6 +39476,11 @@ body {
   padding: 15px;
   line-height: 1.4;
   white-space: normal;
+}
+
+.sm th,
+.sm td {
+  padding: 8px;
 }
 
 .fm-rounded {

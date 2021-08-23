@@ -15,6 +15,11 @@ class CreateLabInvoicesTable extends Migration
     {
         Schema::create('lab_invoices', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('purchase_id')->references('id')->on('purchases');
+            $table->string('invoice_number');
+            $table->json('tests');
+            $table->json('alterations');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

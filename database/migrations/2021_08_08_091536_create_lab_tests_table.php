@@ -15,6 +15,9 @@ class CreateLabTestsTable extends Migration
     {
         Schema::create('lab_tests', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->json('tests');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

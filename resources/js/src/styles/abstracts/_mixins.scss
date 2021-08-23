@@ -29,6 +29,11 @@
 }
 
 
+@mixin flex-ac-jc{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 @mixin background-gradient
 {
