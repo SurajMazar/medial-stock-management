@@ -1,10 +1,14 @@
 import { message } from "antd";
-import { push } from "connected-react-router";
 import { Dispatch } from "redux"
 import {
   fetchLTfail,
   fetchLTrequest,
-  fetchLTsuccess
+  fetchLTsuccess,
+
+  fetchLIRequest,
+  fetchLIfail,
+  fetchLIsuccess
+
 } from '../store/action-reducer/labTests.actionreducer';
 import instance from '../utils/axios';
 import { setUrl } from "../utils/helper.utils";
@@ -63,5 +67,29 @@ export const fetchLabTestById = async (id:number|string) =>{
   }catch(e:any){
     return undefined;
     message.error("Something went wrong");
+  }
+}
+
+
+
+export const fetchLabInvoices = (params:any = {page:1}) =>{
+  return async (dispatch:Dispatch) =>{
+    dispatch(fetchLIRequest());
+    try{
+      let url = setUrl(params,`api/lab-invoices`)
+      const response = await instance().get(url);
+      let data = {
+        li:response.data.data,
+        meta:response.data.meta
+      }
+      dispatch(fetchLIsuccess(data));
+    }catch(e:any){
+      if(e.response && e.response.data){
+        dispatch(fetchLIfail(e.response.data));
+      }else{
+        dispatch(fetchLIfail("Something went wrong"));
+        message.error("Something went wrong");
+      }
+    }
   }
 }

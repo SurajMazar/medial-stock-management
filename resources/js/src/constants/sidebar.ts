@@ -109,16 +109,12 @@ const sidebars:Array<routeInterface> = [
   },
 
   {
-    path:'/lab invoices',
+    path:'/lab-invoices',
     title:'Lab Invoices',
     icon:SolutionOutlined
   },
 
-  {
-    path:'/reports',
-    title:'Lab reports',
-    icon:FileProtectOutlined
-  },
+
 
 ]
 

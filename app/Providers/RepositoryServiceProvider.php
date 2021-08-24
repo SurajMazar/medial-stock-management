@@ -49,6 +49,10 @@ class RepositoryServiceProvider extends ServiceProvider
     $this->app->bind(
       "App\Repositories\LabTests\LabTestInterface",
       "App\Repositories\LabTests\LabTestRepository",);
+
+    $this->app->bind(
+      "App\Repositories\LabInvoice\LabInvoiceInterface",
+      "App\Repositories\LabInvoice\LabInvoiceRepository",);
   }
 
   /**

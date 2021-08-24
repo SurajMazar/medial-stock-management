@@ -68,4 +68,3 @@ class CustomerController extends Controller
     return failure($Customer->getMessage());
   }
 }
-Inline Parameters for VSCode

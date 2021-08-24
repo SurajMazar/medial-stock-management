@@ -10,6 +10,7 @@ import { setFormdata } from '../../../utils/helper.utils';
 
 interface test{
   name:string,
+  normal:string,
   price:number
 }
 
@@ -33,6 +34,7 @@ const AddEditLabTest = () => {
   const addTest = () =>{
     const newTests:Array<test> = [...tests].concat([{
       name:'',
+      normal:'',
       price:0
     }]);
     setTests(newTests);
@@ -45,7 +47,7 @@ const AddEditLabTest = () => {
   }
 
 
-  const onTestInputChange = (e:React.ChangeEvent<HTMLInputElement>,index:number,field:'name'|'price')=>{
+  const onTestInputChange = (e:React.ChangeEvent<HTMLInputElement>,index:number,field:'normal'|'name'|'price')=>{
     const value = e.target.value;
     const updatedArray = [...tests];
     const newValue:any = updatedArray.find((item,i)=>i===index);
@@ -102,7 +104,7 @@ const AddEditLabTest = () => {
 
 
   useEffect(()=>{
-    if(editData){
+    if(editData && editData.tests){
       form.setFieldsValue({
         name:editData?.name
       });
@@ -154,6 +156,7 @@ const AddEditLabTest = () => {
                         <thead>
                           <tr>
                             <th>Name</th>
+                            <th>Normal value</th>
                             <th>Price</th>
                             <th>
                               <Button htmlType="button" type="primary" size="middle" shape="round" onClick={addTest}>
@@ -172,6 +175,9 @@ const AddEditLabTest = () => {
                                     onChange={(e)=>onTestInputChange(e,i,'name')}
                                   />
                                 </td>
+                                <td><Input value={test.normal} placeholder="Normal value" type="text" className="form-control"
+                                  onChange={(e)=>onTestInputChange(e,i,'normal')}
+                                /></td>
                                 <td><Input value={test.price} placeholder="Price" type="number" className="form-control"
                                   onChange={(e)=>onTestInputChange(e,i,'price')}
                                 /></td>

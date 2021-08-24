@@ -3,6 +3,7 @@
 use App\Http\Controllers\api\AuthController;
 use App\Http\Controllers\api\CurrencyController;
 use App\Http\Controllers\api\CustomerController;
+use App\Http\Controllers\api\LabInvoiceController;
 use App\Http\Controllers\api\LabTestController;
 use App\Http\Controllers\api\PaymentController;
 use App\Http\Controllers\api\VendorController;
@@ -32,6 +33,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::middleware(['auth:api'])->group(function () {
+  
   Route::resource('/vendors', VendorController::class);
 
   Route::resource('/customers', CustomerController::class);
@@ -59,5 +61,8 @@ Route::middleware(['auth:api'])->group(function () {
 
 
   Route::resource('/lab-tests', LabTestController::class);
+
+
+  Route::resource('/lab-invoices', LabInvoiceController::class);
 
 });

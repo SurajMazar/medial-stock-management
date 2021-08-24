@@ -15,10 +15,13 @@ class CreateLabInvoicesTable extends Migration
     {
         Schema::create('lab_invoices', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('purchase_id')->references('id')->on('purchases');
+            $table->foreignId('customer_id')->nullable()->references('id')->on('customers');
             $table->string('invoice_number');
+            $table->date('invoice_date');
+            $table->string('customer_name')->nullable();
             $table->json('tests');
             $table->json('alterations');
+            $table->text('note')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

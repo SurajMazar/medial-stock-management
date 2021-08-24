@@ -6,6 +6,8 @@ import CustomerPage from '../pages/Customers';
 import CreateEditCustomer from '../pages/Customers/create-edit';
 import Dashboard from '../pages/Dashboard';
 import Home from '../pages/Home';
+import LabInvoice from '../pages/Lab/LabInvoice';
+import AddEditLabInvoice from '../pages/Lab/LabInvoice/add-edit';
 import LabTestList from '../pages/Lab/LabTests';
 import AddEditLabTest from '../pages/Lab/LabTests/add-edit';
 import Login from '../pages/Login';
@@ -191,8 +193,23 @@ const routes:Array<routeInterface> = [
     component:AddEditLabTest,
     layout:AppLayout,
     title:"Edit Lab tests"
-  }
+  },
 
+
+  {
+    path:'/lab-invoices',
+    component:LabInvoice,
+    layout:AppLayout,
+    title:"Lab tests"
+  },
+
+  
+  {
+    path:'/lab-invoices/add',
+    component:AddEditLabInvoice,
+    layout:AppLayout,
+    title:"Add Lab tests"
+  }
 
 ]
 

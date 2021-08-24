@@ -18,6 +18,9 @@ class LabTestRepository implements LabTestInterface{
         $labtests->Search($keyword);
       }
 
+      if($items_per_page === "all"){
+        return $labtests->get();
+      } 
       return $labtests->paginate($items_per_page);
     }
 
