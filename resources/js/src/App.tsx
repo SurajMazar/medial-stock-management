@@ -6,6 +6,7 @@ import PublicRouter from './router/Public';
 
 const App = () =>{
   return(
+    <>
     <Switch>
       {
         routes.map((route,i)=>{
@@ -19,6 +20,7 @@ const App = () =>{
       })
       }
     </Switch>
+    </>
   );
 }
 

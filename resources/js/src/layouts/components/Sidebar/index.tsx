@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Layout, Menu, Modal } from 'antd';
-import {NavLink} from 'react-router-dom';
+import {NavLink,useLocation} from 'react-router-dom';
 import sidebars from '../../../constants/sidebar'
 import { useDispatch } from 'react-redux';
 import { Logout } from '../../../services/auth.service';
@@ -12,6 +12,7 @@ const {SubMenu} = Menu;
 const Sidebar = () => {
 
   const dispatch = useDispatch();
+  const location = useLocation();
 
 
   /**
@@ -54,6 +55,7 @@ const Sidebar = () => {
         mode="inline"
         className="sidebar-menu"
         style={{ height: '100%', borderRight: 0 }}
+        defaultSelectedKeys={[location.pathname]}
       >
         {
           sidebars.map((route,index)=>{
@@ -61,7 +63,7 @@ const Sidebar = () => {
             if(route.children && route.children.length){
               
               return(
-                <SubMenu key={route.title} title={route.title} 
+                <SubMenu key={route.path} title={route.title} 
                 icon={Icon ? <Icon/> : null}>
                   {route.children.map((r,i)=>(
                     <Menu.Item key={'sub-menu-'+i} onClick={(e:any)=>e.stopPropagation()}>
@@ -75,14 +77,14 @@ const Sidebar = () => {
             }
             else if(route.path){
               return (
-              <Menu.Item key={index+1} icon={Icon ? <Icon/> : null}>
+              <Menu.Item key={route.path} icon={Icon ? <Icon/> : null}>
                 <NavLink exact activeClassName="active" to={route.path||''}>
                   {route.title}
                 </NavLink>
               </Menu.Item>
               )
             }else{
-              return (<Menu.Item key={index+1} className="menu-header">
+              return (<Menu.Item key={route.path} className="menu-header">
                {route.title}
               </Menu.Item> )
             }

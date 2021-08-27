@@ -53,7 +53,7 @@ const LabTestList:React.FC = () =>{
                     <tr key={i}>
                       <td>{getSn(metaLT.current_page,i)}</td>
                       <td>{lt.name}</td>
-                      <td>{JSON.parse(lt.tests).length}</td>
+                      <td>{lt?.tests?JSON.parse(lt.tests).length:0}</td>
                       <td>
                         <Link to={`/lab-tests/edit/${lt.id}`}>
                           <Button icon={<EditOutlined/>} 
