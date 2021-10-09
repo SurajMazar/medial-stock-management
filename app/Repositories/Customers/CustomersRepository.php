@@ -62,7 +62,7 @@ class CustomersRepository implements CustomersInterface{
 
 
     public function delete($id){
-      $customer  = Customer::onlyTrashed();
+      $customer  = Customer::latest();
       $customer->findOrFail($id);
       return $customer->forceDelete();
     }

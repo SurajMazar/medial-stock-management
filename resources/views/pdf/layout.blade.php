@@ -56,6 +56,9 @@
     border-bottom: 1px double #bcbcbc;
     border-top: 1px double #bcbcbc;
   }
+  .table-border{
+    border:1px solid #bcbcbc;
+  }
 
   .table th , .table  td {
     font-size: 11px;

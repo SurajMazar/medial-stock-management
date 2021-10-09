@@ -195,14 +195,14 @@ const CreateEditPurchase:React.FC<Props> = (props) =>{
                 {
                   purchases && purchases.length?
                   purchases.map(item=>{
-                    if(!item.free){
-                      return(
-                        <Select.Option value={item.id} key={item.id}>
-                          {item.product?.name}
-                        </Select.Option>
-                      )
+                    if(JSON.parse(item.free)){
+                      return '';
                     }
-                    return '';
+                    return (
+                      <Select.Option value={item.id} key={item.id}>
+                        {item.product?.name}
+                      </Select.Option>
+                    );
                   }):
                   <Select.Option value='' disabled>
                     Purchases are empty

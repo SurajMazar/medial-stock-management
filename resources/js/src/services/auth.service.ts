@@ -21,6 +21,7 @@ export const login = (form:FormData) =>{
         user:response.data.data.user
       }
       localStorage.setItem('auth_token',data.token);
+      localStorage.setItem('userId',data.user.id);
       dispatch(loginSuccess(data));
       dispatch(push('/'));
     }catch(e:any){

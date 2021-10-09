@@ -28,7 +28,6 @@ class CreatePurchasesTable extends Migration
       $table->float('free_rate')->nullable();;
       $table->foreignId('product_id')->references('id')->on('products')->nullable(false);
       $table->foreignId('purchase_invoice_id')->references('id')->on('purchase_invoices')->nullable(false);
-      $table->softDeletes();
       $table->timestamps();
     });
   }

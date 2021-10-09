@@ -19,7 +19,6 @@ class CreateCurrenciesTable extends Migration
             $table->string('country');
             $table->string('symbol');
             $table->string('local_value');
-            $table->softDeletes();
             $table->timestamps();
         });
     }

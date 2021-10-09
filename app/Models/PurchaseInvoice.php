@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class PurchaseInvoice extends Model
 {
-  use HasFactory, SoftDeletes;
+  use HasFactory;
   protected $guarded = [];
 
   protected static function boot()
@@ -17,21 +17,21 @@ class PurchaseInvoice extends Model
 
     static::deleting(function ($instance) {
       // Delete registry_detail
-      if ($instance->isForceDeleting()) {
-        $instance->purchases()->forceDelete();
-      } else {
+      // if ($instance->isForceDeleting()) {
+      //   $instance->purchases()->forceDelete();
+      // } else {
         $instance->purchases()->delete();
-      }
+      // }
     });
 
-    static::restoring(function ($instance) {
-      $instance->purchases()
-        ->onlyTrashed()
-        ->get()
-        ->each(function ($purchase) {
-          $purchase->restore();
-        });
-    });
+    // static::restoring(function ($instance) {
+    //   $instance->purchases()
+    //     ->onlyTrashed()
+    //     ->get()
+    //     ->each(function ($purchase) {
+    //       $purchase->restore();
+    //     });
+    // });
   }
 
   public function vendor()

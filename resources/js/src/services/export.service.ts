@@ -1,5 +1,6 @@
 import httpBase from "../utils/axios";
 import printJS from "print-js";
+import { message } from "antd";
 
 export const exportPDF = async(route:string,name:string,id:string|number,print:boolean = false) =>{
   try{
@@ -16,5 +17,6 @@ export const exportPDF = async(route:string,name:string,id:string|number,print:b
     }
   }catch(e){
     console.log(e);
+    message.error('something went wrong!')
   }
 }

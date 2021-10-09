@@ -11,6 +11,8 @@ use App\Http\Controllers\api\ProductCategoryController;
 use App\Http\Controllers\api\ProductController;
 use App\Http\Controllers\api\PurchaseController;
 use App\Http\Controllers\api\PurchaseInvoiceController;
+use App\Http\Controllers\api\SalesController;
+use App\Http\Controllers\api\SalesInvoiceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -51,18 +53,19 @@ Route::middleware(['auth:api'])->group(function () {
   Route::get('/purchase_invoice/restore/{id}', [PurchaseInvoiceController::class,'restore']);
   Route::get('/purchase_invoice/export_pdf/{id}', [PurchaseInvoiceController::class,'export_pdf']);
 
-
-
+  
   Route::resource('/purchases', PurchaseController::class);
   Route::delete('/purchases/delete/{id}', [PurchaseController::class,'trash']);
 
-
   Route::resource('/payments', PaymentController::class);
-
-
   Route::resource('/lab-tests', LabTestController::class);
-
-
   Route::resource('/lab-invoices', LabInvoiceController::class);
+  Route::get('/lab-invoices/export_pdf/{id}', [LabInvoiceController::class,'export_pdf']);
+  Route::get('/lab-invoices/export_pdf_report/{id}', [LabInvoiceController::class,'export_report_pdf']);
+
+  
+  Route::resource('/sale-invoice', SalesInvoiceController::class);
+  Route::resource('/sales', SalesController::class);
+  Route::get('/sale-invoice/export_pdf/{id}', [SalesInvoiceController::class,'export_pdf']);
 
 });

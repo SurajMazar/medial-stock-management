@@ -17,9 +17,9 @@ class CreateSalesTable extends Migration
             $table->id();
             $table->foreignId('sale_invoice_id')->references('id')->on('sale_invoices');
             $table->foreignId('purchase_id')->references('id')->on('purchases');
+            $table->float('quantity');
             $table->float('rate')->nullable();
-            $table->float('amount')->nullable();
-            $table->softDeletes();
+            $table->float('total')->nullable();
             $table->timestamps();
         });
     }

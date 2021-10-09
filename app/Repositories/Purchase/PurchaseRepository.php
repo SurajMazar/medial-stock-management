@@ -62,21 +62,10 @@ class PurchaseRepository implements PurchaseInterface{
     }
   }
 
-  public function trash($id){
-    $purchase  = Purchase::findOrFail($id);
-    return $purchase->forceDelete();
-  }
-
-
-  public function restore($id){
-    $purchase  = Purchase::onlyTrashed();
-    $purchase->findOrFail($id);
-    return $purchase->restore();
-  }
 
 
   public function delete($id){
-    $purchase  = Purchase::onlyTrashed();
+    $purchase  = Purchase::latest();
     $purchase->findOrFail($id);
     return $purchase->forceDelete();
   }

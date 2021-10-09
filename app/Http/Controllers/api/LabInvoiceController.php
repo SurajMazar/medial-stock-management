@@ -49,6 +49,15 @@ class LabInvoiceController extends Controller
     return failure($response->getMessage());
   }
 
+  public function show($id){
+    $response = LabInvoice::latest()->with('customer');
+    $response = $response->findOrFail($id);
+    if($response instanceof LabInvoice){
+      return success('Lab invoice fetched',$response);
+    }
+    return failure($response->getMessage());
+  }
+
 
 
   /**
@@ -71,5 +80,16 @@ class LabInvoiceController extends Controller
   public function destroy($id){
     return $this->labInvoiceRepository->delete($id);
   }
+
+  public function export_pdf($id){
+    return $this->labInvoiceRepository->downloadInvoicePdf($id);
+  }
+
+
+  public function export_report_pdf($id){
+    return $this->labInvoiceRepository->downloadReportPdf($id);
+  }
+
+
 
 }

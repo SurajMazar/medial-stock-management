@@ -6,15 +6,18 @@ export interface AuthStore{
   authenticated:boolean,
   user:User|undefined,
   loading:boolean,
-  error:any
+  error:any,
+  userId:undefined|string
 }
 
 const token = localStorage.getItem('auth_token');
+const userId = localStorage.getItem('userId');
 
 const initialState:AuthStore = {
   token:token?token:undefined,
   authenticated:token?true:false,
   user:undefined,
+  userId:userId?userId:undefined,
   loading:false,
   error:undefined,
 }
@@ -33,6 +36,7 @@ const AuthSlice = createSlice({
       state.authenticated = true;
       state.token = actions.payload.token;
       state.user = actions.payload.user;
+      state.user = actions.payload.user.id;
     },
 
     loginFail(state,actions){

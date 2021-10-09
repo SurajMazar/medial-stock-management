@@ -61,7 +61,7 @@ class LabTestRepository implements LabTestInterface{
 
 
     public function delete($id){
-      $labtests  = LabTest::onlyTrashed();
+      $labtests  = LabTest::latest();
       $labtests->findOrFail($id);
       return $labtests->forceDelete();
     }

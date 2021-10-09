@@ -16,6 +16,8 @@ import ProductCategory from '../pages/Products/Category';
 import ProductView from '../pages/Products/View';
 import PurchaseInvoice from '../pages/Purchase/Purchase-invoice';
 import ViewPurchaseInvoice from '../pages/Purchase/Purchase-invoice/view';
+import SalesInvoice from '../pages/Sales/SalesInvoice';
+import CreateEditSalesInvoice from '../pages/Sales/SalesInvoice/edit/create-edit';
 import Vendor from '../pages/Vendor';
 import EditVendor from '../pages/Vendor/edit';
 
@@ -144,7 +146,14 @@ const routes:Array<routeInterface> = [
 
   {
     path:'/sales-invoices',
-    component:Vendor,
+    component:SalesInvoice,
+    title:'Sales invoice',
+    layout:AppLayout
+  },
+
+  {
+    path:'/sales-invoices/edit/:id',
+    component:CreateEditSalesInvoice,
     title:'Sales invoice',
     layout:AppLayout
   },
@@ -209,6 +218,13 @@ const routes:Array<routeInterface> = [
     component:AddEditLabInvoice,
     layout:AppLayout,
     title:"Add Lab tests"
+  },
+
+  {
+    path:'/lab-invoices/edit/:id',
+    component:AddEditLabInvoice,
+    layout:AppLayout,
+    title:"Edit Lab tests"
   }
 
 ]

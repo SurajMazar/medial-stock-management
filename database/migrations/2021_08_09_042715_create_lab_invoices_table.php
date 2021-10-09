@@ -19,10 +19,11 @@ class CreateLabInvoicesTable extends Migration
             $table->string('invoice_number');
             $table->date('invoice_date');
             $table->string('customer_name')->nullable();
-            $table->json('tests');
-            $table->json('alterations');
+            $table->json('tests')->nullable();
+            $table->json('alterations')->nullable();
             $table->text('note')->nullable();
-            $table->softDeletes();
+            $table->string('amount')->nullable();
+            $table->foreignId('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

@@ -56,11 +56,11 @@ const sidebars:Array<routeInterface> = [
     icon:MedicineBoxOutlined
   },
 
-  {
-    path:'/reports',
-    title:'Reports',
-    icon:BarChartOutlined
-  },
+  // {
+  //   path:'/reports',
+  //   title:'Reports',
+  //   icon:BarChartOutlined
+  // },
  
   {
     path:null,
@@ -72,11 +72,11 @@ const sidebars:Array<routeInterface> = [
     title:'Puchase invoice',
     icon:SolutionOutlined
   },
-  {
-    path:'/purchase-returns',
-    title:'Purchase returns',
-    icon:SwapLeftOutlined
-  },
+  // {
+  //   path:'/purchase-returns',
+  //   title:'Purchase returns',
+  //   icon:SwapLeftOutlined
+  // },
 
 
   {
@@ -89,11 +89,11 @@ const sidebars:Array<routeInterface> = [
     title:'Sales invoice',
     icon:SolutionOutlined
   },
-  {
-    path:'/sales-returns',
-    title:'Sales returns',
-    icon:SwapLeftOutlined
-  },
+  // {
+  //   path:'/sales-returns',
+  //   title:'Sales returns',
+  //   icon:SwapLeftOutlined
+  // },
 
 
 

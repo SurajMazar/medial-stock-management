@@ -65,8 +65,8 @@ export const fetchLabTestById = async (id:number|string) =>{
     const response =await instance().get(`api/lab-tests/${id}`);
     return response.data.data;
   }catch(e:any){
-    return undefined;
     message.error("Something went wrong");
+    return undefined;
   }
 }
 
@@ -93,3 +93,47 @@ export const fetchLabInvoices = (params:any = {page:1}) =>{
     }
   }
 }
+
+
+export const createLabInvoice = async(formData:FormData)=>{
+  try{
+    const response = await instance().post('api/lab-invoices',formData);
+    message.success("Lab Invoice created!");
+    history.push(`/lab-invoices/edit/${response.data.data.id}`)
+  }catch(e:any){
+    message.error("Something went wrong");
+  }
+}
+
+
+export const updateLabInvoice = async(id:number|string,formData:FormData,notify = true)=>{
+  try{
+    const response = await instance().post('api/lab-invoices/'+id,formData);
+    if(notify) {message.success("Lab Invoice updated!");}
+    // history.push(`/lab-tests/edit/${response.data.data.id}`)
+  }catch(e:any){
+    message.error("Something went wrong");
+  }
+}
+
+export const deleteLabInvoice = async(id:number|string)=>{
+  try{
+    const response = await instance().delete('api/lab-invoices/'+id);
+    message.success("Lab Invoice deleted!");
+  }catch(e:any){
+    message.error("Something went wrong");
+  }
+}
+
+
+export const fetchLabInvoiceByID = async(id:number|string)=>{
+  try{
+    const response = await instance().get('api/lab-invoices/'+id);
+    return response.data.data
+    // history.push(`/lab-tests/edit/${response.data.data.id}`)
+  }catch(e:any){
+    message.error("Something went wrong");
+    return undefined
+  }
+}
+

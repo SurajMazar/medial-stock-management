@@ -1,5 +1,5 @@
 import { DeleteOutlined, EyeOutlined, FilePdfOutlined, PrinterOutlined } from '@ant-design/icons';
-import { Button, Popconfirm, Popover } from 'antd';
+import { Button, Popconfirm, Menu, Dropdown} from 'antd';
 import moment from 'moment';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -52,6 +52,56 @@ const PurchaseInvoice:React.FC<PIprops> = ({vendor_id}) =>{
     await exportPDF('purchase_invoice/export_pdf',`purchase-invoice-${id}`,id,print);
   }
 
+  const dropdownMenu = (pi:any) =>(
+    <Menu>
+      <Menu.Item>
+        <Link to={`/purchase-invoices/view/${pi.id}`}>
+          <Button icon={<EyeOutlined />}
+          shape="round" title="view" size="middle" className="mr-1 mb-1"
+          type="link">
+            View
+          </Button>
+        </Link>
+      </Menu.Item>
+
+      <Menu.Item>
+       <Button shape='round'
+        icon={<FilePdfOutlined />}
+        onClick={()=>exportPdf(pi.id)}
+        size="middle" className="mr-1 mb-1" title="Export pdf" 
+        type="link"
+        >
+          Export  PDF
+        </Button>
+      </Menu.Item>
+
+      <Menu.Item>
+        <Button shape='round' 
+        onClick={()=>exportPdf(pi.id,true)}
+        icon={<PrinterOutlined />} size="middle" title="print" className="mr-1 mb-1" type="link">
+          Print
+        </Button>
+      </Menu.Item>
+
+      {/* <Menu.Item>
+        <Popconfirm
+          title={"Are you sure?"}
+          onConfirm={()=>deletePI(pi.id)}
+          okText="delete"
+          cancelText="cancle"
+        >
+          <Button title="delete" 
+          type="link"
+          size="middle" className="mr-1 mb-1"
+          icon={<DeleteOutlined />}
+          >
+            Delete
+          </Button>
+        </Popconfirm>
+      </Menu.Item> */}
+    </Menu>
+  )
+
   return(
     <section>
       <div className="section-break-1-2 d-flex flex-wrap ac">
@@ -88,36 +138,9 @@ const PurchaseInvoice:React.FC<PIprops> = ({vendor_id}) =>{
                     <td>{moment(pi.transaction_date).format("YYYY-MM-DD")}</td>
                     <td>Rs.{pi.total || 0}</td>
                     <td>
-                      <div className="d-flex">
-                        <Link to={`/purchase-invoices/view/${pi.id}`}>
-                          <Button icon={<EyeOutlined />}
-                          shape="round" title="view" size="middle" className="mr-1 mb-1" type="primary">
-                          </Button>
-                        </Link>
-
-                        <Button shape='round'
-                        icon={<FilePdfOutlined />}
-                        onClick={()=>exportPdf(pi.id)}
-                        size="middle" className="mr-1 mb-1" title="Export pdf" type="primary">
-                        </Button>
-
-                        <Button shape='round' 
-                        onClick={()=>exportPdf(pi.id,true)}
-                        icon={<PrinterOutlined />} size="middle" title="print" className="mr-1 mb-1" type="default">
-                        </Button>
-
-                        <Popconfirm
-                          title={"Are you sure?"}
-                          onConfirm={()=>deletePI(pi.id)}
-                          okText="delete"
-                          cancelText="cancle"
-                        >
-                          <Button shape="round" title="delete" size="middle" className="btn-outline-danger mr-1 mb-1"
-                          icon={<DeleteOutlined />}
-                          >
-                          </Button>
-                        </Popconfirm>
-                      </div>
+                      <Dropdown overlay={()=>dropdownMenu(pi)} placement="bottomCenter">
+                        <Button type="link">Actions</Button>
+                      </Dropdown>
                     </td>
                   </tr>
                 ))

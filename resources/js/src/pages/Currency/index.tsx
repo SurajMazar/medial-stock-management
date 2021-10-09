@@ -59,7 +59,7 @@ const Currency:React.FC = () =>{
       </div>
 
       <div className="section-break-1">
-        <DatTableWrapper fetchData={loadCurrency} meta={meta}>
+        <DatTableWrapper fetchData={loadCurrency}  meta={meta}>
           {
             loading?<Preloader/>:
             <table className="table">

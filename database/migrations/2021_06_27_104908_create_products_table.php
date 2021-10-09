@@ -22,7 +22,6 @@ class CreateProductsTable extends Migration
             $table->longText('description')->nullable();
             $table->foreignId('product_category_id')->references('id')->on('product_categories')->nullable(false);
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

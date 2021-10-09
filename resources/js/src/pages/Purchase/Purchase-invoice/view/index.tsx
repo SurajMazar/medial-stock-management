@@ -60,11 +60,11 @@ const ViewPurchaseInvoice:React.FC = ()=>{
             icon={<PrinterOutlined />} size="middle" title="print" className="mr-2" type="default">
             </Button>
 
-            <Popconfirm placement="leftTop" title={'Are you sure?'} onConfirm={()=>deletePI(id)} okText="delete" cancelText="cancle">
+            {/* <Popconfirm placement="leftTop" title={'Are you sure?'} onConfirm={()=>deletePI(id)} okText="delete" cancelText="cancle">
               <Button shape='round' title="delete"
               icon={<DeleteOutlined />} size="middle" className="btn-outline-danger">
               </Button>
-            </Popconfirm>
+            </Popconfirm> */}
           </div>
           
           

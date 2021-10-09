@@ -12,7 +12,7 @@ class ProductRepository implements ProductInterface{
     public function index($request){
       $items_per_page = $request->items_per_page?:10;
       $keyword = $request->keyword;
-      $products = Product::latest()->with('category');
+      $products = Product::latest()->with('category','purchases');
       if($keyword){
         $products->Search($keyword);
       }
@@ -62,7 +62,7 @@ class ProductRepository implements ProductInterface{
 
 
     public function delete($id){
-      $product  = Product::onlyTrashed();
+      $product  = Product::latest();
       $product->findOrFail($id);
       return $product->forceDelete();
     }

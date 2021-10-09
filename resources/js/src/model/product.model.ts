@@ -1,3 +1,5 @@
+import { purchase } from "./purchase.model";
+
 export interface ProductCategory{
   id:number,
   name:string,
@@ -15,7 +17,8 @@ interface Product{
   created_at: Date,
   category:ProductCategory,
   total_purchases:string|number,
-  total_stocks:string|number
+  total_stocks:string|number,
+  purchases:Array<purchase>
 }
 
 export default Product;

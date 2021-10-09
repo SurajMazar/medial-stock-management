@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Purchase extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory;
     protected $guarded = [];
 
     public function product(){
