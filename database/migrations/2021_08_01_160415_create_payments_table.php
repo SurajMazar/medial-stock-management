@@ -22,7 +22,6 @@ class CreatePaymentsTable extends Migration
             $table->string('receiving_person');
             $table->string('paid_by');
             $table->text('note')->nullable();
-            $table->softDeletes();
             $table->timestamps();
         });
     }

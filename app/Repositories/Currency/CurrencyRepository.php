@@ -62,7 +62,7 @@ class CurrencyRepository implements CurrencyInterface{
 
 
     public function delete($id){
-      $pc  = Currency::onlyTrashed();
+      $pc  = Currency::latest();
       $pc->findOrFail($id);
       return $pc->forceDelete();
     }

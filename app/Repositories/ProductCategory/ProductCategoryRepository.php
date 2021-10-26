@@ -62,7 +62,7 @@ class ProductCategoryRepository implements ProductCategoryInterface{
 
 
     public function delete($id){
-      $pc  = ProductCategory::onlyTrashed();
+      $pc  = ProductCategory::latest();
       $pc->findOrFail($id);
       return $pc->forceDelete();
     }

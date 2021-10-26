@@ -38697,6 +38697,11 @@ body {
   white-space: nowrap !important;
 }
 
+.floating-button-wrapper {
+  position: relative;
+  height: 100%;
+}
+
 .ant-layout-header {
   background: #fff !important;
   background-color: #fff !important;
@@ -39434,6 +39439,12 @@ body {
 .ant-btn-round {
   min-width: 50px;
   border-radius: 32px !important;
+}
+
+.floating-button {
+  position: fixed;
+  bottom: 5%;
+  right: 5%;
 }
 
 .table-wrapper {

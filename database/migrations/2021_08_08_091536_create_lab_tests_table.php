@@ -17,7 +17,6 @@ class CreateLabTestsTable extends Migration
             $table->id();
             $table->string('name');
             $table->json('tests');
-            $table->softDeletes();
             $table->timestamps();
         });
     }

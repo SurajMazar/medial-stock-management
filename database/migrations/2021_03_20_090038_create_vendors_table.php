@@ -37,7 +37,6 @@ class CreateVendorsTable extends Migration
       $table->string('twitter')->nullable();
       $table->string('youtube')->nullable();
       $table->longText('description')->nullable();
-      $table->softDeletes();
       $table->timestamps();
     });
   }

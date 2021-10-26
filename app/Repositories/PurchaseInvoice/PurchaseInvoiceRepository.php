@@ -75,19 +75,8 @@ class PurchaseInvoiceRepository implements PurchaseInvoiceInterface{
       }
     }
 
-    public function trash($id){
-      $purchaseInvoice  = PurchaseInvoice::findOrFail($id);
-      return $purchaseInvoice->delete();
-    }
-
-
-    public function restore($id){
-      return PurchaseInvoice::withTrashed()->find($id)->restore();
-    }
-
-
     public function delete($id){
-      return PurchaseInvoice::withTrashed()->find($id)->forceDelete();
+      return PurchaseInvoice::latest()->find($id)->forceDelete();
     }
 
     public function downloadPdf($id){

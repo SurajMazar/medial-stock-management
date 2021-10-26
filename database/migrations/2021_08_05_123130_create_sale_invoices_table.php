@@ -16,13 +16,13 @@ class CreateSaleInvoicesTable extends Migration
         Schema::create('sale_invoices', function (Blueprint $table) {
             $table->id();
             $table->string('invoice_number');
-            $table->foreignId('customer_id')->references('id')->on('customers')->nullable();
+            $table->foreignId('customer_id')->nullable()->references('id')->on('customers');
             $table->dateTime('transaction_date')->nullable();
-            $table->longText('alterations');
+            $table->longText('alterations')->nullable();
             $table->string('customer_name')->nullable();
             $table->string('amount')->nullable();
             $table->string('note')->nullable();
-            $table->softDeletes();
+            $table->foreignId('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

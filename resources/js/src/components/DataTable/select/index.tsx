@@ -15,6 +15,7 @@ interface Props{
   defaultOption?:any
   dropDownRenderer?:any
   displayValue?:string|Array<string>
+  handleChange?:any
 }
 
 const {Option} = Select;
@@ -33,6 +34,7 @@ const CustomSelect:React.FC<Props> = (props)=>{
     defaultOption,
     dropDownRenderer,
     displayValue,
+    handleChange
   } = props;
 
 
@@ -81,8 +83,12 @@ const CustomSelect:React.FC<Props> = (props)=>{
 
 
   useEffect(()=>{
-    if(!options.length) search({page:1})
+    search({page:1})
   },[]) //eslint-disable-line
+
+
+
+  const defChange =  ()=>{}
 
   return(
     <Form.Item
@@ -99,6 +105,7 @@ const CustomSelect:React.FC<Props> = (props)=>{
         filterOption={false}
         onSearch={handleSearch}
         placeholder={placeholder}
+        onChange={handleChange|| defChange}
         dropdownRender={(menu)=>(
           <>
           {menu}

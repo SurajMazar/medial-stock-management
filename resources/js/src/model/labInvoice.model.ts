@@ -7,8 +7,10 @@ interface LabInvoice{
   invoice_date:Date,
   customer_name?:string,
   customer:Customer,
+  customer_id:number,
   alterations:string,
-  created_at:Date
+  created_at:Date,
+  amount:string,
 }
 
 

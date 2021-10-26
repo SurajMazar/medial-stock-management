@@ -3,6 +3,7 @@
 namespace App\Repositories\LabInvoice;
 
 use App\Models\LabInvoice;
+use PDF;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
@@ -17,7 +18,7 @@ class LabInvoiceRepository implements LabInvoiceInterface{
   public function index($request){
     $items_per_page = $request->items_per_page?:10;
     $keyword = $request->keyword?:null;
-    $labInvoices = LabInvoice::orderBy('invoice_date','desc');
+    $labInvoices = LabInvoice::orderBy('invoice_date','desc')->with('customer');
 
     if($keyword){
       $labInvoices->Search($keyword);
@@ -85,9 +86,33 @@ class LabInvoiceRepository implements LabInvoiceInterface{
    * @return JSON
    */
   public function delete($id){
-    return LabInvoice::withTrashed()->find($id)->forceDelete();
+    $labInvoice =  LabInvoice::findOrFail($id);
+    return $labInvoice->delete();
   }
 
+
+
+public function downloadInvoicePdf($id){
+      $data = LabInvoice::latest();
+      $data = $data->findOrFail($id);
+      $data->tests= str_replace("\\", "",$data->tests);
+      $data->tests= json_decode($data->tests);
+      $data->alterations= str_replace("\\", "",$data->alterations);
+      $data->alterations= json_decode($data->alterations);
+      $pdf = PDF::loadView('pdf.lab_invoice',compact('data'));
+      return $pdf->download('lab-invoice.pdf');
+    }
+
+  public function downloadReportPdf($id){
+      $data = LabInvoice::latest();
+      $data = $data->findOrFail($id);
+      $data->tests= str_replace("\\", "",$data->tests);
+      $data->tests= json_decode($data->tests);
+      $data->alterations= str_replace("\\", "",$data->alterations);
+      $data->alterations= json_decode($data->alterations);
+      $pdf = PDF::loadView('pdf.lab_report',compact('data'));
+      return $pdf->download('lab-invoice.pdf');
+    }
 
 }
 

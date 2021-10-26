@@ -70,14 +70,14 @@ const CreateEditCustomer = () =>{
           <div className="ml-auto">
             <div className="d-flex flex-wrap">
               <Link to="/customers">
-                <Button shape='round' size="middle" className="btn-primary mr-2">
+                <Button shape='round' size="middle" type='primary' className='mr-2'>
                   List
                 </Button>
               </Link>
               {
                 editData?
                 <Link to="/customers/add" onClick={()=>dispatch(removeEditingCustomer())}>
-                  <Button shape='round' size="middle" className="btn-primary mr-2">
+                  <Button shape='round' size="middle" type='primary'>
                     Add 
                   </Button>
                 </Link>:""

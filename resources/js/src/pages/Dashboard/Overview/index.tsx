@@ -26,29 +26,6 @@ const Overview = () =>{
        
       </div>
     </section>
-    <section className="section-break-1">
-      <div className="row">
-        <div className="col-md-6 col-lg-3">
-          <OverviewCard title="Today's Sales" counts={5000} icon={FaRegMoneyBillAlt}/>
-        </div>
-
-        <div className="col-md-6 col-lg-3">
-          <OverviewCard title="Weekly Sales" counts={5000} icon={FaFileInvoice}/>
-        </div>
-
-        <div className="col-md-6 col-lg-3">
-          <OverviewCard title="Today's Expenses" counts={3000} icon={FaRegMoneyBillAlt}/>
-        </div>
-
-        <div className="col-md-6 col-lg-3">
-          <OverviewCard title="Weekly Expenses" counts={30000} icon={FaFileInvoice}/>
-        </div>
-       
-      </div>
-    </section>
-
-
-    
     </>
   );
 }

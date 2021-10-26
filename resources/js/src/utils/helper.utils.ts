@@ -1,3 +1,5 @@
+import { sale } from "../model/sales.model";
+
 export const setUrl = (params:any,url:string) =>{
   if(params){
     Object.keys(params).map((item,i)=>{
@@ -89,4 +91,22 @@ export const getCurrency = (purchaseInvoice:any) =>{
     return purchaseInvoice.currency?.symbol + " ";
   }
   return "Rs ";
+}
+
+
+export const salesQuantityFormatter = (item:sale) =>{
+  if(item){
+    const {purchase,quantity} = item
+    const {product} = purchase
+    
+    if(product?.has_sub_units){
+      const arr = quantity.toString().split('.');
+      if(arr.length>1 && arr[1] !== '0'){
+        return arr[0]+' unit  '+arr[1]+" "+product.sub_unit_name
+      }
+    }
+    
+    return quantity
+  }
+  return 0
 }

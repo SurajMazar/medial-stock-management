@@ -155,7 +155,7 @@ export const deletePurchaseItem = (id:string)=>{
   return async (dispatch:Dispatch)=>{
     dispatch(fetchSinglePurchaseInvoiceRequest());
     try{
-      await httpBase().delete(`api/purchases/delete/${id}`);
+      await httpBase().delete(`api/purchases/${id}`);
       dispatch(deletePurchase(id));
       message.success("Item deleted successfully!");
     }catch(e:any){
