@@ -101,7 +101,7 @@ export const salesQuantityFormatter = (item:sale) =>{
     
     if(product?.has_sub_units){
       const arr = quantity.toString().split('.');
-      if(arr.length>1){
+      if(arr.length>1 && arr[1] !== '0'){
         return arr[0]+' unit  '+arr[1]+" "+product.sub_unit_name
       }
     }

@@ -53,7 +53,7 @@ const AddEditSale:React.FC<Props> = (props)=>{
 
   const productHasSubUnit= () =>{
     if(selectedProduct){
-      return JSON.parse((selectedProduct.has_sub_units).toString())? true:false
+      return JSON.parse((selectedProduct.has_sub_units).toString()||"0")? true:false
     }
     return false;
   }
@@ -64,7 +64,7 @@ const AddEditSale:React.FC<Props> = (props)=>{
 
     if(selectedProduct && values.purchase_id){
       let total = 0;
-      if(productHasSubUnit()){
+      if(productHasSubUnit() && values.sub_unit){
         const totalQuantity = Number(values.quantity) + (Number(values.sub_unit)/Number(selectedProduct.subunits_per_quantity))
         total = Number((totalQuantity * values.rate).toFixed(2))
       }else{

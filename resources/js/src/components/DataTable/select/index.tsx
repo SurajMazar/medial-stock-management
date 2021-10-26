@@ -83,7 +83,7 @@ const CustomSelect:React.FC<Props> = (props)=>{
 
 
   useEffect(()=>{
-    if(!options.length) search({page:1})
+    search({page:1})
   },[]) //eslint-disable-line
 
 
