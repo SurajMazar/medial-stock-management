@@ -23,7 +23,6 @@ const CreateSalesInvoice: React.FC<CreateSIprops> = (props) => {
 
   //redux state
   const state = useSelector((state: StoreInterface) => state);
-  const {userId} = state.auth;
   const { loading: loadingCustomer, customers } = state.customer;
 
   //component state
@@ -42,7 +41,7 @@ const CreateSalesInvoice: React.FC<CreateSIprops> = (props) => {
   const handleSubmit = (values:any)=>{
     values = setFormdata(removeNullItems({
       ...values,
-      user_id:userId
+      // user_id:userId
     }))
     setCreating(true)
     dispatch(CreateSalesInvoiceService(values,()=>setCreating(false)));
@@ -79,7 +78,7 @@ const CreateSalesInvoice: React.FC<CreateSIprops> = (props) => {
         onFinish={handleSubmit}
         id="create-sales-invoice-form">
         <div className="row">
-          <div className="col-md-12">
+          {/* <div className="col-md-12">
             <Form.Item
               label="Invoice number"
               name="invoice_number"
@@ -93,7 +92,7 @@ const CreateSalesInvoice: React.FC<CreateSIprops> = (props) => {
             >
               <Input placeholder="Invoice number" className="form-control" />
             </Form.Item>
-          </div>
+          </div> */}
 
           <div className="col-md-12">
             <Form.Item

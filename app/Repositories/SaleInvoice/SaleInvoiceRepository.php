@@ -5,7 +5,8 @@
   use App\Models\SalesInvoice;
   use App\Repositories\SaleInvoice\SaleInvoiceInterface;
   use Exception;
-  use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
   use PDF;
 
 class SaleInvoiceRepository implements SaleInvoiceInterface{
@@ -45,6 +46,8 @@ class SaleInvoiceRepository implements SaleInvoiceInterface{
           'transaction_date' => date('Y-m-d H:i:s',strtotime($request->transaction_date)),
         ]);
         $input = $request->all();
+        $input['invoice_number'] = sprintf('SI-%s',uniqid());
+        $input['user_id'] =  Auth::user()->id;
         $saleInvoice = SalesInvoice::create($input);
         DB::commit();
 

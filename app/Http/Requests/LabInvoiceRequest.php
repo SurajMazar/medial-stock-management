@@ -24,7 +24,7 @@ class LabInvoiceRequest extends FormRequest
     public function rules()
     {
         return [
-            'invoice_number'=>'required',
+            // 'invoice_number'=>'required',
             'invoice_date'=>'required'
         ];
     }

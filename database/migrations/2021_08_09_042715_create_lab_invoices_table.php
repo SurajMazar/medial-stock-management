@@ -23,7 +23,7 @@ class CreateLabInvoicesTable extends Migration
             $table->json('alterations')->nullable();
             $table->text('note')->nullable();
             $table->string('amount')->nullable();
-            $table->foreignId('user_id')->references('id')->on('users');
+            $table->foreignId('user_id')->nullable()->references('id')->on('users');
             $table->timestamps();
         });
     }
