@@ -22,7 +22,7 @@ class CreateSaleInvoicesTable extends Migration
             $table->string('customer_name')->nullable();
             $table->string('amount')->nullable();
             $table->string('note')->nullable();
-            $table->foreignId('user_id')->nullable()->references('id')->on('users');
+            $table->foreignId('user_id')->nullable()->references('id')->on('users')->onDelete(null);
             $table->timestamps();
         });
     }

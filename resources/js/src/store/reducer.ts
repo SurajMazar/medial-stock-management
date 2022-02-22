@@ -10,6 +10,7 @@ import AuthReducer from './action-reducer/auth.actionreducer';
 import CustomerReducer from './action-reducer/customer.actionreducer';
 import LabTestsReducer from './action-reducer/labTests.actionreducer';
 import SalesReducer from './action-reducer/sales.actionreducer';
+import userReducer from './action-reducer/user.slice';
 
 const reducer = {
   router:connectRouter(history) as  Reducer<RouterState<LocationState>>,
@@ -20,7 +21,8 @@ const reducer = {
   purchase:PurchaseReducer,
   customer:CustomerReducer,
   labTests:LabTestsReducer,
-  sale:SalesReducer
+  sale:SalesReducer,
+  user:userReducer
 }
 
 export default reducer;
