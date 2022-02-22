@@ -20,7 +20,8 @@ import SalesInvoice from '../pages/Sales/SalesInvoice';
 import CreateEditSalesInvoice from '../pages/Sales/SalesInvoice/edit/create-edit';
 import Vendor from '../pages/Vendor';
 import EditVendor from '../pages/Vendor/edit';
-
+import User from '../pages/User'
+import CreateEditUser from '../pages/User/create-edit';
 
 interface routeInterface{
   path:string|null,
@@ -225,8 +226,31 @@ const routes:Array<routeInterface> = [
     component:AddEditLabInvoice,
     layout:AppLayout,
     title:"Edit Lab tests"
-  }
+  },
 
+
+  // user management
+
+  {
+    path:'/users',
+    component:User,
+    layout:AppLayout,
+    title:"Users"
+  },
+
+  {
+    path:'/users/create',
+    component:CreateEditUser,
+    layout:AppLayout,
+    title:"Create user"
+  },
+
+  {
+    path:'/user/edit/:id',
+    component:CreateEditUser,
+    layout:AppLayout,
+    title:"Edit user"
+  },
 ]
 
 export default routes;

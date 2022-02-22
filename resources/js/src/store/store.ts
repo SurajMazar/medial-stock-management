@@ -10,6 +10,7 @@ import { AuthStore } from './action-reducer/auth.actionreducer';
 import { CustomerStoreInterface } from './action-reducer/customer.actionreducer';
 import { LabTestInterface } from './action-reducer/labTests.actionreducer';
 import { SalesStoreInterface } from './action-reducer/sales.actionreducer';
+import { UserStore } from './action-reducer/user.slice';
 
 export interface StoreInterface{
   auth:AuthStore,
@@ -19,7 +20,8 @@ export interface StoreInterface{
   purchase:PurchaseStoreInterface,
   customer:CustomerStoreInterface,
   labTests:LabTestInterface,
-  sale:SalesStoreInterface
+  sale:SalesStoreInterface,
+  user:UserStore
 }
 
 const store = configureStore({

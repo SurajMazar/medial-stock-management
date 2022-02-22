@@ -68,6 +68,23 @@ class ProductRepository implements ProductInterface{
     }
 
 
+    public function outOfStockProducts(){
+      $products = Product::with('purchases')->get();
+      $filtered = [];
+
+      foreach($products as $product){
+        $total_stocks = 0;
+        foreach($product->purchases as $purchase){
+          $total_stocks = $total_stocks + $purchase->quantity;
+        }
+        if($total_stocks === 0){
+          array_push($filtered,$product);
+        }
+      }
+      
+      return $filtered;
+    }
+
   }
 
 

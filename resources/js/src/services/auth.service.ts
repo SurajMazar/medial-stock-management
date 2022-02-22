@@ -18,10 +18,12 @@ export const login = (form:FormData) =>{
       const response = await instance(true).post('/api/login',form);
       let data = {
         token:response.data.data.token,
-        user:response.data.data.user
+        user:response.data.data.user,
+        role:response.data.data.role
       }
       localStorage.setItem('auth_token',data.token);
       localStorage.setItem('userId',data.user.id);
+      localStorage.setItem('role',data.role)
       dispatch(loginSuccess(data));
       dispatch(push('/'));
     }catch(e:any){

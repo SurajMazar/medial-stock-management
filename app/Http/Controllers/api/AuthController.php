@@ -14,7 +14,8 @@ class AuthController extends Controller
       $user = Auth::user();
       return success('User token generated',[
         'token'=>$user->createToken('msm')->accessToken,
-        'user'=>$user
+        'user'=>$user,
+        'role'=>$user->roles[0]->name
       ]);
     }else {
       return failure(' These credentials do not match our records.', 400);

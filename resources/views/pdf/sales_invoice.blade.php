@@ -7,20 +7,20 @@
 <div class="container">
   <div class="row">
    
-    <div class="col-md-12 text-center">
+    {{-- <div class="col-md-12 text-center"> --}}
       {{-- <img src="{{asset('logo.png')}}" alt="" class="img-fluid"> --}}
-      <h2 class="title">
+      {{-- <h2 class="title">
         ARADHANA PHARMACY
       </h2>
-    </div>
+    </div> --}}
    
   </div>
   <div class="row pt-2">
-    <div class="w-50">
+    {{-- <div class="w-50">
       <p><span>Pan: </p>
       <p>Tokha 8, Kathmandu</p>
       <p><span>Phone: 4351828</span></p>
-    </div>
+    </div> --}}
     <div class="w-50 ml-auto">
       <p class="text-right"><span>Customer: </span>{{$data->customer?$data->customer->name:$data->customer_name}}</p>
       <p class="text-right"><span>Invoice No: </span>{{$data->invoice_number?:""}}</p>

@@ -1,4 +1,5 @@
 import { sale } from "../model/sales.model";
+import { getLocalStorage } from "./localstorage.util";
 
 export const setUrl = (params:any,url:string) =>{
   if(params){
@@ -109,4 +110,14 @@ export const salesQuantityFormatter = (item:sale) =>{
     return quantity
   }
   return 0
+}
+
+
+export const getRole = ()=>{
+  return getLocalStorage('role');
+}
+
+
+export const isAdmin = ()=>{
+  return getRole() === 'admin'
 }

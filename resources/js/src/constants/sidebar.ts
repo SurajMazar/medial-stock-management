@@ -1,48 +1,55 @@
-import { BarChartOutlined, CoffeeOutlined, DollarOutlined, FileProtectOutlined, FileSearchOutlined, HomeOutlined, MedicineBoxOutlined, ShopOutlined, SketchOutlined, SolutionOutlined, SwapLeftOutlined } from "@ant-design/icons";
+import { BarChartOutlined, CoffeeOutlined, DollarOutlined, FileProtectOutlined, FileSearchOutlined, HomeOutlined, MedicineBoxOutlined, ShopOutlined, SketchOutlined, SolutionOutlined, SwapLeftOutlined, UserOutlined } from "@ant-design/icons";
 
 interface routeInterface{
   path:string|null,
   icon?:any,
   children?:Array<routeInterface>,
-  title:string
+  title:string,
+  roles?:string[]
 }
 
 const sidebars:Array<routeInterface> = [
   {
     path:'/',
     title:'Dashboard',
-    icon:HomeOutlined
+    icon:HomeOutlined,
+    roles:['admin','sale','lab']
   },
   {
     path:null,
     title:'Management',
   },
-  {
-    path:'/currency',
-    title:'Currency',
-    icon:DollarOutlined
-  },
+  // {
+  //   path:'/currency',
+  //   title:'Currency',
+  //   icon:DollarOutlined,
+  //   roles:['admin']
+  // },
   {
     path:'/vendors',
     title:'Vendors',
-    icon:CoffeeOutlined
+    icon:CoffeeOutlined,
+    roles:['admin']
   },
   {
     path:'/customers',
     title:'Customers',
-    icon:SketchOutlined
+    icon:SketchOutlined,
+    roles:['admin','sale','lab']
   },
 
   
   {
     path:null,
-    title:'Inventory'
+    title:'Inventory',
+    roles:['admin']
   },
 
 
   {
     path:null,
     title:'Products Mgmt',
+    roles:['admin'],
     children:[
       {
         path:'/products',
@@ -64,13 +71,15 @@ const sidebars:Array<routeInterface> = [
  
   {
     path:null,
-    title:'Purchases'
+    title:'Purchases',
+    roles:['admin']
   },
 
   {
     path:'/purchase-invoices',
     title:'Puchase invoice',
-    icon:SolutionOutlined
+    icon:SolutionOutlined,
+    roles:['admin']
   },
   // {
   //   path:'/purchase-returns',
@@ -81,13 +90,15 @@ const sidebars:Array<routeInterface> = [
 
   {
     path:null,
-    title:'Sales'
+    title:'Sales',
+    roles:['admin','sale']
   },
 
   {
     path:'/sales-invoices',
     title:'Sales invoice',
-    icon:SolutionOutlined
+    icon:SolutionOutlined,
+    roles:['admin','sale']
   },
   // {
   //   path:'/sales-returns',
@@ -99,22 +110,38 @@ const sidebars:Array<routeInterface> = [
 
   {
     path:null,
-    title:'Laboratory'
+    title:'Laboratory',
+    roles:['admin','lab']
   },
 
   {
     path:'/lab-tests',
     title:'Lab Tests',
-    icon:FileSearchOutlined
+    icon:FileSearchOutlined,
+    roles:['admin','lab']
   },
 
   {
     path:'/lab-invoices',
     title:'Lab Invoices',
-    icon:SolutionOutlined
+    icon:SolutionOutlined,
+    roles:['admin','lab']
   },
 
 
+  {
+    path:null,
+    title:'User management',
+    roles:['admin']
+  },
+
+
+  {
+    path:'/users',
+    title:'Users',
+    icon:UserOutlined,
+    roles:['admin']
+  },
 
 ]
 

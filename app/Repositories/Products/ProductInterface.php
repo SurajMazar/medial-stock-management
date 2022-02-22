@@ -9,6 +9,7 @@
     public function update($id,$request);
     public function trash($id);
     public function delete($id);
+    public function outOfStockProducts();
   }
 
 ?>

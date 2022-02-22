@@ -13,6 +13,6 @@ class LabInvoiceSeeder extends Seeder
      */
     public function run()
     {
-        //
+        
     }
 }
