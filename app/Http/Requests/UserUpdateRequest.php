@@ -23,8 +23,9 @@ class UserUpdateRequest extends FormRequest
      */
     public function rules()
     {
+
         return [
-            'email'=>'required|unique:users,'.$this->id,
+            'email'=>'required|unique:users,email,'.$this->user,
             'name'=> 'required',
             'role' => 'required'
         ];

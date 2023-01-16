@@ -50,7 +50,6 @@ class UserController extends Controller
     public function update(UserUpdateRequest $request, $id){
         try{
             $role = Role::where('name',$request->role)->first();
-
             $user = User::findOrFail($id);
             $user->update([
                 'name'=>$request->name,

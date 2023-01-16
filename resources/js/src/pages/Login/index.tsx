@@ -54,7 +54,7 @@ const Login:React.FC = props =>{
                       required:true,message:"This field is required !!"
                     }
                   ]}>
-                  <Input placeholder="Your password" type="password" className="form-control"/>
+                  <Input.Password placeholder="Your password" type="password" size='middle'/>
                 </Form.Item>
               </div>
 
